@@ -10,8 +10,7 @@ function Navbar({ darkMode, setDarkMode }) {
     { name: "Skills", id: "skills" },
     { name: "Projects", id: "projects" },
     { name: "Certificates", id: "certificates" },
-    { name: "Plan", id: "placement-plan" }, // ✅ Added Plan section
-    { name: "Contact", id: "contact" },
+    { name: "Contact", id: "contact" }, // ✅ Removed "Plan"
   ];
 
   const scrollToSection = (id) => {

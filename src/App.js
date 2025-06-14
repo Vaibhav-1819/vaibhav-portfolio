@@ -7,7 +7,6 @@ import Projects from "./components/Projects";
 import Certificates from "./components/Certificates";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import PlacementPlan from "./components/PlacementPlan"; // ✅ Added
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -52,9 +51,7 @@ function App() {
           </section>
 
           {/* ✅ New Placement Plan Section */}
-          <section id="placement-plan">
-            <PlacementPlan />
-          </section>
+
 
           <section id="contact">
             <Contact />
