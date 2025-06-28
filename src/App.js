@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 function App() {
   const [darkMode, setDarkMode] = useState(true);
 
+  // Apply or remove the dark class on <html>
   useEffect(() => {
     const root = document.documentElement;
     if (darkMode) {
@@ -49,10 +50,6 @@ function App() {
           <section id="certificates">
             <Certificates />
           </section>
-
-          {/* ✅ New Placement Plan Section */}
-
-
           <section id="contact">
             <Contact />
           </section>

@@ -4,20 +4,20 @@ import { Award } from "lucide-react";
 
 const certificates = [
   {
-    title: "Full Stack Web Development",
+    title: " Generative AI for Data Science",
     issuer: "Coursera",
-    link: "https://www.coursera.org/account/accomplishments/certificate/XYZ123",
-    date: "March 2024",
+    link: "https://www.coursera.org/account/accomplishments/verify/V749FNPX59S5",
+    date: "27 May 2025",
   },
   {
-    title: "AI & Machine Learning",
-    issuer: "Udacity",
-    link: "https://confirm.udacity.com/ABC456",
-    date: "January 2024",
+    title: "IBM Z Day 2025 SE - AI & Data",
+    issuer: "IBM",
+    link: "https://www.credly.com/badges/5c5a40ce-05ed-4f07-b5af-b5c5f4dea46e/print",
+    date: "25 April 2025",
   },
   {
-    title: "Frontend Developer Certification",
-    issuer: "FreeCodeCamp",
+    title: "WIP",
+    issuer: "WIP",
     link: "https://www.freecodecamp.org/certification/vaibhav/frontend",
     date: "November 2023",
   },

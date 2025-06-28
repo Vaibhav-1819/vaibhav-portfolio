@@ -33,6 +33,6 @@ module.exports = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"), // Optional
+    require("tailwindcss-animate"), // Optional animation plugin
   ],
 };

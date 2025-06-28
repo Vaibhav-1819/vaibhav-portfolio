@@ -29,12 +29,12 @@ function Contact() {
         <div className="flex items-center space-x-4">
           <Linkedin className="text-mkbhdRed" />
           <a
-            href="https://www.linkedin.com/in/venkata-vaibhav-ram-bharathula-ab910a291"
+            href="https://www.linkedin.com/in/vaibhav-bharathula"
             target="_blank"
             rel="noopener noreferrer"
             className="text-lg hover:underline"
           >
-            linkedin.com/in/venkata-vaibhav-ram-bharathula
+            linkedin.com/in/vaibhav-bharathula
           </a>
         </div>
         <div className="flex items-center space-x-4">
