@@ -24,15 +24,29 @@ const Hero = () => {
         Full-stack developer with a strong focus on AI integration, UI/UX design, and building scalable, user-centric web applications.
       </motion.p>
 
-      <motion.a
-        href="#projects"
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 0.6 }}
-        className="mt-8 inline-block bg-mkbhdRed text-white px-6 py-3 rounded-xl shadow hover:bg-red-600 transition"
+        className="mt-8 flex flex-col sm:flex-row gap-4"
       >
-        View My Work
-      </motion.a>
+        <a
+          href="#projects"
+          className="bg-mkbhdRed text-white px-6 py-3 rounded-xl shadow hover:bg-red-600 transition"
+        >
+          View My Work
+        </a>
+
+        {/* ✅ Resume Button */}
+        <a
+          href="/Vaibhav_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="border border-mkbhdRed text-mkbhdRed dark:text-red-400 dark:border-red-400 px-6 py-3 rounded-xl hover:bg-mkbhdRed hover:text-white dark:hover:bg-red-500 transition"
+        >
+          View Resume
+        </a>
+      </motion.div>
     </section>
   );
 };
