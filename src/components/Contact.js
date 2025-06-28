@@ -34,7 +34,7 @@ function Contact() {
             rel="noopener noreferrer"
             className="text-lg hover:underline"
           >
-            linkedin.com/in/venkata-vaibhav-ram-bharathula
+            linkedin.com/in/vaibhav-bharathula
           </a>
         </div>
         <div className="flex items-center space-x-4">
