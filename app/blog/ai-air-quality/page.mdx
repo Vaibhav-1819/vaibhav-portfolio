@@ -1,0 +1,49 @@
+export const metadata = {
+  title: 'Predicting Air Quality with XGBoost & Gemini',
+  description: 'How I built AetherAI using Python, FastAPI, and an XGBoost machine learning model to provide real-time localized environmental insights.',
+}
+
+# Predicting Air Quality with XGBoost & Gemini
+
+*April 2026 • 6 min read*
+
+---
+
+Building AetherAI was an exercise in connecting powerful machine learning models with seamless web experiences. The goal was to provide users with not just raw air quality data, but contextualized, personalized insights into what that data actually meant for their health and daily routines.
+
+## Data Ingestion & Model Training
+
+The first challenge was acquiring reliable data. I integrated data from multiple meteorological APIs and environmental sensors to gather a robust dataset encompassing:
+- Particulate Matter (PM2.5, PM10)
+- Humidity & Temperature
+- Wind speeds and historical trends
+
+Using **Python** and **pandas**, I pre-processed this time-series data, handling missing values and engineering new features. For the predictive engine, I chose **XGBoost**. Its gradient boosting framework handles tabular environmental data exceptionally well, capturing non-linear relationships that traditional linear regression models miss.
+
+```python
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+
+# Simplified training pipeline
+X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2)
+dtrain = xgb.DMatrix(X_train, label=y_train)
+
+param = {'max_depth': 6, 'eta': 0.1, 'objective': 'reg:squarederror'}
+model = xgb.train(param, dtrain, num_boost_round=100)
+```
+
+## The FastAPI Backend
+
+To serve the model predictions to the frontend quickly, I built a microservice using **FastAPI**. 
+FastAPI's asynchronous capabilities meant that the server could handle multiple prediction requests simultaneously without blocking, while its automatic OpenAPI generation made front-end integration a breeze.
+
+## Generative Insights with Gemini
+
+Raw numbers (like an AQI of 145) aren't always actionable for the average user. 
+To bridge this gap, I integrated the **Google Gemini API**. After predicting the air quality metrics, the FastAPI backend sends those metrics to Gemini with a carefully crafted prompt. Gemini then generates human-readable advice—for example:
+
+> *"The PM2.5 levels are unusually high today due to stagnant wind conditions. It's recommended to avoid outdoor cardio activities and keep windows closed until the evening."*
+
+## The Result
+
+AetherAI evolved from a simple data dashboard into an intelligent, proactive environmental assistant. By combining traditional machine learning (XGBoost) for numerical prediction with generative AI (Gemini) for contextual analysis, the platform provides a significantly better user experience.

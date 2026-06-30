@@ -1,0 +1,66 @@
+export const metadata = {
+  title: 'Architecting CricSphere: High-Performance Analytics at Scale',
+  description: 'An overview of how I built CricSphere, combining full-stack web development with machine learning models to deliver real-time cricket match predictions.',
+}
+
+# Architecting CricSphere: High-Performance Analytics at Scale
+
+*January 2026 • 7 min read*
+
+---
+
+**CricSphere** is one of my most ambitious projects—a full-stack platform that doesn't just display cricket scores, but actively predicts match outcomes using machine learning models trained on vast amounts of historical data.
+
+In this post, I want to dive into the architecture that makes CricSphere fast, scalable, and intelligent.
+
+## The Problem: Real-time ML Inference
+
+Most sports analytics platforms separate the data science workflow from the consumer-facing web application. Running a complex Machine Learning model in real-time during a live match can be incredibly resource-intensive and slow, leading to a poor user experience.
+
+The challenge was: **How do we run live inference on thousands of simultaneous user requests without bottlenecking the server?**
+
+## The Solution: A Decoupled, Event-Driven Architecture
+
+To solve this, I designed CricSphere using a decoupled microservices architecture.
+
+### 1. The Frontend (Next.js & Tailwind)
+The user interface is built with **Next.js**. By leveraging Server Components and Static Site Generation (SSG) for historical match data, the initial load times are blazingly fast. The UI is highly interactive, featuring beautiful glassmorphic designs and fluid Framer Motion animations.
+
+### 2. The Model Serving Layer (FastAPI)
+Instead of bundling the ML models directly into a monolithic backend, I deployed them via an independent **FastAPI** microservice.
+- The models were trained using Python, utilizing **XGBoost** and **Random Forests** on datasets containing ball-by-ball data from thousands of historical matches.
+- FastAPI provides an incredibly fast, asynchronous endpoint for the frontend to query.
+
+### 3. Edge Caching (Redis)
+Cricket match states don't change every millisecond. When a ball is bowled, the state updates, but thousands of users might request the prediction for that exact same state.
+To optimize this, I implemented an edge caching layer using **Redis**. 
+
+When a request for a prediction comes in:
+1. The server checks Redis to see if a prediction for the current match state already exists.
+2. If it does (Cache Hit), it returns the prediction instantly (usually < 10ms).
+3. If it doesn't (Cache Miss), it queries the FastAPI ML service, returns the result, and caches it in Redis for the next 15 seconds.
+
+```typescript
+// Simplified API Route Logic
+export async function getPrediction(matchState: MatchState) {
+  const cacheKey = `prediction_${matchState.matchId}_${matchState.overs}`;
+  
+  // 1. Check Cache
+  const cached = await redis.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+  
+  // 2. Fetch from ML Service
+  const prediction = await fetchMLPrediction(matchState);
+  
+  // 3. Cache the result for 15 seconds
+  await redis.setex(cacheKey, 15, JSON.stringify(prediction));
+  
+  return prediction;
+}
+```
+
+## The Impact
+
+By decoupling the ML inference and heavily caching the results, CricSphere is able to serve real-time analytics to thousands of simulated concurrent users with zero degradation in UI responsiveness.
+
+It was an incredible journey blending the worlds of **Data Science** and **Full-Stack Engineering**!
