@@ -59,13 +59,13 @@ export function MatchPredictionWidget() {
         <div>
           <label className="text-xs font-mono text-muted uppercase">Team A vs Team B</label>
           <div className="flex items-center gap-2 mt-2">
-            <select className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary">
+            <select aria-label="Select Team A" className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary">
               <option>India</option>
               <option>Australia</option>
               <option>England</option>
             </select>
             <span className="text-muted text-xs">vs</span>
-            <select className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary">
+            <select aria-label="Select Team B" className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary">
               <option>Australia</option>
               <option>India</option>
               <option>England</option>
@@ -74,7 +74,7 @@ export function MatchPredictionWidget() {
         </div>
         <div>
           <label className="text-xs font-mono text-muted uppercase">Venue</label>
-          <select className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary mt-2 outline-none focus:border-primary">
+          <select aria-label="Select Venue" className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary mt-2 outline-none focus:border-primary">
             <option>Wankhede Stadium</option>
             <option>MCG</option>
             <option>Lord's</option>
@@ -132,6 +132,7 @@ export function MatchPredictionWidget() {
               </div>
             </div>
             <button 
+              aria-label="Reset prediction"
               onClick={() => setStatus("idle")} 
               className="absolute top-4 right-4 text-xs font-mono text-muted hover:text-primary underline"
             >
@@ -158,6 +159,7 @@ export function AnalyticsExplorerWidget() {
         {tabs.map((t, i) => (
           <button 
             key={t.name}
+            aria-label={t.name}
             onClick={() => setTab(i)}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors ${tab === i ? 'bg-primary/20 text-primary border border-primary/30' : 'text-muted hover:bg-surface border border-transparent'}`}
           >
@@ -207,6 +209,7 @@ export function MLPipelineWidget() {
             className={`border rounded-xl transition-all overflow-hidden ${activeNode === i ? 'bg-primary/5 border-primary/30' : 'bg-surface border-border'}`}
           >
             <button 
+              aria-label={`View ${node.name} details`}
               onClick={() => setActiveNode(i)}
               className="w-full p-4 flex items-center justify-between text-left"
             >
@@ -248,6 +251,7 @@ export function MLPipelineWidget() {
         {nodes.map((node, i) => (
           <button 
             key={node.name}
+            aria-label={`Select step ${node.name}`}
             onClick={() => setActiveNode(i)}
             className={`w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center z-10 transition-all duration-300 border-2 text-xs font-mono font-bold
               ${activeNode === i ? 'bg-primary text-primary-foreground border-primary scale-110 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 

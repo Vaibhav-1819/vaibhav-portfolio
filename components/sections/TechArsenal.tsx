@@ -42,6 +42,7 @@ function TechCategoryCard({ category, index }: { category: string, index: number
     >
       <button 
         onClick={() => setIsExpanded(!isExpanded)}
+        aria-label={`Toggle ${category}`}
         className="w-full flex items-center justify-between p-6 md:p-8 cursor-pointer md:cursor-default"
       >
         <h3 className="text-lg md:text-xl font-heading font-bold text-secondary flex items-center gap-2">

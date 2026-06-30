@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Home, Code, FileText, FlaskConical, Mail } from "lucide-react";
+import { Search, Home, Code, FileText, FlaskConical, Mail, Zap, Route, Trophy, Briefcase } from "lucide-react";
 
 export function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,11 +23,14 @@ export function CommandPalette() {
   }, []);
 
   const commands = [
-    { name: "Home", icon: <Home size={16} /> },
-    { name: "Projects", icon: <Code size={16} /> },
-    { name: "Experience", icon: <FileText size={16} /> },
-    { name: "Labs", icon: <FlaskConical size={16} /> },
-    { name: "Contact", icon: <Mail size={16} /> },
+    { name: "Home", id: "hero", icon: <Home size={16} /> },
+    { name: "Projects", id: "projects", icon: <Code size={16} /> },
+    { name: "Engineering Highlights", id: "highlights", icon: <Zap size={16} /> },
+
+    { name: "Journey", id: "journey", icon: <Route size={16} /> },
+    { name: "Experience", id: "experience", icon: <Briefcase size={16} /> },
+    { name: "Achievements", id: "achievements", icon: <Trophy size={16} /> },
+    { name: "Contact", id: "footer", icon: <Mail size={16} /> },
   ];
 
   const filteredCommands = commands.filter(cmd => 
@@ -66,16 +69,19 @@ export function CommandPalette() {
                 ESC
               </div>
             </div>
-            
-            <div className="p-2 max-h-[300px] overflow-y-auto">
+            <div className="p-2">
               {filteredCommands.length > 0 ? (
                 filteredCommands.map((cmd) => (
                   <button 
                     key={cmd.name}
+                    aria-label={cmd.name}
                     className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-primary/10 hover:text-primary text-secondary transition-colors text-sm font-medium group text-left"
                     onClick={() => {
                       setIsOpen(false);
-                      // In a real app, this would route to `#${cmd.name.toLowerCase()}`
+                      const element = document.getElementById(cmd.id);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
                     }}
                   >
                     <span className="text-muted group-hover:text-primary transition-colors">

@@ -83,6 +83,7 @@ export function Navbar() {
               {/* Mobile Menu Toggle */}
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle mobile menu"
                 className="flex md:hidden items-center justify-center p-2 rounded-full bg-surface/50 border border-border text-muted hover:text-primary hover:border-primary/50 transition-all active:scale-95"
               >
                 {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}

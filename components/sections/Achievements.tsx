@@ -4,14 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Trophy, Code2, Award, ChevronDown } from "lucide-react";
 
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
+
 export function AchievementsSection() {
   const [showAllCerts, setShowAllCerts] = useState(false);
 
   const stats = [
-    { label: "Young Turks Percentile", value: "97", subtitle: "Top 3% Nationwide" },
-    { label: "CodeChef Max Rating", value: "834", subtitle: "Division 4" },
-    { label: "LeetCode Solved", value: "113+", subtitle: "Data Structures & Algorithms" },
-    { label: "GeeksforGeeks", value: "69+", subtitle: "Problem Solving" }
+    { label: "Young Turks Percentile", value: 97, suffix: "", subtitle: "Top 3% Nationwide" },
+    { label: "CodeChef Max Rating", value: 834, suffix: "", subtitle: "Division 4" },
+    { label: "LeetCode Solved", value: 113, suffix: "+", subtitle: "Data Structures & Algorithms" },
+    { label: "GeeksforGeeks", value: 69, suffix: "+", subtitle: "Problem Solving" }
   ];
 
   const coreCerts = [
@@ -22,7 +24,7 @@ export function AchievementsSection() {
     { title: "AWS Academy Graduate - Data Engineering", provider: "AWS Training", date: "Apr 2025" }
   ];
 
-  const hiddenCerts: Array<{title: string, provider: string, date: string}> = [
+  const hiddenCerts: Array<{ title: string, provider: string, date: string }> = [
     // Empty for now since the user provided exactly 5, all of which are featured.
   ];
 
@@ -40,7 +42,7 @@ export function AchievementsSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
-          
+
           {/* Left Column: Coding Profiles & Stats */}
           <div className="space-y-8">
             <h3 className="flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-muted pb-4 border-b border-border/50">
@@ -48,7 +50,7 @@ export function AchievementsSection() {
             </h3>
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, i) => (
-                <motion.div 
+                <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -57,23 +59,25 @@ export function AchievementsSection() {
                   className="p-6 rounded-2xl bg-surface/30 border border-border/50 flex flex-col justify-between group hover:bg-surface/50 transition-colors"
                 >
                   <div className="mb-4">
-                    <p className="text-3xl font-mono font-bold text-secondary group-hover:text-primary transition-colors tracking-tight">{stat.value}</p>
+                    <p className="text-3xl font-mono font-bold text-secondary group-hover:text-primary transition-colors tracking-tight">
+                      <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                    </p>
                     <p className="text-xs text-muted/60 font-mono mt-1">{stat.subtitle}</p>
                   </div>
                   <p className="text-sm font-bold text-secondary">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="p-6 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-between"
             >
               <div>
-                <p className="text-sm font-bold text-secondary">Agentblazer</p>
-                <p className="text-xs text-primary font-mono mt-1 uppercase tracking-widest">Champion</p>
+                <p className="text-sm font-bold text-secondary">Salesforce Agentblazer</p>
+                <p className="text-xs text-primary font-mono mt-1 uppercase tracking-widest">Champion 2026</p>
               </div>
               <Trophy className="text-primary opacity-50" size={32} />
             </motion.div>
@@ -86,7 +90,7 @@ export function AchievementsSection() {
             </h3>
             <div className="flex flex-col gap-4">
               {coreCerts.map((cert, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -104,7 +108,7 @@ export function AchievementsSection() {
 
               <AnimatePresence>
                 {showAllCerts && hiddenCerts.map((cert, i) => (
-                  <motion.div 
+                  <motion.div
                     key={`hidden-${i}`}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
@@ -121,7 +125,7 @@ export function AchievementsSection() {
               </AnimatePresence>
 
               {hiddenCerts.length > 0 && (
-                <button 
+                <button
                   onClick={() => setShowAllCerts(!showAllCerts)}
                   className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl border border-border/50 hover:bg-surface/30 transition-colors text-xs font-mono uppercase tracking-widest text-muted hover:text-secondary mt-2"
                 >

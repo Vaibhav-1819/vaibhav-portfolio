@@ -1,15 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 const highlights = [
-  { value: "22,007", label: "Matches Processed", color: "text-emerald-400" },
-  { value: "638K+", label: "PvP Records", color: "text-primary" },
-  { value: "4", label: "ML Models Trained", color: "text-accent" },
-  { value: "11K", label: "Images Analyzed", color: "text-secondary" },
-  { value: "80%", label: "Classification Accuracy", color: "text-primary" },
-  { value: "370K+", label: "Player Innings", color: "text-emerald-400" },
-  { value: "<50ms", label: "Inference Latency", color: "text-accent" }
+  { num: 22007, prefix: "", suffix: "", label: "Matches Processed", color: "text-emerald-400" },
+  { num: 638, prefix: "", suffix: "K+", label: "PvP Records", color: "text-primary" },
+  { num: 4, prefix: "", suffix: "", label: "ML Models Trained", color: "text-accent" },
+  { num: 11, prefix: "", suffix: "K", label: "Images Analyzed", color: "text-secondary" },
+  { num: 80, prefix: "", suffix: "%", label: "Classification Accuracy", color: "text-primary" },
+  { num: 370, prefix: "", suffix: "K+", label: "Player Innings", color: "text-emerald-400" },
+  { num: 50, prefix: "<", suffix: "ms", label: "Inference Latency", color: "text-accent" }
 ];
 
 export function EngineeringHighlights() {
@@ -38,7 +39,7 @@ export function EngineeringHighlights() {
               className="p-8 bg-surface/30 border border-border/50 rounded-3xl flex flex-col justify-center items-center text-center group hover:border-primary/50 transition-colors"
             >
               <h3 className={`text-4xl md:text-5xl font-mono font-bold tracking-tighter mb-4 ${item.color} group-hover:scale-110 transition-transform duration-500`}>
-                {item.value}
+                <AnimatedNumber value={item.num} prefix={item.prefix} suffix={item.suffix} />
               </h3>
               <p className="text-sm font-mono text-muted uppercase tracking-[0.1em] leading-relaxed">
                 {item.label}

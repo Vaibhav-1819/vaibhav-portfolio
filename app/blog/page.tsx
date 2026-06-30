@@ -12,7 +12,7 @@ export default function BlogListingPage() {
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
 
       {/* Back to Home Navigation */}
-      <div className="absolute top-8 left-6 md:left-12 z-50">
+      <div className="absolute top-24 left-6 md:left-12 z-50">
         <Link 
           href="/" 
           className="flex items-center gap-2 px-4 py-2 bg-surface/50 hover:bg-surface border border-border rounded-full text-sm font-mono text-muted hover:text-secondary transition-all backdrop-blur-md"
@@ -45,7 +45,7 @@ export default function BlogListingPage() {
 
         {/* Blog Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          {blogs.map((post, index) => (
+          {[...blogs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((post, index) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}

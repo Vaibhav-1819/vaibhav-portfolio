@@ -1,13 +1,14 @@
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { HeroDashboard } from "@/components/sections/HeroDashboard";
-import { FeaturedBuild } from "@/components/sections/FeaturedBuild";
-import { ProjectsGrid } from "@/components/sections/ProjectsGrid";
-import { EngineeringHighlights } from "@/components/sections/EngineeringHighlights";
-import { Experiments } from "@/components/sections/Experiments";
-import { JourneyTimeline } from "@/components/sections/JourneyTimeline";
-import { ExperienceSection } from "@/components/sections/Experience";
-import { AchievementsSection } from "@/components/sections/Achievements";
-import { Footer } from "@/components/layout/Footer";
+import dynamic from 'next/dynamic';
+
+const FeaturedBuild = dynamic(() => import('@/components/sections/FeaturedBuild').then(mod => mod.FeaturedBuild));
+const ProjectsGrid = dynamic(() => import('@/components/sections/ProjectsGrid').then(mod => mod.ProjectsGrid));
+const EngineeringHighlights = dynamic(() => import('@/components/sections/EngineeringHighlights').then(mod => mod.EngineeringHighlights));
+const JourneyTimeline = dynamic(() => import('@/components/sections/JourneyTimeline').then(mod => mod.JourneyTimeline));
+const ExperienceSection = dynamic(() => import('@/components/sections/Experience').then(mod => mod.ExperienceSection));
+const AchievementsSection = dynamic(() => import('@/components/sections/Achievements').then(mod => mod.AchievementsSection));
+const Footer = dynamic(() => import('@/components/layout/Footer').then(mod => mod.Footer));
 
 export default function Home() {
   return (
@@ -34,7 +35,6 @@ export default function Home() {
       <FeaturedBuild />
       <ProjectsGrid />
       <EngineeringHighlights />
-      <Experiments />
       <JourneyTimeline />
       <ExperienceSection />
       <AchievementsSection />

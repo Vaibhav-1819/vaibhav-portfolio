@@ -1,15 +1,6 @@
-import { Code, Server, FileText, BrainCircuit } from "lucide-react";
+import { Server, BrainCircuit } from "lucide-react";
 
 export const resumes = [
-  {
-    id: "software-engineer",
-    title: "Software Engineer",
-    description: "General software engineering resume highlighting full-stack development, modern frontend frameworks, backend technologies, and system architecture.",
-    file: "/docs/Resume_Vaibhav_Ram.pdf",
-    icon: Code,
-    color: "from-blue-500/20 to-cyan-500/20",
-    iconColor: "text-blue-500"
-  },
   {
     id: "java-developer",
     title: "Java Developer",

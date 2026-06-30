@@ -35,5 +35,32 @@ export const blogs: BlogPost[] = [
     date: "January 2026",
     readTime: "7 min read",
     tags: ["Next.js", "Machine Learning", "Data Analytics"]
+  },
+  {
+    id: "machinaiq-predictive-maintenance",
+    slug: "machinaiq-predictive-maintenance",
+    title: "MachinaIQ: AI-Driven Predictive Maintenance at Scale",
+    description: "Building an explainable AI system using FastAPI, Random Forests, and SMOTE to predict industrial equipment failures in real-time.",
+    date: "June 2026",
+    readTime: "10 min read",
+    tags: ["Machine Learning", "FastAPI", "Explainable AI"]
+  },
+  {
+    id: "car-brand-classification-efficientnet",
+    slug: "car-brand-classification-efficientnet",
+    title: "Automated Car Brand Classification using EfficientNet",
+    description: "Training a deep learning CNN model on over 11,000 images to identify 50 distinct car brands with transfer learning.",
+    date: "May 2025",
+    readTime: "8 min read",
+    tags: ["Deep Learning", "Computer Vision", "TensorFlow"]
+  },
+  {
+    id: "cyber-threat-detection-ml",
+    slug: "cyber-threat-detection-ml",
+    title: "Building a Real-Time Cyber Threat Detection System with ML",
+    description: "A deep dive into architecting a real-time network anomaly detection system using Machine Learning, packet inspection, and Python.",
+    date: "October 2025",
+    readTime: "15 min read",
+    tags: ["Machine Learning", "Cybersecurity", "FastAPI", "Python"]
   }
 ];

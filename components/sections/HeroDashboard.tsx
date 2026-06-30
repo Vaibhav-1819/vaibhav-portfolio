@@ -1,3 +1,5 @@
+
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { heroContent } from "@/content/hero";
 import Link from "next/link";
 import { projects } from "@/content/projects";
@@ -115,31 +117,28 @@ export async function HeroDashboard() {
                </div>
                
                <div className="flex flex-col gap-4 mt-6">
-                 <div className="flex items-center justify-between border-b border-border/50 pb-4">
-                   <div className="flex items-center gap-2">
-                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                     <span className="text-[10px] md:text-xs font-mono text-muted uppercase tracking-widest">Status: Active</span>
-                   </div>
-                   <div className="text-[10px] md:text-xs font-mono text-muted uppercase tracking-widest text-right">
-                     Last Updated: Today
-                   </div>
-                 </div>
+                  <div className="flex items-center border-b border-border/50 pb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[10px] md:text-xs font-mono text-muted uppercase tracking-widest">Status: Active</span>
+                    </div>
+                  </div>
 
                  <div className="grid grid-cols-2 gap-4 bg-background/50 rounded-2xl p-4 border border-border/50">
                    <div className="text-left">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary">22,000+</p>
+                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={22000} suffix="+" /></p>
                      <p className="text-[10px] uppercase tracking-wider text-muted">Matches</p>
                    </div>
                    <div className="text-right">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary">4</p>
+                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={4} /></p>
                      <p className="text-[10px] uppercase tracking-wider text-muted">Models</p>
                    </div>
                    <div className="text-left">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary">638K+</p>
+                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={638} suffix="K+" /></p>
                      <p className="text-[10px] uppercase tracking-wider text-muted">Player Matchups</p>
                    </div>
                    <div className="text-right">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary">16</p>
+                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={16} /></p>
                      <p className="text-[10px] uppercase tracking-wider text-muted">Datasets</p>
                    </div>
                  </div>

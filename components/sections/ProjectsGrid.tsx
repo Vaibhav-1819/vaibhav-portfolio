@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export function ProjectsGrid() {
   const mainProjects = projects.filter(p => p.slug === 'nexus' || p.slug === 'aetherai');
-  const otherProjectsList = projects.filter(p => p.slug !== 'cricsphere' && p.slug !== 'nexus' && p.slug !== 'aetherai');
+
 
   return (
     <section id="projects" className="py-32 border-t border-border/50">
@@ -75,46 +75,7 @@ export function ProjectsGrid() {
           ))}
         </div>
 
-        {/* Other Projects List */}
-        {otherProjectsList.length > 0 && (
-          <div className="mt-24 md:mt-32 max-w-4xl mx-auto">
-            <h3 className="font-heading font-bold text-3xl md:text-4xl text-secondary mb-8 md:mb-12 tracking-[-0.02em] text-center md:text-left">
-              Other Projects
-            </h3>
-            <div className="flex flex-col gap-4">
-              {otherProjectsList.map((project, i) => (
-                <a href={project.github} target="_blank" rel="noreferrer" key={project.slug} className="block active:scale-[0.98] transition-transform">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.1 }}
-                    className="p-6 md:p-8 rounded-3xl bg-surface/20 border border-border/50 hover:bg-surface/50 hover:border-primary/50 transition-all group flex flex-col md:flex-row md:items-center justify-between gap-6"
-                  >
-                    <div className="flex flex-col flex-1 pb-2 md:pb-0">
-                      <h3 className="font-heading font-bold text-2xl md:text-3xl tracking-[-0.02em] text-secondary group-hover:text-primary transition-colors mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm md:text-base text-muted mb-4">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map(tech => (
-                          <span key={tech} className="text-[10px] md:text-xs font-mono text-muted/80 bg-background/50 px-2 py-1 rounded border border-border/30">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="shrink-0 flex items-center justify-center p-3 rounded-full bg-surface border border-border/50 text-secondary md:bg-transparent md:border-transparent">
-                      <ArrowRight className="text-muted group-hover:text-primary transform group-hover:translate-x-2 transition-all" size={20} />
-                    </div>
-                  </motion.div>
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+
       </div>
     </section>
   );

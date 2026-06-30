@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Database, GitBranch, Terminal, Zap, LineChart, BrainCircuit } from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/content/projects";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 const project = projects.find(p => p.slug === 'cricsphere');
 
@@ -125,15 +126,15 @@ export default function CricSpherePage() {
           <div className="p-6 rounded-2xl bg-surface border border-border/50 space-y-6">
             <div className="flex justify-between items-center border-b border-border/50 pb-4">
               <span className="text-sm text-muted">Training Data</span>
-              <span className="font-mono font-bold text-primary">22,007 Matches</span>
+              <span className="font-mono font-bold text-primary"><AnimatedNumber value={22007} suffix=" Matches" /></span>
             </div>
             <div className="flex justify-between items-center border-b border-border/50 pb-4">
               <span className="text-sm text-muted">PvP Records</span>
-              <span className="font-mono font-bold text-primary">638K+</span>
+              <span className="font-mono font-bold text-primary"><AnimatedNumber value={638} suffix="K+" /></span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted">Inference Time</span>
-              <span className="font-mono font-bold text-accent">&lt;100ms</span>
+              <span className="font-mono font-bold text-accent"><AnimatedNumber value={100} prefix="<" suffix="ms" /></span>
             </div>
           </div>
         </div>
