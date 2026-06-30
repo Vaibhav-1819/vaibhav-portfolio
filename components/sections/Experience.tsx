@@ -6,7 +6,6 @@ import { Briefcase } from "lucide-react";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { AnimatePresence } from "framer-motion";
 
 export function ExperienceSection() {
   return (
@@ -63,33 +62,29 @@ function ExperienceCard({ exp, index }: { exp: any, index: number }) {
           <ChevronDown size={14} className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
         
-        <AnimatePresence>
-          {(isExpanded || (typeof window !== 'undefined' && window.innerWidth >= 768)) && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden md:!h-auto md:!opacity-100"
-            >
-              <ul className="space-y-3 mb-6 mt-4 md:mt-0">
-                {exp.description.map((desc: string, j: number) => (
-                  <li key={j} className="text-sm text-muted flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-border mt-1.5 shrink-0" />
-                    {desc}
-                  </li>
-                ))}
-              </ul>
+        <motion.div
+          initial={false}
+          animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden md:!h-auto md:!opacity-100"
+        >
+          <ul className="space-y-3 mb-6 mt-4 md:mt-0">
+            {exp.description.map((desc: string, j: number) => (
+              <li key={j} className="text-sm text-muted flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-border mt-1.5 shrink-0" />
+                {desc}
+              </li>
+            ))}
+          </ul>
 
-              <div className="flex flex-wrap gap-2">
-                {exp.skills.map((skill: string) => (
-                  <span key={skill} className="text-[10px] md:text-xs text-muted/80 bg-background px-2 py-1 rounded-md border border-border/50">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          <div className="flex flex-wrap gap-2">
+            {exp.skills.map((skill: string) => (
+              <span key={skill} className="text-[10px] md:text-xs text-muted/80 bg-background px-2 py-1 rounded-md border border-border/50">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );

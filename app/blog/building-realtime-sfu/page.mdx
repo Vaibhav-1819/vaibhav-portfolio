@@ -1,0 +1,54 @@
+export const metadata = {
+  title: 'Building a Real-Time SFU with LiveKit',
+  description: 'An deep dive into transitioning from a standard WebRTC mesh network to a scalable Selective Forwarding Unit (SFU) architecture.',
+}
+
+# Building a Real-Time SFU with LiveKit
+
+*May 2026 • 8 min read*
+
+---
+
+When building **Nexus**, my real-time collaboration platform, I initially started with a standard WebRTC mesh network. It was easy to set up for two people, but as soon as more users joined the room, the performance degraded significantly. 
+
+In a mesh network, every participant has to send their video and audio streams to *every other participant*. If there are 5 people in a call, each person is uploading 4 streams and downloading 4 streams. This quickly chokes the user's upload bandwidth.
+
+## Enter the Selective Forwarding Unit (SFU)
+
+To solve this, I migrated to an **SFU architecture** using [LiveKit](https://livekit.io/). 
+
+An SFU acts as a central server. Instead of sending your stream to everyone, you send it *once* to the SFU, and the SFU handles routing it to everyone else.
+
+### The Architecture
+
+Here is how the architecture changed:
+
+1. **Client (React)**: Uses `@livekit/components-react` for handling camera, microphone, and rendering participant tiles.
+2. **Server (Node.js)**: Uses the LiveKit server SDK to generate access tokens securely.
+3. **SFU**: The LiveKit open-source server instances handling the heavy lifting of video routing.
+
+### Token Generation Example
+
+To join a room securely, the server needs to issue a token. Here is a simplified version of the token generation logic:
+
+```typescript
+import { AccessToken } from 'livekit-server-sdk';
+
+export const createToken = async (roomName: string, participantName: string) => {
+  const at = new AccessToken('API_KEY', 'API_SECRET', {
+    identity: participantName,
+  });
+
+  at.addGrant({ roomJoin: true, room: roomName });
+
+  return at.toJwt();
+}
+```
+
+### Managing State alongside Video
+
+One of the biggest challenges was managing real-time chat and document state alongside the video layer. I integrated **Socket.IO** to handle text chat, ensuring that even if video drops due to poor network, the text WebSocket connection remains stable and lightweight.
+
+## Conclusion
+
+Migrating to LiveKit and an SFU model completely transformed the scalability of Nexus. It was a steep learning curve understanding WebRTC protocols deeply, but it ultimately provided a much more stable and professional experience for users.

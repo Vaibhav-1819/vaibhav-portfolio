@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import { CursorGlow } from '@/components/ui/CursorGlow';
 import { CommandPalette } from '@/components/ui/CommandPalette';
-import { Navbar } from '@/components/ui/Navbar';
-import { StatusBar } from '@/components/ui/StatusBar';
+import { Navbar } from '@/components/layout/Navbar';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -37,7 +36,6 @@ export default function RootLayout({
         <CursorGlow />
         <CommandPalette />
         {children}
-        <StatusBar />
       </body>
     </html>
   );

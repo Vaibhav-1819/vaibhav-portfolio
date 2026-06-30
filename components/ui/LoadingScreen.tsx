@@ -7,6 +7,20 @@ export function LoadingScreen() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
+  const loadingStates = [
+    "Initializing workspace...",
+    "Compiling projects...",
+    "Loading experiments...",
+    "Connecting to backend...",
+    "Preparing UI..."
+  ];
+  
+  const currentStateIndex = Math.min(
+    Math.floor((progress / 100) * loadingStates.length),
+    loadingStates.length - 1
+  );
+  const currentState = loadingStates[currentStateIndex];
+
   useEffect(() => {
     // Check if it's the first visit in this session
     const hasVisited = sessionStorage.getItem("hasVisitedV2");
@@ -64,7 +78,7 @@ export function LoadingScreen() {
             </div>
             
             <div className="flex justify-between text-xs text-muted">
-              <span>Initializing Projects</span>
+              <span>{currentState}</span>
               <span>{Math.min(progress, 100)}%</span>
             </div>
           </div>

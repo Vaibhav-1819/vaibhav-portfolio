@@ -1,4 +1,5 @@
 import { heroContent } from "@/content/hero";
+import Link from "next/link";
 import { projects } from "@/content/projects";
 import { Activity, Code, GitCommit, Layout, Server, Sparkles, BookOpen } from "lucide-react";
 
@@ -83,9 +84,9 @@ export async function HeroDashboard() {
                <a href="#projects" className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-bold text-sm tracking-wide active:scale-95 transition-transform shadow-[0_0_20px_rgba(var(--color-primary),0.3)]">
                  Launch Workspace
                </a>
-               <a href="/docs/Resume_Vaibhav_Ram.pdf" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-surface border border-border text-secondary font-bold text-sm tracking-wide active:scale-95 transition-transform">
+               <Link href="/resume" className="px-6 py-3 rounded-full bg-surface border border-border text-secondary font-bold text-sm tracking-wide active:scale-95 transition-transform">
                  Resume
-               </a>
+               </Link>
                <a href="https://github.com/Vaibhav-1819" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-surface border border-border text-secondary font-bold text-sm tracking-wide active:scale-95 transition-transform">
                  GitHub
                </a>

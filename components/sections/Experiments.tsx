@@ -50,7 +50,7 @@ export function Experiments() {
   );
 }
 
-function MatchPredictionWidget() {
+export function MatchPredictionWidget() {
   const [status, setStatus] = useState<"idle" | "predicting" | "result">("idle");
 
   return (
@@ -144,7 +144,7 @@ function MatchPredictionWidget() {
   );
 }
 
-function AnalyticsExplorerWidget() {
+export function AnalyticsExplorerWidget() {
   const [tab, setTab] = useState(0);
   const tabs = [
     { name: "Runs", icon: BarChart3 },
@@ -186,7 +186,7 @@ function AnalyticsExplorerWidget() {
   );
 }
 
-function MLPipelineWidget() {
+export function MLPipelineWidget() {
   const [activeNode, setActiveNode] = useState(0);
   const nodes = [
     { name: "Dataset", desc: "22,007 raw JSON match files ingested from Cricsheet." },

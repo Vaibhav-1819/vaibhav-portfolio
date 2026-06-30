@@ -7,7 +7,7 @@ import { Experiments } from "@/components/sections/Experiments";
 import { JourneyTimeline } from "@/components/sections/JourneyTimeline";
 import { ExperienceSection } from "@/components/sections/Experience";
 import { AchievementsSection } from "@/components/sections/Achievements";
-import { Footer } from "@/components/sections/Footer";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
