@@ -12,7 +12,7 @@ const Footer = dynamic(() => import('@/components/layout/Footer').then(mod => mo
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative overflow-hidden flex flex-col pb-8">
+    <main id="top" className="min-h-screen relative overflow-hidden flex flex-col pb-8">
       <LoadingScreen />
       
       {/* 

@@ -14,7 +14,7 @@ export function AnimatedNumber({ value, suffix = "", prefix = "", duration = 200
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" });
   
-  const [displayValue, setDisplayValue] = useState("0");
+  const [displayValue, setDisplayValue] = useState(value.toLocaleString());
   
   useEffect(() => {
     if (isInView) {

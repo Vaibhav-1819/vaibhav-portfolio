@@ -33,7 +33,7 @@ export const projects: Project[] = [
   {
     title: 'AetherAI',
     slug: 'aetherai',
-    description: 'Bridged the gap between raw environmental data and actionable user insights by providing real-time, localized air quality forecasting.',
+    description: 'Built a real-time forecasting pipeline using XGBoost (94.2% confidence) and Gemini 1.5 Flash to translate predicted AQI into actionable, personalized health advice.',
     github: 'https://github.com/Vaibhav-1819',
     technologies: ['React', 'FastAPI', 'XGBoost', 'Gemini', 'SQLite'],
     image: '/images/aetherai_1.webp',
@@ -44,7 +44,7 @@ export const projects: Project[] = [
   {
     title: 'BrandRecognizer',
     slug: 'brandrecognizer',
-    description: 'Trained a deep learning model on 11,000+ images across 50 brands. Achieved ~80% accuracy using transfer learning and augmentation. Automated preprocessing and evaluation pipeline.',
+    description: 'Trained an EfficientNetB0 model via transfer learning to classify 50 car brands from 11,000+ images, reaching ~80% accuracy with dynamic data augmentation.',
     technologies: ['Python', 'TensorFlow', 'EfficientNetB0'],
     featured: false,
     year: 2024,
@@ -53,7 +53,7 @@ export const projects: Project[] = [
   {
     title: 'CrickIQ',
     slug: 'crickiq',
-    description: 'Developed a responsive quiz platform with timers, categories, and scoring system. Implemented session storage for state persistence and designed an engaging, user-friendly UI.',
+    description: 'A responsive cricket quiz platform with timers, categories, and score tracking, using session storage for state persistence.',
     technologies: ['React.js'],
     featured: false,
     year: 2023,

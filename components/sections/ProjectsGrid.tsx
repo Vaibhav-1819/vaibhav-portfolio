@@ -9,7 +9,6 @@ import Image from "next/image";
 export function ProjectsGrid() {
   const mainProjects = projects.filter(p => p.slug === 'nexus' || p.slug === 'aetherai');
 
-
   return (
     <section id="projects" className="py-32 border-t border-border/50">
       <div className="max-w-7xl mx-auto px-6">
@@ -20,7 +19,7 @@ export function ProjectsGrid() {
           <p className="text-muted text-lg md:text-xl">Apps, tools, and platforms built for learning and scale.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {mainProjects.map((project, i) => (
             <Link href={`/projects/${project.slug}`} key={project.slug} className="block group">
               <motion.div
@@ -73,7 +72,7 @@ export function ProjectsGrid() {
             </motion.div>
           </Link>
           ))}
-        </div>
+        </motion.div>
 
 
       </div>

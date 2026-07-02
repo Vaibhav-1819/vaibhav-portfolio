@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, AnimatePresence } from "framer-motion";
-import { Command, Menu, X } from "lucide-react";
+import { Command, Menu, X, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -72,7 +72,7 @@ export function Navbar() {
                 href="/resume" 
                 className="hidden md:flex items-center gap-1.5 px-4 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-full text-xs font-mono font-bold tracking-widest transition-colors"
               >
-                RESUME
+                <Download size={14} /> RESUME
               </Link>
               
               <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-surface rounded-full border border-border text-muted cursor-pointer hover:border-primary/50 transition-colors">
@@ -131,7 +131,7 @@ export function Navbar() {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="flex justify-center items-center gap-1.5 w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-xl text-xs font-mono font-bold tracking-widest transition-colors active:scale-95"
                     >
-                      VIEW RESUME
+                      <Download size={14} /> VIEW RESUME
                     </Link>
                   </motion.div>
                 </div>

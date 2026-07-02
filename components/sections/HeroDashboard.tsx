@@ -75,24 +75,14 @@ export async function HeroDashboard() {
             ))}
           </div>
 
-          {/* Mobile Specific Info & Buttons */}
-          <div className="flex md:hidden flex-col gap-6 pt-2">
-             <div className="flex flex-col gap-1">
-               <span className="text-[10px] font-mono text-muted uppercase tracking-widest">Current Build</span>
-               <span className="font-heading font-bold text-2xl text-secondary">CricSphere</span>
-             </div>
-
-             <div className="flex flex-wrap items-center gap-3">
-               <a href="#projects" className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-bold text-sm tracking-wide active:scale-95 transition-transform shadow-[0_0_20px_rgba(var(--color-primary),0.3)]">
-                 Launch Workspace
-               </a>
-               <Link href="/resume" className="px-6 py-3 rounded-full bg-surface border border-border text-secondary font-bold text-sm tracking-wide active:scale-95 transition-transform">
-                 Resume
-               </Link>
-               <a href="https://github.com/Vaibhav-1819" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-surface border border-border text-secondary font-bold text-sm tracking-wide active:scale-95 transition-transform">
-                 GitHub
-               </a>
-             </div>
+          {/* Status Widget */}
+          <div className="pt-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-surface border border-border/50 text-xs font-mono">
+              <span className="text-muted select-none">$ current_status:</span>
+              <span className="text-secondary">seeking SWE/AI roles</span>
+              <span className="text-muted/50 hidden md:inline">|</span>
+              <span className="text-primary hidden md:inline">open_to: May 2027</span>
+            </div>
           </div>
 
         </div>

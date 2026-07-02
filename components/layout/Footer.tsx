@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
-
 export function Footer() {
   return (
-    <footer className="w-full bg-background pt-32 pb-16 px-6 border-t border-border/50" id="footer">
+    <footer className="w-full bg-background pt-16 pb-8 px-6 border-t border-border/50" id="footer">
       <div className="max-w-5xl mx-auto font-mono">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +26,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="p-6 md:p-8 space-y-6">
+          <div className="p-4 md:p-6 space-y-3">
             {/* Terminal Command */}
             <motion.div 
               initial={{ opacity: 0 }}
@@ -56,9 +55,9 @@ export function Footer() {
               whileInView={{ opacity: 1, height: "auto" }}
               viewport={{ once: true }}
               transition={{ delay: 1.8, duration: 0.4 }}
-              className="space-y-6 pt-4 border-t border-border/30 overflow-hidden"
+              className="space-y-3 pt-2 border-t border-border/30 overflow-hidden"
             >
-              <div className="space-y-4">
+              <div className="space-y-2">
                 <p className="text-secondary font-bold uppercase tracking-widest text-xs md:text-sm">
                   End of Workspace
                 </p>

@@ -63,7 +63,7 @@ export function FeaturedBuild() {
           transition={{ duration: 1 }}
           className="relative rounded-3xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5 w-full aspect-[16/9]"
         >
-          <Image src="/images/cricsphere_landing.webp" alt="CricSphere Dashboard" fill className="object-cover" priority sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw" />
+          <Image src="/images/cricsphere_landing.webp" alt="CricSphere Dashboard" fill className="object-cover" priority sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
           
           <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 flex flex-col md:flex-row items-end justify-between gap-6 z-10">

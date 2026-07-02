@@ -3,19 +3,21 @@ import type { MDXComponents } from 'mdx/types'
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import Mermaid from '@/components/ui/Mermaid';
+import { AetherAIDemo } from '@/components/ui/AetherAIDemo';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    AetherAIDemo,
     wrapper: ({ children }) => (
       <main id="top" className="min-h-screen pt-32 pb-24 px-6 max-w-3xl mx-auto font-mono relative">
         <div className="absolute top-24 left-0 xl:-left-32 z-50">
-          <Link 
+          <a 
             href="/blog" 
             className="flex items-center gap-2 px-4 py-2 bg-surface/50 hover:bg-surface border border-border rounded-full text-sm font-mono text-muted hover:text-secondary transition-all backdrop-blur-md"
           >
             <ArrowLeft size={16} />
             <span>All Blogs</span>
-          </Link>
+          </a>
         </div>
         {children}
         <div className="mt-20 pt-8 border-t border-border/50 text-center">

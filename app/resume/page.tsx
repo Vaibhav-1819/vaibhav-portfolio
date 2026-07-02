@@ -14,13 +14,13 @@ export default function ResumeSelectionPage() {
 
       {/* Back to Home Navigation */}
       <div className="absolute top-24 left-6 md:left-12 z-50">
-        <Link 
+        <a 
           href="/" 
           className="flex items-center gap-2 px-4 py-2 bg-surface/50 hover:bg-surface border border-border rounded-full text-sm font-mono text-muted hover:text-secondary transition-all backdrop-blur-md"
         >
           <ArrowLeft size={16} />
           <span>Workspace</span>
-        </Link>
+        </a>
       </div>
 
       <div className="relative z-10 max-w-4xl w-full flex flex-col items-center">
