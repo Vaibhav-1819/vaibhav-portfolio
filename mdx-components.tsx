@@ -6,6 +6,15 @@ import Mermaid from '@/components/ui/Mermaid';
 import { AetherAIDemo } from '@/components/ui/AetherAIDemo';
 import { BlogLayoutClient } from '@/components/layout/BlogLayoutClient';
 
+const extractText = (children: any): string => {
+  if (typeof children === 'string') return children;
+  if (Array.isArray(children)) return children.map(extractText).join('');
+  if (typeof children === 'object' && children !== null && children.props && children.props.children) {
+    return extractText(children.props.children);
+  }
+  return '';
+};
+
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     AetherAIDemo,
@@ -16,11 +25,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     h1: ({ children }) => <h1 className="text-4xl md:text-5xl font-heading font-bold text-secondary tracking-tight mb-8">{children}</h1>,
     h2: ({ children }) => {
-      const id = typeof children === 'string' ? children.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '';
+      const text = extractText(children);
+      const id = text ? text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '';
       return <h2 id={id} className="text-2xl font-heading font-bold text-secondary mt-12 mb-4 border-b border-border/50 pb-2 scroll-mt-32">{children}</h2>;
     },
     h3: ({ children }) => {
-      const id = typeof children === 'string' ? children.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '';
+      const text = extractText(children);
+      const id = text ? text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '';
       return <h3 id={id} className="text-xl font-heading font-bold text-secondary mt-8 mb-4 scroll-mt-32">{children}</h3>;
     },
     p: ({ children }) => <p className="text-muted leading-relaxed mb-6 text-sm md:text-base">{children}</p>,

@@ -135,15 +135,18 @@ export function CommandPalette() {
         switch (cmd) {
           case "help":
             output = (
-              <div className="space-y-1">
-                <p>Available commands:</p>
-                <p className="pl-4"><span className="text-primary">home</span>     - Return to the top of the workspace</p>
-                <p className="pl-4"><span className="text-primary">projects</span> - View my portfolio projects</p>
-                <p className="pl-4"><span className="text-primary">blog</span>     - Read my technical writings</p>
-                <p className="pl-4"><span className="text-primary">resume</span>   - Download or view my resume</p>
-                <p className="pl-4"><span className="text-primary">contact</span>  - Get in touch with me</p>
-                <p className="pl-4"><span className="text-primary">whoami</span>   - About the developer</p>
-                <p className="pl-4"><span className="text-primary">clear</span>    - Clear the terminal</p>
+              <div className="flex flex-col text-sm leading-tight">
+                <p className="text-muted mb-2">Available commands:</p>
+                <div className="grid grid-cols-[80px_1fr] gap-x-2 gap-y-1.5 pl-2">
+                  <span className="text-primary">home</span><span className="text-secondary">Return to workspace root</span>
+                  <span className="text-primary">projects</span><span className="text-secondary">View portfolio projects</span>
+                  <span className="text-primary">blog</span><span className="text-secondary">Read technical writings</span>
+                  <span className="text-primary">resume</span><span className="text-secondary">View or download resume</span>
+                  <span className="text-primary">ask</span><span className="text-secondary">AI Assistant (e.g. 'ask what are your skills')</span>
+                  <span className="text-primary">contact</span><span className="text-secondary">Get in touch</span>
+                  <span className="text-primary">whoami</span><span className="text-secondary">About the developer</span>
+                  <span className="text-primary">clear</span><span className="text-secondary">Clear terminal output</span>
+                </div>
               </div>
             );
             break;
@@ -156,45 +159,45 @@ export function CommandPalette() {
             break;
           case "projects":
             output = (
-              <div className="space-y-1">
-                <p>Where would you like to navigate?</p>
+              <div className="flex flex-col gap-1 text-sm leading-tight">
+                <p className="text-muted mb-1">Where would you like to navigate?</p>
                 <p className="pl-4"><span className="text-primary">[1]</span> Projects Overview</p>
                 <p className="pl-4"><span className="text-primary">[2]</span> Nexus (Developer Workspace)</p>
                 <p className="pl-4"><span className="text-primary">[3]</span> AetherAI (Air Quality Prediction)</p>
-                <p className="pl-4 text-muted mt-2"><span className="text-secondary">Type 1, 2, or 3, or 'cancel' to abort.</span></p>
+                <p className="pl-4 text-muted mt-1"><span className="text-secondary">Type 1, 2, or 3, or 'cancel' to abort.</span></p>
               </div>
             );
             setTerminalState("AWAITING_PROJECT_CHOICE");
             break;
           case "blog":
             output = (
-              <div className="space-y-1">
-                <p>Read a specific post?</p>
+              <div className="flex flex-col gap-1 text-sm leading-tight">
+                <p className="text-muted mb-1">Read a specific post?</p>
                 <p className="pl-4"><span className="text-primary">[1]</span> All Blogs</p>
                 <p className="pl-4"><span className="text-primary">[2]</span> AetherAI: Predicting Air Quality</p>
                 <p className="pl-4"><span className="text-primary">[3]</span> CricSphere: Processing 2M+ matches</p>
-                <p className="pl-4 text-muted mt-2"><span className="text-secondary">Type 1, 2, or 3, or 'cancel' to abort.</span></p>
+                <p className="pl-4 text-muted mt-1"><span className="text-secondary">Type 1, 2, or 3, or 'cancel' to abort.</span></p>
               </div>
             );
             setTerminalState("AWAITING_BLOG_CHOICE");
             break;
           case "resume":
             output = (
-              <div className="space-y-1">
-                <p>Select a resume profile to view/download:</p>
+              <div className="flex flex-col gap-1 text-sm leading-tight">
+                <p className="text-muted mb-1">Select a resume profile to view/download:</p>
                 <p className="pl-4"><span className="text-primary">[1]</span> Software Engineer</p>
                 <p className="pl-4"><span className="text-primary">[2]</span> AI/ML Engineer</p>
-                <p className="pl-4 text-muted mt-2"><span className="text-secondary">Type 1 or 2, or 'cancel' to abort.</span></p>
+                <p className="pl-4 text-muted mt-1"><span className="text-secondary">Type 1 or 2, or 'cancel' to abort.</span></p>
               </div>
             );
             setTerminalState("AWAITING_RESUME_CHOICE");
             break;
           case "contact":
             output = (
-              <div className="flex flex-col gap-2">
-                <p>Email: bharathulavaibhav@gmail.com</p>
-                <a href="https://github.com/Vaibhav-1819" target="_blank" rel="noreferrer" className="text-secondary hover:text-primary underline decoration-border underline-offset-4">GitHub</a>
-                <a href="https://linkedin.com/in/vaibhav-bharathula" target="_blank" rel="noreferrer" className="text-secondary hover:text-primary underline decoration-border underline-offset-4">LinkedIn</a>
+              <div className="flex flex-col gap-1 text-sm leading-tight">
+                <p>Email: <span className="text-secondary">bharathulavaibhav@gmail.com</span></p>
+                <p>GitHub: <a href="https://github.com/Vaibhav-1819" target="_blank" rel="noreferrer" className="text-secondary hover:text-primary underline decoration-border underline-offset-4">Vaibhav-1819</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/vaibhav-bharathula" target="_blank" rel="noreferrer" className="text-secondary hover:text-primary underline decoration-border underline-offset-4">vaibhav-bharathula</a></p>
               </div>
             );
             break;

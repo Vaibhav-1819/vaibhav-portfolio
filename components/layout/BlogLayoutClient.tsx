@@ -36,21 +36,32 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
       
       setHeadings(items);
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveId(entry.target.id);
-            }
-          });
-        },
-        { rootMargin: "-100px 0px -80% 0px" } // Highlight when it hits the top portion of the screen
-      );
+      const observerCallback = () => {
+        // Find all headings
+        const elements = Array.from(document.querySelectorAll("main h2, main h3"));
+        
+        // Find the active heading (the one closest to the top but still above a threshold)
+        let currentActive = "";
+        for (const elem of elements) {
+          const rect = elem.getBoundingClientRect();
+          // 150px accounts for the fixed header
+          if (rect.top <= 150) {
+            currentActive = elem.id;
+          }
+        }
+        
+        if (currentActive) {
+          setActiveId(currentActive);
+        }
+      };
 
-      elements.forEach((elem) => observer.observe(elem));
+      window.addEventListener("scroll", observerCallback, { passive: true });
+      observerCallback(); // Trigger once on load
 
-      return () => observer.disconnect();
-    }, 100);
+      return () => {
+        window.removeEventListener("scroll", observerCallback);
+      };
+    }, 200);
   }, []);
 
   return (
