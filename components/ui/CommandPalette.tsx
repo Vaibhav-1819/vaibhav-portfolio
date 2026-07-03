@@ -226,7 +226,43 @@ export function CommandPalette() {
             output = "";
             break;
           default:
-            output = `Command not found: ${cmd}. Type 'help' to see available commands.`;
+            if (cmd.startsWith("ask ")) {
+              const query = cmd.slice(4).trim();
+              if (query.match(/(skill|language|tech|stack|framework)/)) {
+                output = (
+                  <div className="space-y-1">
+                    <p className="text-secondary font-bold">AI Assistant:</p>
+                    <p>Vaibhav specializes in:</p>
+                    <p className="pl-4 text-emerald-400">Languages: Python, TypeScript, Java, SQL</p>
+                    <p className="pl-4 text-emerald-400">Frameworks: React, Next.js, Spring Boot, TensorFlow, PyTorch</p>
+                    <p className="pl-4 text-emerald-400">Tools: Docker, AWS, Databricks, PostgreSQL, RabbitMQ</p>
+                  </div>
+                );
+              } else if (query.match(/(experience|work|job)/)) {
+                output = (
+                  <div className="space-y-1">
+                    <p className="text-secondary font-bold">AI Assistant:</p>
+                    <p>Vaibhav is currently building scalable architectures and ML pipelines. Previously, he worked as a Data Science Intern at InMobi and an SDE Intern at Zopsmart. Type 'resume' for a full breakdown.</p>
+                  </div>
+                );
+              } else if (query.match(/(cricsphere|nexus|aether|project)/)) {
+                output = (
+                  <div className="space-y-1">
+                    <p className="text-secondary font-bold">AI Assistant:</p>
+                    <p>His featured projects include:</p>
+                    <p className="pl-4"><span className="text-primary">Nexus:</span> A real-time collaboration workspace using WebRTC.</p>
+                    <p className="pl-4"><span className="text-primary">CricSphere:</span> An ML analytics platform trained on 22k+ matches.</p>
+                    <p className="pl-4"><span className="text-primary">AetherAI:</span> An air quality prediction tool.</p>
+                  </div>
+                );
+              } else if (query.match(/(who are you|about|hello|hi)/)) {
+                output = <p><span className="text-secondary font-bold">AI Assistant:</span> Hello! I'm Vaibhav's terminal assistant. I can answer quick questions about his skills, experience, or projects. Try asking: <span className="text-primary italic">ask what are your skills</span></p>;
+              } else {
+                output = <p><span className="text-secondary font-bold">AI Assistant:</span> I don't have a specific answer for that yet, but I can tell you about his skills, experience, or projects. Try typing: <span className="text-primary italic">ask what are your skills</span></p>;
+              }
+            } else {
+              output = `Command not found: ${cmd}. Type 'help' to see available commands.`;
+            }
         }
       }
 

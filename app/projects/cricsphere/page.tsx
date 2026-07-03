@@ -37,12 +37,31 @@ export default function CricSpherePage() {
             I wanted to understand how modern sports analytics systems are built. Starting with over 22,000 raw match files, I designed a data warehouse, engineered point-in-time features, trained multiple ML models, and built an interactive platform that surfaces predictions and cricket intelligence.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 text-sm font-mono text-muted mb-20">
+          <div className="flex flex-wrap justify-center gap-4 text-sm font-mono text-muted mb-16">
             <span className="px-4 py-2 border border-border/50 rounded-lg bg-surface/30">React</span>
             <span className="px-4 py-2 border border-border/50 rounded-lg bg-surface/30">Node.js</span>
             <span className="px-4 py-2 border border-border/50 rounded-lg bg-surface/30">Express.js</span>
             <span className="px-4 py-2 border border-border/50 rounded-lg bg-surface/30">RapidAPI</span>
             <span className="px-4 py-2 border border-border/50 rounded-lg bg-surface/30">Machine Learning</span>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-20">
+             <div className="bg-surface/50 rounded-2xl p-6 border border-border/50">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={22000} suffix="+" /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono">Matches</p>
+             </div>
+             <div className="bg-surface/50 rounded-2xl p-6 border border-border/50">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={4} /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono">Models</p>
+             </div>
+             <div className="bg-surface/50 rounded-2xl p-6 border border-border/50">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={638} suffix="K+" /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono">Player Matchups</p>
+             </div>
+             <div className="bg-surface/50 rounded-2xl p-6 border border-border/50">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={16} /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono">Datasets</p>
+             </div>
           </div>
         </motion.div>
 

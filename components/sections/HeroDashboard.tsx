@@ -4,6 +4,7 @@ import { heroContent } from "@/content/hero";
 import Link from "next/link";
 import { projects } from "@/content/projects";
 import { Activity, Code, GitCommit, Layout, Server, Sparkles, BookOpen } from "lucide-react";
+import { GithubHeatmap } from "@/components/ui/GithubHeatmap";
 
 async function getGithubStats() {
   try {
@@ -66,10 +67,7 @@ export async function HeroDashboard() {
 
           <div className="hidden md:flex flex-wrap gap-3">
             {heroContent.roles.map((role) => (
-              <span 
-                key={role} 
-                className="px-4 py-2 rounded-full text-xs font-mono font-medium tracking-wide bg-surface border border-border text-primary uppercase"
-              >
+              <span key={role} className="px-4 py-2 rounded-full text-xs font-mono font-medium tracking-wide bg-surface border border-border text-primary uppercase block">
                 {role}
               </span>
             ))}
@@ -102,8 +100,8 @@ export async function HeroDashboard() {
                </div>
                <div>
                  <p className="text-[11px] font-mono text-muted uppercase tracking-[0.2em] mb-2">Current Build</p>
-                 <h3 className="text-2xl md:text-3xl font-heading font-bold text-secondary tracking-[-0.02em] leading-tight mb-1">CricSphere</h3>
-                 <p className="text-sm text-primary font-mono tracking-tight">AI Cricket Intelligence Platform</p>
+                 <h3 className="text-2xl md:text-3xl font-heading font-bold text-secondary tracking-[-0.02em] leading-tight mb-1">Nexus</h3>
+                 <p className="text-sm text-primary font-mono tracking-tight">Real-Time Collaborative Workspace</p>
                </div>
                
                <div className="flex flex-col gap-4 mt-6">
@@ -113,25 +111,10 @@ export async function HeroDashboard() {
                       <span className="text-[10px] md:text-xs font-mono text-muted uppercase tracking-widest">Status: Active</span>
                     </div>
                   </div>
-
-                 <div className="grid grid-cols-2 gap-4 bg-background/50 rounded-2xl p-4 border border-border/50">
-                   <div className="text-left">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={22000} suffix="+" /></p>
-                     <p className="text-[10px] uppercase tracking-wider text-muted">Matches</p>
-                   </div>
-                   <div className="text-right">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={4} /></p>
-                     <p className="text-[10px] uppercase tracking-wider text-muted">Models</p>
-                   </div>
-                   <div className="text-left">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={638} suffix="K+" /></p>
-                     <p className="text-[10px] uppercase tracking-wider text-muted">Player Matchups</p>
-                   </div>
-                   <div className="text-right">
-                     <p className="text-lg md:text-2xl font-mono font-bold text-secondary"><AnimatedNumber value={16} /></p>
-                     <p className="text-[10px] uppercase tracking-wider text-muted">Datasets</p>
-                   </div>
-                 </div>
+                  
+                  <div className="pt-2 text-sm text-muted leading-relaxed font-mono">
+                    Scalable WebRTC infrastructure built with LiveKit and complex WebSocket states.
+                  </div>
                </div>
             </div>
 
@@ -144,7 +127,7 @@ export async function HeroDashboard() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['React', 'Spring Boot', 'TensorFlow', 'DuckDB', 'Framer Motion'].map(tech => (
-                    <span key={tech} className="px-2 py-1 text-[10px] md:text-xs bg-background rounded-md text-secondary border border-border/50">
+                    <span key={tech} className="px-2 py-1 text-[10px] md:text-xs bg-background rounded-md text-secondary border border-border/50 block">
                       {tech}
                     </span>
                   ))}
@@ -154,7 +137,7 @@ export async function HeroDashboard() {
               {/* Activity Block */}
               <div className="flex-1 bg-surface/50 backdrop-blur-md border border-border rounded-3xl p-6 flex flex-col justify-center group hover:border-border/80 transition-colors relative overflow-hidden">
                  <p className="text-xs font-mono text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
-                   <GitCommit size={14} /> GitHub
+                   <GitCommit size={14} /> GitHub Activity
                  </p>
                  <div>
                    <p className="text-[10px] md:text-xs text-muted mb-1">Latest Repository</p>
@@ -164,6 +147,14 @@ export async function HeroDashboard() {
                    <p className="text-[10px] font-mono text-primary/80 mt-1">Updated {githubStats.lastUpdated}</p>
                  </div>
               </div>
+            </div>
+
+            {/* Heatmap Block */}
+            <div className="min-w-[85vw] md:min-w-0 md:w-full snap-center bg-surface/50 backdrop-blur-md border border-border rounded-3xl p-6 flex flex-col justify-center group hover:border-border/80 transition-colors overflow-hidden">
+               <p className="text-xs font-mono text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
+                 <GitCommit size={14} /> Contributions
+               </p>
+               <GithubHeatmap />
             </div>
 
           </div>

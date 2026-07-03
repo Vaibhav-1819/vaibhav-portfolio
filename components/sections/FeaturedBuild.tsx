@@ -53,6 +53,31 @@ export function FeaturedBuild() {
           >
             I wanted to understand how modern sports analytics systems are built. Starting with over 22,000 raw match files, I designed a data warehouse, engineered point-in-time features, trained multiple ML models, and built an interactive platform that surfaces predictions and cricket intelligence.
           </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
+          >
+             <div className="bg-surface/50 rounded-2xl p-4 md:p-6 border border-border/50 flex flex-col items-center md:items-start">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={22000} suffix="+" /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono text-center md:text-left">Matches</p>
+             </div>
+             <div className="bg-surface/50 rounded-2xl p-4 md:p-6 border border-border/50 flex flex-col items-center md:items-start">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={4} /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono text-center md:text-left">Models</p>
+             </div>
+             <div className="bg-surface/50 rounded-2xl p-4 md:p-6 border border-border/50 flex flex-col items-center md:items-start">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={638} suffix="K+" /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono text-center md:text-left">Player Matchups</p>
+             </div>
+             <div className="bg-surface/50 rounded-2xl p-4 md:p-6 border border-border/50 flex flex-col items-center md:items-start">
+               <p className="text-2xl md:text-3xl font-mono font-bold text-secondary mb-1"><AnimatedNumber value={16} /></p>
+               <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted font-mono text-center md:text-left">Datasets</p>
+             </div>
+          </motion.div>
         </div>
 
         {/* Massive Hero Image */}

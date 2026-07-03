@@ -16,16 +16,14 @@ export default function LabsPage() {
       {/* Background Effects */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
 
-      {/* Back to Home Navigation */}
-      <div className="absolute top-24 left-6 md:left-12 z-50">
-        <a 
-          href="/" 
-          className="flex items-center gap-2 px-4 py-2 bg-surface/50 hover:bg-surface border border-border rounded-full text-sm font-mono text-muted hover:text-secondary transition-all backdrop-blur-md"
-        >
-          <ArrowLeft size={16} />
-          <span>Workspace</span>
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center bg-background/80 backdrop-blur-md border-b border-border/50">
+        <a href="/" className="flex items-center gap-2 text-muted hover:text-primary transition-colors group">
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <span className="font-mono text-sm">Back to Workspace</span>
         </a>
-      </div>
+        <div className="font-heading font-bold text-lg tracking-tighter">Labs</div>
+      </nav>
 
       <div className="relative z-10 max-w-6xl w-full flex flex-col items-center mt-12">
         {/* Header Section */}
