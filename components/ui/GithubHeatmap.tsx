@@ -36,8 +36,6 @@ export function GithubHeatmap() {
         }}
         blockSize={11}
         blockMargin={5}
-        hideMonthLabels
-        hideColorLegend
         transformData={(data) => selectLastNDays(data, 150)}
       />
     </div>
