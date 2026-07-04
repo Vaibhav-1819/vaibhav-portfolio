@@ -236,16 +236,16 @@ export function CommandPalette() {
                   <div className="space-y-1">
                     <p className="text-secondary font-bold">AI Assistant:</p>
                     <p>Vaibhav specializes in:</p>
-                    <p className="pl-4 text-emerald-400">Languages: Python, TypeScript, Java, SQL</p>
-                    <p className="pl-4 text-emerald-400">Frameworks: React, Next.js, Spring Boot, TensorFlow, PyTorch</p>
-                    <p className="pl-4 text-emerald-400">Tools: Docker, AWS, Databricks, PostgreSQL, RabbitMQ</p>
+                    <p className="pl-4 text-emerald-400">Languages: JavaScript, Java, Python, SQL</p>
+                    <p className="pl-4 text-emerald-400">Frameworks: React.js, Express.js, TensorFlow, CNNs</p>
+                    <p className="pl-4 text-emerald-400">Tools: Git, Docker, AWS, OCI, Firebase</p>
                   </div>
                 );
               } else if (query.match(/(experience|work|job)/)) {
                 output = (
                   <div className="space-y-1">
                     <p className="text-secondary font-bold">AI Assistant:</p>
-                    <p>Vaibhav is currently building scalable architectures and ML pipelines. Previously, he worked as a Data Science Intern at InMobi and an SDE Intern at Zopsmart. Type 'resume' for a full breakdown.</p>
+                    <p>Vaibhav recently worked as a Deep Learning Intern at CITD training CNN classifiers, and previously as an AI Creators Program Intern at Swecha.org exploring LLMs and NLP. Type 'resume' for a full breakdown.</p>
                   </div>
                 );
               } else if (query.match(/(cricsphere|nexus|aether|project)/)) {
