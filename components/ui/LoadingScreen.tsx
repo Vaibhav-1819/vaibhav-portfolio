@@ -15,6 +15,7 @@ const MatrixRain = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Set exact dimensions
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -24,15 +25,21 @@ const MatrixRain = () => {
     const drops: number[] = Array.from({ length: columns }).map(() => 1);
 
     const draw = () => {
+      // Create a trailing effect by painting a translucent background
       ctx.fillStyle = "rgba(10, 10, 10, 0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#10b981";
+
+      // Paint the characters
+      ctx.fillStyle = "#10b981"; // emerald-500
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
+        // Add random brighter characters
         ctx.fillStyle = Math.random() > 0.95 ? "#ffffff" : "#10b981";
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Reset drop randomly to create varied rain
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
@@ -41,6 +48,7 @@ const MatrixRain = () => {
     };
 
     const interval = setInterval(draw, 33);
+
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -53,112 +61,102 @@ const MatrixRain = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 opacity-[0.25] pointer-events-none" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 opacity-[0.15] pointer-events-none" />;
 };
 
-type BootPhase = "LOGS" | "DECRYPT" | "GRANTED" | "DONE";
-
 export function LoadingScreen() {
-  const [bootPhase, setBootPhase] = useState<BootPhase>("LOGS");
-  const [logs, setLogs] = useState<string[]>([]);
-  const [decryptProgress, setDecryptProgress] = useState(0);
-  const [scrambledName, setScrambledName] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [scrambledText, setScrambledText] = useState("");
+  const [isGlitching, setIsGlitching] = useState(false);
 
-  const BOOT_MESSAGES = [
-    "[OK] Loading Developer Profile",
-    "[OK] Initializing Nexus Services",
-    "[OK] Loading AI Models",
-    "[OK] Fetching GitHub Activity",
-    "[OK] Mounting Workspace",
-    "[OK] Starting Portfolio Engine",
-    "Loading Modules:",
-    "[✓] Projects",
-    "[✓] Research",
-    "[✓] Resume",
-    "[✓] Blog",
-    "[✓] AI Playground",
-    "System Boot Complete.",
-    "Authenticating Identity..."
+  const loadingStates = [
+    "Initializing workspace environment...",
+    "Booting Nexus WebRTC infrastructure...",
+    "Loading CricSphere ML models...",
+    "Syncing AetherAI datasets...",
+    "Establishing secure WebSocket connection...",
+    "Rendering UI components..."
   ];
 
-  // Phase 1: Terminal Boot Logs
+  const currentStateIndex = Math.min(
+    Math.floor((progress / 100) * loadingStates.length),
+    loadingStates.length - 1
+  );
+  const currentState = loadingStates[currentStateIndex];
+
   useEffect(() => {
     // TEMPORARILY DISABLED FOR TESTING
     // const hasVisited = sessionStorage.getItem("hasVisitedV2");
     // if (hasVisited) {
-    //   setBootPhase("DONE");
+    //   setLoading(false);
     //   return;
     // }
 
-    if (bootPhase === "LOGS") {
-      let index = 0;
-      const interval = setInterval(() => {
-        setLogs(prev => [...prev, BOOT_MESSAGES[index]]);
-        index++;
-        if (index >= BOOT_MESSAGES.length) {
+    // Simulate loading progress
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setBootPhase("DECRYPT"), 500);
+          setTimeout(() => {
+            setLoading(false);
+            // sessionStorage.setItem("hasVisitedV2", "true");
+          }, 1500); // Give the glitch effect time to play out
+          return 100;
         }
-      }, 120); // Fast log printing
-      return () => clearInterval(interval);
-    }
-  }, [bootPhase]);
+        return prev + Math.floor(Math.random() * 5) + 2;
+      });
+    }, 150); // fast ticks
+    return () => clearInterval(interval);
+  }, []);
 
-  // Phase 2: Decrypt
+  // Scramble Text Effect
   useEffect(() => {
-    if (bootPhase === "DECRYPT") {
-      let currentProgress = 0;
-      
-      const decryptInterval = setInterval(() => {
+    if (loading) {
+      const scrambleInterval = setInterval(() => {
+        const correctCharsCount = Math.floor((progress / 100) * TARGET_TEXT.length);
+
         let newText = "";
+        let hit100 = false;
+
         for (let i = 0; i < TARGET_TEXT.length; i++) {
-          if (i < currentProgress) {
+          if (progress >= 100) {
+            newText = TARGET_TEXT;
+            hit100 = true;
+            break;
+          }
+          if (i < correctCharsCount) {
             newText += TARGET_TEXT[i];
           } else {
             newText += CHARS[Math.floor(Math.random() * CHARS.length)];
           }
         }
-        setScrambledName(newText);
-      }, 50);
 
-      const progressInterval = setInterval(() => {
-        currentProgress++;
-        setDecryptProgress(currentProgress);
-        if (currentProgress > TARGET_TEXT.length) {
-          clearInterval(progressInterval);
-          clearInterval(decryptInterval);
-          setScrambledName(TARGET_TEXT);
-          setTimeout(() => setBootPhase("GRANTED"), 200);
+        setScrambledText(newText);
+
+        if (hit100) {
+          setIsGlitching(true);
+          setTimeout(() => setIsGlitching(false), 600);
+          clearInterval(scrambleInterval);
         }
-      }, 200); // Decrypt speed per letter
-      
-      return () => {
-        clearInterval(decryptInterval);
-        clearInterval(progressInterval);
-      };
-    }
-  }, [bootPhase]);
+      }, 50); // ultra-fast scramble computation
 
-  // Phase 3: Access Granted
-  useEffect(() => {
-    if (bootPhase === "GRANTED") {
-      setTimeout(() => {
-        setBootPhase("DONE");
-        // sessionStorage.setItem("hasVisitedV2", "true");
-      }, 1200);
+      return () => clearInterval(scrambleInterval);
     }
-  }, [bootPhase]);
+  }, [progress, loading]);
+
+  if (!loading) return null;
 
   return (
     <AnimatePresence>
-      {bootPhase !== "DONE" && (
+      {loading && (
         <motion.div
-          key="loading-screen"
           initial={{ opacity: 1 }}
-          // Slide upwards while fading out slightly to transition seamlessly
-          exit={{ opacity: 0, y: "-100%", transition: { duration: 0.8, ease: [0.7, 0, 0.3, 1] } }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050505] text-primary font-mono overflow-hidden"
+          exit={{ opacity: 0, filter: "blur(20px)", scale: 1.1 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a0a0a] text-primary font-mono overflow-hidden"
         >
+          {/* Inject inline styles for CRT & Glitch */}
           <style>{`
             @keyframes crt-flicker {
               0% { opacity: 0.95; }
@@ -192,89 +190,45 @@ export function LoadingScreen() {
             }
           `}</style>
 
+          {/* Matrix Background */}
           <MatrixRain />
+
+          {/* CRT Overlay */}
           <div className="absolute inset-0 scanlines mix-blend-overlay z-10" />
 
-          {/* HUD Container */}
-          <div className="flex flex-col max-w-xl w-full px-6 relative z-20 h-full justify-center">
-            
-            {/* Terminal Logs */}
-            <div className="flex-1 flex flex-col justify-end min-h-[300px] mb-8">
-              <div className="space-y-1.5 text-xs md:text-sm text-emerald-500/90 font-mono text-left max-w-md w-full mx-auto">
-                {logs.map((log, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, x: -10 }} 
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.1 }}
-                  >
-                    {log.startsWith("[✓]") ? (
-                      <span className="text-emerald-300 pl-4">{log}</span>
-                    ) : log.includes(":") ? (
-                      <span className="text-secondary opacity-70">{log}</span>
-                    ) : (
-                      log
-                    )}
-                  </motion.div>
-                ))}
-                {bootPhase === "LOGS" && (
-                  <motion.div 
-                    animate={{ opacity: [1, 0] }} 
-                    transition={{ repeat: Infinity, duration: 0.8 }} 
-                    className="w-2.5 h-4 bg-emerald-500 inline-block align-middle ml-1" 
-                  />
-                )}
+          {/* Main Content */}
+          <div className="flex flex-col items-center gap-8 max-w-sm w-full px-6 relative z-20">
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-xs text-muted uppercase tracking-[0.2em] mb-2">Auth User</span>
+
+              <div className="text-4xl md:text-6xl font-heading font-black tracking-widest flex items-center justify-center min-h-[80px]">
+                <span
+                  className={`
+                    ${progress === 100 ? "text-emerald-500 drop-shadow-[0_0_20px_rgba(16,185,129,0.8)]" : "text-secondary"}
+                    ${isGlitching ? "glitch-text" : ""}
+                  `}
+                >
+                  {scrambledText || "..."}
+                </span>
               </div>
             </div>
 
-            {/* Decrypt Phase */}
-            <div className="h-[200px] flex flex-col items-center justify-start">
-              {bootPhase !== "LOGS" && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center gap-6 w-full"
-                >
-                  <span className="text-xs text-muted uppercase tracking-[0.3em]">
-                    {bootPhase === "GRANTED" ? "Identity Verified" : "Decrypting Key"}
-                  </span>
-                  
-                  <div className="text-5xl md:text-7xl font-heading font-black tracking-[0.3em] flex items-center justify-center min-h-[80px]">
-                    <span className={`
-                      ${bootPhase === "GRANTED" ? "text-emerald-500 drop-shadow-[0_0_20px_rgba(16,185,129,0.8)] glitch-text" : "text-white"}
-                    `}>
-                      {scrambledName || TARGET_TEXT}
-                    </span>
-                  </div>
+            <div className="w-full space-y-4 mt-8">
+              <div className="h-[2px] w-full bg-surface overflow-hidden relative">
+                <motion.div
+                  className="absolute top-0 left-0 bottom-0 bg-emerald-500 drop-shadow-[0_0_8px_rgba(16,185,129,1)]"
+                  initial={{ width: "0%" }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ ease: "easeOut", duration: 0.1 }}
+                />
+              </div>
 
-                  <AnimatePresence>
-                    {bootPhase === "GRANTED" && (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-lg md:text-xl text-emerald-400 font-black tracking-widest text-center px-4 py-1.5 border border-emerald-500/30 bg-emerald-500/10"
-                      >
-                        ACCESS GRANTED
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              )}
+              <div className="flex justify-between text-[11px] uppercase tracking-wider text-muted font-mono">
+                <span className={isGlitching ? "text-emerald-500" : "animate-pulse"}>{currentState}</span>
+                <span className={progress === 100 ? "text-emerald-500" : ""}>{Math.min(progress, 100)}%</span>
+              </div>
             </div>
-            
           </div>
-
-          {/* White Flash on Completion */}
-          <AnimatePresence>
-            {bootPhase === "GRANTED" && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.8, 0] }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="absolute inset-0 bg-emerald-100 mix-blend-overlay z-50 pointer-events-none"
-              />
-            )}
-          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>
