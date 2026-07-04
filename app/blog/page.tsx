@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { BookOpen, Clock, Calendar, ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Calendar, ArrowRight } from "lucide-react";
 import { blogs } from "@/content/blogs";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 export default function BlogListingPage() {
   return (
@@ -56,11 +55,10 @@ export default function BlogListingPage() {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
               
               {/* Card */}
-              <SpotlightCard className="h-full">
-                <Link 
-                  href={`/blog/${post.slug}`}
-                  className="relative h-full flex flex-col p-8 rounded-3xl bg-surface/80 backdrop-blur-md border border-border overflow-hidden transition-all duration-300 hover:border-primary/40 group-hover:-translate-y-1 block"
-                >
+              <Link 
+                href={`/blog/${post.slug}`}
+                className="relative h-full flex flex-col p-8 rounded-3xl bg-surface/80 backdrop-blur-md border border-border overflow-hidden transition-all duration-300 hover:border-primary/40 group-hover:-translate-y-1 block"
+              >
                 
                 {/* Meta Information */}
                 <div className="flex items-center gap-4 text-xs font-mono text-muted mb-4">
@@ -102,8 +100,7 @@ export default function BlogListingPage() {
                   </div>
                 </div>
 
-                </Link>
-              </SpotlightCard>
+              </Link>
             </motion.div>
           ))}
         </div>

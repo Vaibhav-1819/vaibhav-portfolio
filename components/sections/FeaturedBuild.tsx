@@ -6,7 +6,6 @@ import { projects } from "@/content/projects";
 import { Database, Network, Cpu, Server, Activity, BrainCircuit, Zap, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 export function FeaturedBuild() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,46 +120,40 @@ export function FeaturedBuild() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <SpotlightCard className="group h-full">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="p-8 h-full space-y-6"
-              >
-                <Database size={32} className="text-primary group-hover:scale-110 transition-transform" />
-                <h3 className="font-bold text-xl">Analytics Warehouse</h3>
-                <p className="text-muted leading-relaxed">Processed 22,000+ raw JSON match files into an optimized relational schema for rapid feature extraction.</p>
-              </motion.div>
-            </SpotlightCard>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-6 hover:border-primary/50 transition-colors group"
+            >
+              <Database size={32} className="text-primary group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-xl">Analytics Warehouse</h3>
+              <p className="text-muted leading-relaxed">Processed 22,000+ raw JSON match files into an optimized relational schema for rapid feature extraction.</p>
+            </motion.div>
 
-            <SpotlightCard className="group h-full">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="p-8 h-full space-y-6"
-              >
-                <BrainCircuit size={32} className="text-accent group-hover:scale-110 transition-transform" />
-                <h3 className="font-bold text-xl">Prediction Engine</h3>
-                <p className="text-muted leading-relaxed">4 ML models trained on point-in-time features to forecast match outcomes with ~61.66% baseline accuracy.</p>
-              </motion.div>
-            </SpotlightCard>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-6 hover:border-accent/50 transition-colors group"
+            >
+              <BrainCircuit size={32} className="text-accent group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-xl">Prediction Engine</h3>
+              <p className="text-muted leading-relaxed">4 ML models trained on point-in-time features to forecast match outcomes with ~61.66% baseline accuracy.</p>
+            </motion.div>
 
-            <SpotlightCard className="group h-full">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="p-8 h-full space-y-6"
-              >
-                <Zap size={32} className="text-emerald-500 group-hover:scale-110 transition-transform" />
-                <h3 className="font-bold text-xl">Real-time Caching</h3>
-                <p className="text-muted leading-relaxed">Aggressive caching layer reducing third-party RapidAPI calls from ~200/min down to just 18/min.</p>
-              </motion.div>
-            </SpotlightCard>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-6 hover:border-emerald-500/50 transition-colors group"
+            >
+              <Zap size={32} className="text-emerald-500 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-xl">Real-time Caching</h3>
+              <p className="text-muted leading-relaxed">Aggressive caching layer reducing third-party RapidAPI calls from ~200/min down to just 18/min.</p>
+            </motion.div>
           </div>
         </div>
 
