@@ -5,6 +5,7 @@ import Link from "next/link";
 import { projects } from "@/content/projects";
 import { Activity, Code, GitCommit, Layout, Server, Sparkles, BookOpen } from "lucide-react";
 import { GithubHeatmap } from "@/components/ui/GithubHeatmap";
+import { ParallaxBackground } from "@/components/ui/ParallaxBackground";
 
 async function getGithubStats() {
   try {
@@ -40,8 +41,9 @@ export async function HeroDashboard() {
   const githubStats = await getGithubStats();
 
   return (
-    <section id="hero" className="min-h-[100dvh] flex flex-col justify-center pt-24 pb-12 md:py-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+    <section id="hero" className="min-h-[100dvh] relative flex flex-col justify-center pt-24 pb-12 md:py-24">
+      <ParallaxBackground />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         
         {/* Left Side: Headline & Typography */}
         <div className="space-y-6 md:space-y-8 z-10 px-6 md:px-0 flex flex-col">
