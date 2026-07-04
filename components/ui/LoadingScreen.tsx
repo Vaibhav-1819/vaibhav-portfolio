@@ -72,10 +72,10 @@ export function LoadingScreen() {
 
   const loadingStates = [
     "Initializing workspace environment...",
-    "Booting Nexus WebRTC infrastructure...",
-    "Loading CricSphere ML models...",
-    "Syncing AetherAI datasets...",
-    "Establishing secure WebSocket connection...",
+    "Loading neural network weights...",
+    "Compiling frontend assets...",
+    "Establishing secure connection...",
+    "Optimizing system performance...",
     "Rendering UI components..."
   ];
 
