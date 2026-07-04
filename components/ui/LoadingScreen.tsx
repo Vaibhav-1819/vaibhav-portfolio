@@ -63,34 +63,26 @@ export function LoadingScreen() {
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background text-primary font-mono"
         >
           <div className="flex flex-col items-center gap-8 max-w-sm w-full px-6">
-            {/* Liquid Gradient Fill Text */}
+            {/* Kinetic Blur Reveal Text */}
             <div className="flex flex-col items-center gap-2 relative">
               <span className="text-xs text-muted uppercase tracking-[0.2em] mb-4">Auth User</span>
               
-              <div className="relative text-4xl md:text-6xl font-heading font-black tracking-widest min-h-[80px]">
-                {/* Background Outline Text */}
-                <div 
-                  className="absolute inset-0 text-transparent opacity-30 select-none"
-                  style={{ WebkitTextStroke: "1px rgba(255,255,255,0.5)" }}
-                >
-                  {TARGET_TEXT}
-                </div>
-                
-                {/* Foreground Filled Text with Clip Path */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent select-none drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]"
-                  style={{ 
-                    clipPath: `polygon(0 0, ${progress}% 0, ${progress}% 100%, 0 100%)` 
-                  }}
-                  transition={{ ease: "easeOut", duration: 0.1 }}
-                >
-                  {TARGET_TEXT}
-                </motion.div>
-                
-                {/* Invisible spacer text to preserve layout height/width */}
-                <div className="opacity-0 select-none pointer-events-none">
-                  {TARGET_TEXT}
-                </div>
+              <div className="flex items-center justify-center text-4xl md:text-6xl font-heading font-black tracking-widest min-h-[80px]">
+                {TARGET_TEXT.split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ filter: "blur(15px)", opacity: 0, y: 10 }}
+                    animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      ease: "easeOut",
+                      delay: i * 0.15,
+                    }}
+                    className={progress === 100 ? "text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-colors duration-500" : "text-secondary"}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
               </div>
             </div>
 
