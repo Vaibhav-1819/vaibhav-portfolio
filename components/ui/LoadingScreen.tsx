@@ -86,12 +86,12 @@ export function LoadingScreen() {
   const currentState = loadingStates[currentStateIndex];
 
   useEffect(() => {
-    // TEMPORARILY DISABLED FOR TESTING
-    // const hasVisited = sessionStorage.getItem("hasVisitedV2");
-    // if (hasVisited) {
-    //   setLoading(false);
-    //   return;
-    // }
+    // Check if it's the first visit in this session
+    const hasVisited = sessionStorage.getItem("hasVisitedV2");
+    if (hasVisited) {
+      setLoading(false);
+      return;
+    }
 
     // Simulate loading progress
     const interval = setInterval(() => {
@@ -100,7 +100,7 @@ export function LoadingScreen() {
           clearInterval(interval);
           setTimeout(() => {
             setLoading(false);
-            // sessionStorage.setItem("hasVisitedV2", "true");
+            sessionStorage.setItem("hasVisitedV2", "true");
           }, 1500); // Give the glitch effect time to play out
           return 100;
         }
