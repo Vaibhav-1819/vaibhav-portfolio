@@ -26,7 +26,7 @@ const MatrixRain = () => {
 
     const draw = () => {
       // Create a trailing effect by painting a translucent background
-      ctx.fillStyle = "rgba(10, 10, 10, 0.08)";
+      ctx.fillStyle = "rgba(10, 10, 10, 0.12)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Paint the characters
@@ -40,14 +40,14 @@ const MatrixRain = () => {
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         // Reset drop randomly to create varied rain
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
           drops[i] = 0;
         }
         drops[i]++;
       }
     };
 
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(draw, 20); // ~50fps for smoother rain
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -71,12 +71,12 @@ export function LoadingScreen() {
   const [isGlitching, setIsGlitching] = useState(false);
 
   const loadingStates = [
-    "Initializing workspace environment...",
-    "Loading neural network weights...",
-    "Compiling frontend assets...",
-    "Establishing secure connection...",
-    "Optimizing system performance...",
-    "Rendering UI components..."
+    "Initializing portfolio architecture...",
+    "Assembling project data...",
+    "Optimizing global state...",
+    "Loading interactive components...",
+    "Preparing developer workspace...",
+    "Welcome to Vaibhav's digital space."
   ];
 
   const currentStateIndex = Math.min(
@@ -104,7 +104,7 @@ export function LoadingScreen() {
           }, 1500); // Give the glitch effect time to play out
           return 100;
         }
-        return prev + Math.floor(Math.random() * 5) + 2;
+        return prev + Math.floor(Math.random() * 5) + 2; 
       });
     }, 150); // fast ticks
     return () => clearInterval(interval);
@@ -199,7 +199,7 @@ export function LoadingScreen() {
           {/* Main Content */}
           <div className="flex flex-col items-center gap-8 max-w-sm w-full px-6 relative z-20">
             <div className="flex flex-col items-center gap-2">
-              <span className="text-xs text-muted uppercase tracking-[0.2em] mb-2">Auth User</span>
+              <span className="text-xs text-muted uppercase tracking-[0.2em] mb-2">Developer Profile</span>
 
               <div className="text-4xl md:text-6xl font-heading font-black tracking-widest flex items-center justify-center min-h-[80px]">
                 <span
