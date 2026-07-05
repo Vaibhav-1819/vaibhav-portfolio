@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Video, MessageSquare, Users, Shield, Server, ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { projects } from "@/content/projects";
 import { ProjectGallery } from "@/components/ui/ProjectGallery";
 
@@ -13,16 +14,26 @@ const nexusImages = [
 ];
 
 export default function NexusPage() {
+  const router = useRouter();
   if (!project) return null;
+
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.history.length > 2) {
+      router.back();
+    } else {
+      router.push('/#projects');
+    }
+  };
 
   return (
     <main className="min-h-screen bg-background text-secondary pb-32">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center bg-background/80 backdrop-blur-md border-b border-border/50">
-        <Link href="/" className="flex items-center gap-2 text-muted hover:text-primary transition-colors group">
+        <a href="/#projects" onClick={handleBack} className="flex items-center gap-2 text-muted hover:text-primary transition-colors group cursor-pointer">
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span className="font-mono text-sm">Back to Workspace</span>
-        </Link>
+        </a>
         <div className="font-heading font-bold text-lg tracking-tighter">Nexus</div>
       </nav>
 

@@ -1,4 +1,4 @@
-
+import { Suspense } from "react";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { heroContent } from "@/content/hero";
 import Link from "next/link";
@@ -35,9 +35,27 @@ async function getGithubStats() {
   }
 }
 
-export async function HeroDashboard() {
-  const cricsphere = projects.find(p => p.slug === 'cricsphere');
+async function GithubActivityBlock() {
   const githubStats = await getGithubStats();
+  
+  return (
+    <div className="flex-1 bg-surface/50 backdrop-blur-md border border-border rounded-3xl p-6 flex flex-col justify-center group hover:border-border/80 transition-colors relative overflow-hidden">
+      <p className="text-xs font-mono text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
+        <GitCommit size={14} /> GitHub Activity
+      </p>
+      <div>
+        <p className="text-[10px] md:text-xs text-muted mb-1">Latest Repository</p>
+        <a href={`https://github.com/Vaibhav-1819/${githubStats.latestRepo}`} target="_blank" rel="noreferrer" className="text-sm font-bold text-secondary hover:text-primary transition-colors line-clamp-1">
+          {githubStats.latestRepo}
+        </a>
+        <p className="text-[10px] font-mono text-primary/80 mt-1">Updated {githubStats.lastUpdated}</p>
+      </div>
+    </div>
+  );
+}
+
+export function HeroDashboard() {
+  const cricsphere = projects.find(p => p.slug === 'cricsphere');
 
   return (
     <section id="hero" className="min-h-[100dvh] flex flex-col justify-center pt-24 pb-12 md:py-24">
@@ -135,18 +153,21 @@ export async function HeroDashboard() {
               </div>
 
               {/* Activity Block */}
-              <div className="flex-1 bg-surface/50 backdrop-blur-md border border-border rounded-3xl p-6 flex flex-col justify-center group hover:border-border/80 transition-colors relative overflow-hidden">
-                 <p className="text-xs font-mono text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
-                   <GitCommit size={14} /> GitHub Activity
-                 </p>
-                 <div>
-                   <p className="text-[10px] md:text-xs text-muted mb-1">Latest Repository</p>
-                   <a href={`https://github.com/Vaibhav-1819/${githubStats.latestRepo}`} target="_blank" rel="noreferrer" className="text-sm font-bold text-secondary hover:text-primary transition-colors line-clamp-1">
-                     {githubStats.latestRepo}
-                   </a>
-                   <p className="text-[10px] font-mono text-primary/80 mt-1">Updated {githubStats.lastUpdated}</p>
-                 </div>
-              </div>
+              <Suspense fallback={
+                <div className="flex-1 bg-surface/50 backdrop-blur-md border border-border rounded-3xl p-6 flex flex-col justify-center group relative overflow-hidden">
+                  <div className="animate-pulse flex space-x-4">
+                    <div className="flex-1 space-y-4 py-1">
+                      <div className="h-2 bg-muted rounded w-3/4"></div>
+                      <div className="space-y-2">
+                        <div className="h-2 bg-muted rounded"></div>
+                        <div className="h-2 bg-muted rounded w-5/6"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }>
+                <GithubActivityBlock />
+              </Suspense>
             </div>
 
             {/* Heatmap Block */}

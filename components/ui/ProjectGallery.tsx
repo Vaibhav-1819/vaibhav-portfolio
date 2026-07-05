@@ -88,7 +88,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                         setCurrentIndex(i); // Bring to center if clicking side item
                       }
                     }}
-                    className={`absolute w-[80%] max-w-2xl aspect-[16/9] rounded-2xl overflow-hidden border-2 shadow-2xl border-border/50 ${isCenter ? 'cursor-zoom-in' : 'cursor-pointer'} bg-surface`}
+                    className={`absolute w-[95%] md:w-[80%] max-w-2xl aspect-[16/9] rounded-2xl overflow-hidden border-2 shadow-2xl border-border/50 ${isCenter ? 'cursor-zoom-in' : 'cursor-pointer'} bg-surface`}
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     <img
