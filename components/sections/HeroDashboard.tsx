@@ -4,7 +4,9 @@ import { heroContent } from "@/content/hero";
 import Link from "next/link";
 import { projects } from "@/content/projects";
 import { Activity, Code, GitCommit, Layout, Server, Sparkles, BookOpen } from "lucide-react";
-import { GithubHeatmap } from "@/components/ui/GithubHeatmap";
+import dynamic from 'next/dynamic';
+
+const GithubHeatmap = dynamic(() => import('@/components/ui/GithubHeatmap').then(mod => mod.GithubHeatmap));
 
 async function getGithubStats() {
   try {

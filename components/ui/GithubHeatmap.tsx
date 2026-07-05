@@ -27,8 +27,9 @@ export function GithubHeatmap() {
   };
 
   return (
-    <div className="w-full py-2 flex justify-start md:justify-center">
-      <GitHubCalendar 
+    <div className="w-full py-2 flex justify-start md:justify-center overflow-x-auto overflow-y-hidden scrollbar-hide">
+      <div className="min-w-max pr-4">
+        <GitHubCalendar 
         username="Vaibhav-1819" 
         colorScheme="dark"
         theme={{
@@ -37,7 +38,8 @@ export function GithubHeatmap() {
         blockSize={11}
         blockMargin={5}
         transformData={(data) => selectLastNDays(data, 150)}
-      />
+        />
+      </div>
     </div>
   );
 }

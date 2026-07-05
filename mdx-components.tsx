@@ -1,10 +1,9 @@
 import type { MDXComponents } from 'mdx/types'
  
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import Mermaid from '@/components/ui/Mermaid';
-import { AetherAIDemo } from '@/components/ui/AetherAIDemo';
-import { BlogLayoutClient } from '@/components/layout/BlogLayoutClient';
+import dynamic from 'next/dynamic';
+const Mermaid = dynamic(() => import('@/components/ui/Mermaid'));
+const AetherAIDemo = dynamic(() => import('@/components/ui/AetherAIDemo').then(m => m.AetherAIDemo));
 
 const extractText = (children: any): string => {
   if (typeof children === 'string') return children;
@@ -18,11 +17,6 @@ const extractText = (children: any): string => {
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     AetherAIDemo,
-    wrapper: ({ children }) => (
-      <BlogLayoutClient>
-        {children}
-      </BlogLayoutClient>
-    ),
     h1: ({ children }) => <h1 className="text-4xl md:text-5xl font-heading font-bold text-secondary tracking-tight mb-8">{children}</h1>,
     h2: ({ children }) => {
       const text = extractText(children);

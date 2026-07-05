@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageIcon, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
+import Image from "next/image";
 
 interface ProjectGalleryProps {
   images: string[];
@@ -91,11 +92,13 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                     className={`absolute w-[95%] md:w-[80%] max-w-2xl aspect-[16/9] rounded-2xl overflow-hidden border-2 shadow-2xl border-border/50 ${isCenter ? 'cursor-zoom-in' : 'cursor-pointer'} bg-surface`}
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`${title} screenshot ${i + 1}`}
-                      loading="lazy"
-                      className="w-full h-full object-cover select-none pointer-events-none"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={isCenter}
+                      className="object-cover select-none pointer-events-none"
                     />
                     
                     {/* Darken side items */}
@@ -178,10 +181,12 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                     transition={{ duration: 0.3 }}
                     className="absolute inset-0 flex items-center justify-center p-4 md:p-12"
                   >
-                    <img
+                    <Image
                       src={images[lightboxIndex]}
                       alt={`${title} screenshot ${lightboxIndex + 1}`}
-                      className="max-w-full max-h-full object-contain rounded-xl drop-shadow-2xl"
+                      fill
+                      sizes="100vw"
+                      className="object-contain rounded-xl drop-shadow-2xl"
                     />
                   </motion.div>
                 </AnimatePresence>

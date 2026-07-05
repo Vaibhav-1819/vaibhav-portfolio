@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
-import { CursorGlow } from '@/components/ui/CursorGlow';
-import { CommandPalette } from '@/components/ui/CommandPalette';
 import { Navbar } from '@/components/layout/Navbar';
+import dynamic from 'next/dynamic';
 import './globals.css';
+
+const CursorGlow = dynamic(() => import('@/components/ui/CursorGlow').then(mod => mod.CursorGlow));
+const CommandPalette = dynamic(() => import('@/components/ui/CommandPalette').then(mod => mod.CommandPalette));
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-heading' });

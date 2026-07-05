@@ -19,7 +19,7 @@ export default function NexusPage() {
 
   const handleBack = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (window.history.length > 2) {
+    if (window.history.length > 1 && document.referrer.includes(window.location.host)) {
       router.back();
     } else {
       router.push('/#projects');
