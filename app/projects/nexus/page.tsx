@@ -1,11 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Video, MessageSquare, Users, Shield, Server, ArrowRight } from "lucide-react";
+import { ArrowLeft, Video, MessageSquare, Users, Shield, Server, ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/content/projects";
+import { ProjectGallery } from "@/components/ui/ProjectGallery";
 
 const project = projects.find(p => p.slug === 'nexus');
+
+const nexusImages = [
+  "/images/nexus_home.webp"
+];
 
 export default function NexusPage() {
   if (!project) return null;
@@ -47,76 +52,78 @@ export default function NexusPage() {
           </div>
         </motion.div>
 
-        {/* Hero Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5"
-        >
-          <img src="/images/nexus.webp" alt="Nexus Dashboard" className="w-full h-auto" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-        </motion.div>
+        {/* Hero Image / Coverflow */}
+        <div className="mt-12">
+          <ProjectGallery images={nexusImages} title="Nexus" />
+        </div>
       </section>
 
-      {/* Engineering Story */}
-      <section className="py-20 px-6 max-w-5xl mx-auto space-y-32">
+      {/* Deep Dive Case Study */}
+      <section className="py-20 px-6 max-w-4xl mx-auto space-y-32">
         
-        {/* The Flow: Lobby -> Meeting -> Chat */}
-        <div className="space-y-16">
-          <h3 className="font-heading font-bold text-3xl md:text-5xl text-center text-secondary">The User Flow</h3>
-          
-          <div className="grid md:grid-cols-4 gap-4">
-            {[
-              { title: 'Lobby', icon: Shield, desc: 'Firebase Auth & Pre-flight checks.' },
-              { title: 'Meeting', icon: Video, desc: 'LiveKit SFU track initialization.' },
-              { title: 'Participants', icon: Users, desc: 'Dynamic grid balancing.' },
-              { title: 'Chat', icon: MessageSquare, desc: 'Socket.IO real-time overlay.' }
-            ].map((step, i) => (
-              <motion.div 
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-3xl bg-surface/30 border border-border/50 text-center space-y-4 hover:border-primary/50 transition-colors group relative overflow-hidden"
-              >
-                <div className="absolute -right-4 -top-4 opacity-5 group-hover:scale-110 transition-transform text-primary">
-                  <step.icon size={100} />
-                </div>
-                <div className="w-12 h-12 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                  <step.icon size={24} />
-                </div>
-                <h4 className="font-bold text-lg">{step.title}</h4>
-                <p className="text-sm text-muted">{step.desc}</p>
-              </motion.div>
-            ))}
+        {/* The Vision */}
+        <div className="space-y-6">
+          <h3 className="font-heading font-bold text-3xl">The Vision</h3>
+          <div className="w-16 h-1 bg-primary rounded-full mb-8" />
+          <div className="prose prose-invert max-w-none text-muted leading-relaxed text-lg space-y-6">
+            <p>
+              In an era of remote work, seamless collaboration is non-negotiable. Yet, many conferencing platforms feel bloated, resource-heavy, and disconnected from the asynchronous tools we use daily. I built Nexus to challenge this standard.
+            </p>
+            <p>
+              Nexus is a unified communication layer. The vision was to tightly couple real-time, low-latency video and audio streaming with instantaneous text chat—all within a lightweight, highly responsive web interface that doesn't melt your laptop's CPU.
+            </p>
           </div>
         </div>
 
-        {/* Architecture Change */}
-        <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-center">
-          <div>
-            <h3 className="font-heading font-bold text-3xl mb-6">The Mesh vs SFU Migration</h3>
-            <p className="text-muted leading-relaxed">
-              Initially, I built Nexus using a traditional WebRTC Mesh architecture. It worked perfectly for 3 users. By 6 users, CPU usage spiked and bandwidth collapsed. 
-              <br/><br/>
-              I architected a migration to a <strong>Selective Forwarding Unit (SFU)</strong> model utilizing LiveKit. Instead of <code>N * (N - 1)</code> connections, the server handles track routing, dropping client-side load massively.
+        {/* Engineering Challenges */}
+        <div className="space-y-12">
+          <div className="text-center">
+            <h3 className="font-heading font-bold text-3xl mb-4">Engineering the Engine</h3>
+            <p className="text-muted max-w-2xl mx-auto">
+              Building a synchronous real-time app forces you to confront the realities of network latency, browser resource limits, and state synchronization.
             </p>
           </div>
-          <div className="p-8 rounded-3xl bg-surface/30 border border-border/50">
-            <div className="flex flex-col gap-6 font-mono text-sm">
-              <div className="flex justify-between items-center pb-4 border-b border-border/50">
-                <span className="text-muted">WebRTC Mesh (Before)</span>
-                <span className="text-red-400">O(N²) Connections</span>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Zap className="text-emerald-500" size={32} />
+              <h4 className="font-bold text-xl">The SFU Migration</h4>
+              <p className="text-muted leading-relaxed">
+                I initially built Nexus on a traditional WebRTC Mesh architecture. It worked for 3 users, but by 6 users, bandwidth collapsed under <code>O(N²)</code> connections. I migrated the entire pipeline to a Selective Forwarding Unit (SFU) using LiveKit, dropping client load massively to <code>O(N)</code> connections and allowing smooth scaling.
+              </p>
+            </div>
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Shield className="text-accent" size={32} />
+              <h4 className="font-bold text-xl">State Synchronization</h4>
+              <p className="text-muted leading-relaxed">
+                Keeping the video layout, mute states, and the Socket.IO chat perfectly in sync required a robust state machine. I decoupled the WebRTC transport layer from the UI using React Context, ensuring that complex media track updates don't cause cascading re-renders across the chat interface.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* The Machine Learning Pipeline / Architecture Dashboard */}
+        <div className="p-10 rounded-3xl bg-surface border border-border/50 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="relative z-10 space-y-8">
+            <div>
+              <h3 className="font-heading font-bold text-2xl mb-2">Network Architecture</h3>
+              <p className="text-muted">Metrics from the core streaming and signaling infrastructure.</p>
+            </div>
+            
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">O(N)</div>
+                <div className="text-sm text-muted">WebRTC connection complexity using the LiveKit SFU.</div>
               </div>
-              <div className="flex justify-between items-center pb-4 border-b border-border/50">
-                <span className="text-muted">LiveKit SFU (After)</span>
-                <span className="text-emerald-400">O(N) Connections</span>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">Sub-sec</div>
+                <div className="text-sm text-muted">Latency on synchronized Socket.IO messaging.</div>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted">State Management</span>
-                <span className="text-primary">React Context + WebSockets</span>
+              <div>
+                <div className="text-3xl font-bold text-accent mb-2">JWT</div>
+                <div className="text-sm text-muted">Token-based authentication for secure room handshakes.</div>
               </div>
             </div>
           </div>

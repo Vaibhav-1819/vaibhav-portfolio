@@ -25,7 +25,7 @@ export const projects: Project[] = [
     description: 'Explored real-time collaboration by building an SFU-based platform using LiveKit and WebRTC. Features authentication and real-time chat alongside video layers.',
     github: 'https://github.com/Vaibhav-1819',
     technologies: ['React', 'Node.js', 'Socket.IO', 'Firebase', 'LiveKit'],
-    image: '/images/nexus.webp',
+    image: '/images/nexus_home.webp',
     featured: true,
     year: 2024,
     status: 'In Progress'
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     description: 'Built a real-time forecasting pipeline using XGBoost (94.2% confidence) and Gemini 1.5 Flash to translate predicted AQI into actionable, personalized health advice.',
     github: 'https://github.com/Vaibhav-1819',
     technologies: ['React', 'FastAPI', 'XGBoost', 'Gemini', 'SQLite'],
-    image: '/images/aetherai_1.webp',
+    image: '/images/aetherai_home.webp',
     featured: true,
     year: 2024,
     status: 'Offline'

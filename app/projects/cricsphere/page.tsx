@@ -5,8 +5,24 @@ import { ArrowLeft, Database, GitBranch, Terminal, Zap, LineChart, BrainCircuit 
 import Link from "next/link";
 import { projects } from "@/content/projects";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
+import { ProjectGallery } from "@/components/ui/ProjectGallery";
 
 const project = projects.find(p => p.slug === 'cricsphere');
+
+const cricsphereImages = [
+  "/images/cricsphere_landing.webp",
+  "/images/cricsphere_home.webp",
+  "/images/cricsphere_intelligence.webp",
+  "/images/cricsphere_match.webp",
+  "/images/cricsphere_matches.webp",
+  "/images/cricsphere_news.webp",
+  "/images/cricsphere_player.webp",
+  "/images/cricsphere_rankings.webp",
+  "/images/cricsphere_schedules.webp",
+  "/images/cricsphere_teams.webp",
+  "/images/cricsphere_login.webp",
+  "/images/cricsphere_register.webp"
+];
 
 export default function CricSpherePage() {
   return (
@@ -65,95 +81,79 @@ export default function CricSpherePage() {
           </div>
         </motion.div>
 
-        {/* Hero Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5"
-        >
-          <img src="/images/cricsphere_landing.webp" alt="CricSphere Dashboard" className="w-full h-auto" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-        </motion.div>
+        {/* Hero Image / Coverflow */}
+        <div className="mt-12">
+          <ProjectGallery images={cricsphereImages} title="CricSphere" />
+        </div>
       </section>
 
-      {/* Engineering Story */}
+      {/* Deep Dive Case Study */}
       <section className="py-20 px-6 max-w-4xl mx-auto space-y-32">
         
-        {/* The Problem */}
-        <div className="grid md:grid-cols-[1fr_2fr] gap-12">
-          <div>
-            <h3 className="font-heading font-bold text-2xl mb-4">The Problem</h3>
-            <div className="w-12 h-1 bg-primary rounded-full" />
-          </div>
-          <div className="prose prose-invert">
-            <p className="text-muted leading-relaxed text-lg">
-              Traditional sports websites are cluttered with ads and surface-level statistics. As an engineering challenge, I wanted to build a platform that didn't just display data, but actually generated <strong>cricket intelligence</strong>. I needed a system capable of parsing thousands of historical matches, identifying patterns, and predicting outcomes in real-time.
+        {/* The Vision */}
+        <div className="space-y-6">
+          <h3 className="font-heading font-bold text-3xl">The Vision</h3>
+          <div className="w-16 h-1 bg-primary rounded-full mb-8" />
+          <div className="prose prose-invert max-w-none text-muted leading-relaxed text-lg space-y-6">
+            <p>
+              When I set out to build CricSphere, the goal wasn't just to display cricket scores. The sports analytics market is saturated with platforms that either bombard users with ads or hide meaningful insights behind complex interfaces. I wanted to build a unified, high-performance ecosystem.
+            </p>
+            <p>
+              I envisioned a platform where a casual fan could effortlessly track live games, while a hardcore analyst could dive deep into historical PvP matchups, win probabilities, and point-in-time statistics—all rendered in a gorgeous, modern UI.
             </p>
           </div>
         </div>
 
-        {/* System Architecture */}
+        {/* Engineering Challenges */}
         <div className="space-y-12">
-          <div>
-            <h3 className="font-heading font-bold text-3xl mb-4 text-center">System Architecture</h3>
-            <p className="text-center text-muted max-w-2xl mx-auto">
-              A decoupled architecture separating the ML prediction engine from the high-throughput live scoring API.
+          <div className="text-center">
+            <h3 className="font-heading font-bold text-3xl mb-4">Engineering the Engine</h3>
+            <p className="text-muted max-w-2xl mx-auto">
+              Handling live sports data at scale presents massive challenges in state management, rate limiting, and ML feature alignment.
             </p>
           </div>
           
-          <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-background border border-border/50 flex flex-col gap-4">
-              <Database className="text-primary" size={24} />
-              <h4 className="font-bold">Analytics Warehouse</h4>
-              <p className="text-sm text-muted">Processed 22,000+ raw JSON match files into an optimized schema for rapid feature extraction.</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-background border border-border/50 flex flex-col gap-4">
-              <BrainCircuit className="text-accent" size={24} />
-              <h4 className="font-bold">Prediction Engine</h4>
-              <p className="text-sm text-muted">4 ML models trained on point-in-time features to forecast match outcomes with ~61.66% baseline accuracy.</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-background border border-border/50 flex flex-col gap-4">
-              <Zap className="text-primary" size={24} />
-              <h4 className="font-bold">Real-time Caching</h4>
-              <p className="text-sm text-muted">Aggressive caching layer reducing third-party RapidAPI calls from ~200/min down to 18/min.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Visual Proof */}
-        <div className="space-y-12">
-          <h3 className="font-heading font-bold text-3xl mb-8 text-center">Dashboard Experience</h3>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="rounded-2xl overflow-hidden border border-border/50">
-              <img src="/images/cricsphere_intelligence.webp" alt="Match Intelligence" className="w-full h-full object-cover" />
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Zap className="text-emerald-500" size={32} />
+              <h4 className="font-bold text-xl">Defeating Rate Limits</h4>
+              <p className="text-muted leading-relaxed">
+                Live cricket APIs are notoriously expensive. I implemented a highly aggressive, intelligent caching layer. By batching requests and syncing state globally across connected clients, I reduced upstream API calls from ~200/min down to just 18/min, ensuring near-instant updates for users without bottlenecking the backend.
+              </p>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-border/50">
-              <img src="/images/cricsphere_match.webp" alt="Live Match View" className="w-full h-full object-cover" />
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <BrainCircuit className="text-accent" size={32} />
+              <h4 className="font-bold text-xl">Preventing Data Leakage</h4>
+              <p className="text-muted leading-relaxed">
+                Training ML models on sports data is tricky. To prevent the model from "seeing the future", I built a pipeline that engineered <em>point-in-time features</em>. The model calculates a team's rolling win rate, toss luck, and batting economy exactly as it stood <strong>before</strong> the first ball of the match was bowled.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Feature Engineering & ML */}
-        <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-center">
-          <div className="space-y-6">
-            <h3 className="font-heading font-bold text-2xl">The Machine Learning Pipeline</h3>
-            <p className="text-muted leading-relaxed">
-              To build the prediction engine, I couldn't just feed raw scores to a model. I engineered <strong>point-in-time features</strong>: calculating a team's win rate, top-order strike rate, and bowling economy <em>exactly as it was</em> before a specific match occurred. This prevented data leakage and ensured the model generalized well to live fixtures.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl bg-surface border border-border/50 space-y-6">
-            <div className="flex justify-between items-center border-b border-border/50 pb-4">
-              <span className="text-sm text-muted">Training Data</span>
-              <span className="font-mono font-bold text-primary"><AnimatedNumber value={22007} suffix=" Matches" /></span>
+        {/* The Machine Learning Pipeline */}
+        <div className="p-10 rounded-3xl bg-surface border border-border/50 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="relative z-10 space-y-8">
+            <div>
+              <h3 className="font-heading font-bold text-2xl mb-2">Model Architecture</h3>
+              <p className="text-muted">A look inside the 4-tier ensemble model driving live predictions.</p>
             </div>
-            <div className="flex justify-between items-center border-b border-border/50 pb-4">
-              <span className="text-sm text-muted">PvP Records</span>
-              <span className="font-mono font-bold text-primary"><AnimatedNumber value={638} suffix="K+" /></span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-muted">Inference Time</span>
-              <span className="font-mono font-bold text-accent"><AnimatedNumber value={100} prefix="<" suffix="ms" /></span>
+            
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">22,000+</div>
+                <div className="text-sm text-muted">Raw JSON match files parsed into an optimized schema.</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">638K+</div>
+                <div className="text-sm text-muted">Historical PvP records processed for feature extraction.</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-accent mb-2">~61.7%</div>
+                <div className="text-sm text-muted">Baseline prediction accuracy achieved across all formats.</div>
+              </div>
             </div>
           </div>
         </div>

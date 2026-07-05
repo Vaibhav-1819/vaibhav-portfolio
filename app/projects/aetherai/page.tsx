@@ -1,11 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Wind, Sparkles, BrainCircuit, Activity, Database, ArrowRight } from "lucide-react";
+import { ArrowLeft, Wind, Sparkles, BrainCircuit, Activity, Database, ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/content/projects";
+import { ProjectGallery } from "@/components/ui/ProjectGallery";
 
 const project = projects.find(p => p.slug === 'aetherai');
+
+const aetherAiImages = [
+  "/images/aetherai_home.webp",
+  "/images/aetherai_simulator.webp",
+  "/images/aetherai_comparision.webp",
+  "/images/aetherai_optimizer.webp",
+  "/images/aetherai_profile.webp"
+];
 
 export default function AetherAIPage() {
   if (!project) return null;
@@ -47,89 +56,80 @@ export default function AetherAIPage() {
           </div>
         </motion.div>
 
-        {/* Hero Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5"
-        >
-          <img src="/images/aetherai_1.webp" alt="AetherAI Dashboard" className="w-full h-auto" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-        </motion.div>
+        {/* Hero Image / Coverflow */}
+        <div className="mt-12">
+          <ProjectGallery images={aetherAiImages} title="AetherAI" />
+        </div>
       </section>
 
-      {/* The Intelligence Flow */}
-      <section className="py-20 px-6 max-w-6xl mx-auto space-y-32">
+      {/* Deep Dive Case Study */}
+      <section className="py-20 px-6 max-w-4xl mx-auto space-y-32">
         
-        <div className="space-y-16">
-          <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <h3 className="font-heading font-bold text-3xl md:text-5xl text-secondary">The Pipeline</h3>
-            <p className="text-muted text-lg">
-              Raw data is useless without context. AetherAI processes metrics through a multi-stage intelligence pipeline before rendering the dashboard.
+        {/* The Vision */}
+        <div className="space-y-6">
+          <h3 className="font-heading font-bold text-3xl">The Vision</h3>
+          <div className="w-16 h-1 bg-primary rounded-full mb-8" />
+          <div className="prose prose-invert max-w-none text-muted leading-relaxed text-lg space-y-6">
+            <p>
+              Environmental data is ubiquitous, but actionable intelligence is rare. Staring at raw AQI numbers or PM2.5 concentrations doesn't tell a user whether it's safe for their asthmatic child to play outside. I set out to bridge this gap.
             </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[
-              { title: 'Air Quality', icon: Wind, desc: 'Real-time Open-Meteo telemetry.' },
-              { title: 'Prediction', icon: Activity, desc: '72-hour neural forecasting.' },
-              { title: 'XGBoost', icon: BrainCircuit, desc: 'Model Confidence 94.2%.' },
-              { title: 'Gemini 1.5', icon: Sparkles, desc: 'Aether Strategy Optimizer.' },
-              { title: 'Dossiers', icon: Database, desc: 'Automated PDF reports.' }
-            ].map((step, i) => (
-              <motion.div 
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-3xl bg-surface/30 border border-border/50 text-center space-y-4 hover:border-primary/50 transition-colors group relative overflow-hidden"
-              >
-                <div className="w-12 h-12 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                  <step.icon size={24} />
-                </div>
-                <h4 className="font-bold text-sm md:text-base">{step.title}</h4>
-              </motion.div>
-            ))}
+            <p>
+              AetherAI was built to be a proactive, intelligent environmental forecasting system. By fusing traditional machine learning (XGBoost) for high-accuracy numerical predictions with advanced LLMs (Gemini 1.5) for natural language translation, the platform transforms atmospheric data into personalized health strategies.
+            </p>
           </div>
         </div>
 
-        {/* Gallery / Showcase */}
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6 pr-8"
-          >
-            <h3 className="font-heading font-bold text-3xl">Neural Engine & API Architecture</h3>
-            <p className="text-muted leading-relaxed">
-              Handling machine learning inference in a web application requires careful asynchronous management. 
-              The Python backend uses FastAPI to serve the XGBoost prediction endpoints and manage conversational state with Gemini 1.5 Flash.
+        {/* Engineering Challenges */}
+        <div className="space-y-12">
+          <div className="text-center">
+            <h3 className="font-heading font-bold text-3xl mb-4">Engineering the Engine</h3>
+            <p className="text-muted max-w-2xl mx-auto">
+              Merging predictive analytics with generative AI required strict latency constraints and complex pipeline orchestration.
             </p>
-            <ul className="space-y-2 text-muted list-disc ml-5 mb-4 text-sm md:text-base">
-              <li><strong>Model Confidence:</strong> 94.2% (R² Score) evaluated on 365 days of data with 9 features.</li>
-              <li><strong>Global Coverage:</strong> Geocoding API allows real-time tracking for any city worldwide.</li>
-              <li><strong>REST Infrastructure:</strong> 7 specialized endpoints including simulation sandbox and optimizations.</li>
-              <li><strong>Chemical Signature Recognition:</strong> AI-driven source identification for traffic and industry emissions.</li>
-            </ul>
-            <div className="p-6 rounded-2xl bg-surface/50 border border-border/50 space-y-4">
-              <div className="flex justify-between items-center pb-4 border-b border-border/50">
-                <span className="text-muted">Inference Latency</span>
-                <span className="font-mono font-bold text-emerald-400">&lt;50ms</span>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Zap className="text-emerald-500" size={32} />
+              <h4 className="font-bold text-xl">High-Speed Inference</h4>
+              <p className="text-muted leading-relaxed">
+                Running ML inference in a web app usually introduces blocking delays. I built an asynchronous Python backend using FastAPI, aggressively optimizing the XGBoost model to execute 72-hour forecasts with an inference latency of less than 50ms per request.
+              </p>
+            </div>
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Sparkles className="text-accent" size={32} />
+              <h4 className="font-bold text-xl">Synthesizing Context</h4>
+              <p className="text-muted leading-relaxed">
+                Raw predictions aren't enough. I integrated Gemini 1.5 Flash via streaming API to consume the numerical forecasts alongside user health profiles. The system generates real-time, context-aware mitigation strategies (like HVAC scheduling) without noticeable UI blocking.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* The Machine Learning Pipeline */}
+        <div className="p-10 rounded-3xl bg-surface border border-border/50 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="relative z-10 space-y-8">
+            <div>
+              <h3 className="font-heading font-bold text-2xl mb-2">Neural Architecture</h3>
+              <p className="text-muted">Metrics from the forecasting and intelligence pipeline.</p>
+            </div>
+            
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">94.2%</div>
+                <div className="text-sm text-muted">R² Confidence Score evaluated across 365 days of testing.</div>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted">LLM Generation</span>
-                <span className="font-mono font-bold text-primary">Gemini 1.5 Streaming</span>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">72-Hour</div>
+                <div className="text-sm text-muted">Continuous prediction window for localized AQI forecasting.</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-accent mb-2">9+</div>
+                <div className="text-sm text-muted">Meteorological and chemical features analyzed per inference.</div>
               </div>
             </div>
-          </motion.div>
-          <div className="grid grid-cols-2 gap-4">
-            <img src="/images/aetherai_2.webp" className="w-full h-full object-cover rounded-2xl border border-border/50 shadow" alt="AetherAI Component" />
-            <img src="/images/aetherai_3.webp" className="w-full h-full object-cover rounded-2xl border border-border/50 shadow" alt="AetherAI Component" />
-            <img src="/images/aetherai_4.webp" className="w-full h-full object-cover rounded-2xl border border-border/50 shadow" alt="AetherAI Component" />
-            <img src="/images/aetherai_5.webp" className="w-full h-full object-cover rounded-2xl border border-border/50 shadow" alt="AetherAI Component" />
           </div>
         </div>
 

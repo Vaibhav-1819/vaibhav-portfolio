@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { projects } from "@/content/projects";
 import { Database, Network, Cpu, Server, Activity, BrainCircuit, Zap, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 export function FeaturedBuild() {
@@ -99,14 +100,22 @@ export function FeaturedBuild() {
                 </span>
               ))}
             </div>
-            <a 
-              href={cricsphere.demo} 
-              target="_blank" 
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity shrink-0"
-            >
-              Launch Platform <ArrowRight size={18} />
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 items-center">
+              <Link 
+                href="/projects/cricsphere"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface/90 backdrop-blur-md text-secondary border border-border/50 font-bold hover:bg-surface hover:border-primary/50 transition-all shrink-0 w-full sm:w-auto"
+              >
+                View Case Study & Gallery
+              </Link>
+              <a 
+                href={cricsphere.demo} 
+                target="_blank" 
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity shrink-0 w-full sm:w-auto"
+              >
+                Launch Platform <ArrowRight size={18} />
+              </a>
+            </div>
           </div>
         </motion.div>
 
@@ -191,30 +200,6 @@ export function FeaturedBuild() {
               <span className="font-mono text-2xl font-bold text-accent"><AnimatedNumber value={100} prefix="<" suffix="ms" /></span>
             </div>
           </motion.div>
-        </div>
-
-        {/* Visual Showcase Gallery */}
-        <div className="space-y-16">
-          <h2 className="font-heading font-bold text-3xl md:text-5xl text-center text-secondary">Dashboard Experience</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="rounded-3xl overflow-hidden border border-border/50 group relative aspect-video"
-            >
-              <Image src="/images/cricsphere_intelligence.webp" alt="Match Intelligence" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="rounded-3xl overflow-hidden border border-border/50 group relative aspect-video"
-            >
-              <Image src="/images/cricsphere_match.webp" alt="Live Match View" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
-            </motion.div>
-          </div>
         </div>
 
       </div>
