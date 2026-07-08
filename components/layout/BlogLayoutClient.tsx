@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState, ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface TOCItem {
   id: string;
@@ -12,6 +13,8 @@ interface TOCItem {
 }
 
 export function BlogLayoutClient({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const isIndex = pathname === "/blog";
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -23,9 +26,14 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
   const [headings, setHeadings] = useState<TOCItem[]>([]);
 
   useEffect(() => {
+    if (isIndex) {
+      setHeadings([]);
+      return;
+    }
+
     // Query all h2 tags inside the main content area after mount
     // setTimeout ensures the MDX components have rendered
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const elements = Array.from(document.querySelectorAll("main h2, main h3"));
       
       const items: TOCItem[] = elements.map((elem) => ({
@@ -61,8 +69,10 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
       return () => {
         window.removeEventListener("scroll", observerCallback);
       };
-    }, 200);
-  }, []);
+    }, 400); // Slightly longer timeout to allow page transition content to render
+
+    return () => clearTimeout(timeout);
+  }, [pathname, isIndex]);
 
   return (
     <div className="relative w-full">
@@ -99,7 +109,8 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
         </main>
 
         {/* Floating Table of Contents (Desktop Only) */}
-        <aside className="hidden xl:block w-64 shrink-0 relative py-32">
+        {!isIndex && (
+          <aside className="hidden xl:block w-64 shrink-0 relative py-32">
           <div className="sticky top-32">
             <h4 className="font-mono text-xs text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
@@ -133,6 +144,7 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
             </div>
           </div>
         </aside>
+        )}
 
       </div>
     </div>

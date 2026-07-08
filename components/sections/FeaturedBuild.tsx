@@ -60,12 +60,12 @@ export function FeaturedBuild() {
         {/* Massive Hero Image */}
         <ScrollReveal
             y={40}
-            className="relative rounded-3xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5 w-full aspect-[16/9]"
+            className="relative rounded-3xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5 w-full min-h-[400px] sm:min-h-[500px] md:aspect-[16/9] md:min-h-0"
           >
           <Image src="/images/cricsphere_landing.webp" alt="CricSphere Dashboard" fill className="object-cover" priority sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
           
-          <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 flex flex-col md:flex-row items-end justify-between gap-6 z-10">
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 z-10 w-full">
             <div className="flex flex-wrap gap-3">
               {cricsphere.technologies.map(tech => (
                 <span key={tech} className="px-4 py-2 bg-background/80 backdrop-blur-md border border-border/50 rounded-lg text-sm font-mono text-secondary">
