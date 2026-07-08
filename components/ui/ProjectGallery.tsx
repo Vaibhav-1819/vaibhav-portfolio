@@ -48,11 +48,10 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
 
   const handleDragEnd = (e: any, { offset, velocity }: any) => {
     const swipe = offset.x;
-    const swipePower = Math.abs(swipe) * velocity.x;
 
-    if (swipe < -50 || swipePower < -500) {
+    if (swipe < -20) {
       setCurrentIndex((prev) => Math.min(images.length - 1, prev + 1));
-    } else if (swipe > 50 || swipePower > 500) {
+    } else if (swipe > 20) {
       setCurrentIndex((prev) => Math.max(0, prev - 1));
     }
   };
@@ -80,7 +79,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
       {/* 3D Coverflow Section */}
       <div className="w-full flex flex-col items-center overflow-hidden py-12 bg-surface/10 border-y border-border/50 rounded-3xl touch-pan-y">
         <motion.div 
-          className="relative w-full max-w-7xl h-[300px] sm:h-[400px] md:h-[600px] flex items-center justify-center cursor-grab active:cursor-grabbing"
+          className="relative w-full max-w-7xl h-[300px] sm:h-[400px] md:h-[600px] flex items-center justify-center cursor-grab active:cursor-grabbing touch-pan-y"
           style={{ perspective: "1200px" }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
@@ -213,17 +212,15 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                     animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
                     exit={{ opacity: 0, filter: "blur(10px)", x: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 flex items-center justify-center p-4 md:p-12 cursor-grab active:cursor-grabbing"
+                    className="absolute inset-0 flex items-center justify-center p-4 md:p-12 cursor-grab active:cursor-grabbing touch-pan-y"
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
                     dragElastic={0.2}
-                    onDragEnd={(e, { offset, velocity }) => {
+                    onDragEnd={(e, { offset }) => {
                       const swipe = offset.x;
-                      const swipePower = Math.abs(swipe) * velocity.x;
-                      
-                      if (swipe < -50 || swipePower < -500) {
+                      if (swipe < -20) {
                         setLightboxIndex((prev) => (prev !== null ? (prev + 1) % images.length : null));
-                      } else if (swipe > 50 || swipePower > 500) {
+                      } else if (swipe > 20) {
                         setLightboxIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : null));
                       }
                     }}
