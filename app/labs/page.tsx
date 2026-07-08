@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft, Beaker, Code2, Cpu, ArrowRight } from "lucide-react";
 import { 
   MatchPredictionWidget, 
-  AnalyticsExplorerWidget, 
   MLPipelineWidget 
 } from "@/components/sections/Experiments";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -61,17 +60,7 @@ export default function LabsPage() {
             <MatchPredictionWidget />
           </FadeIn>
 
-          {/* Analytics Explorer */}
-          <FadeIn
-            delay={0.2}
-            className="flex flex-col p-6 md:p-8 rounded-3xl bg-surface/30 border border-border/50 h-[500px]"
-          >
-            <div className="mb-6">
-              <span className="text-[11px] font-mono text-muted uppercase tracking-[0.2em]">Interactive UI</span>
-              <h3 className="font-heading font-bold text-2xl mt-2 text-secondary tracking-[-0.02em]">Analytics Explorer</h3>
-            </div>
-            <AnalyticsExplorerWidget />
-          </FadeIn>
+
 
           {/* ML Pipeline Explorer */}
           <FadeIn

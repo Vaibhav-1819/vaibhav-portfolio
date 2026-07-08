@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: 'AetherAI',
     slug: 'aetherai',
     description: 'Built a real-time forecasting pipeline using XGBoost (94.2% confidence) and Gemini 1.5 Flash to translate predicted AQI into actionable, personalized health advice.',
-    github: 'https://github.com/Vaibhav-1819',
+    github: 'https://github.com/Vaibhav-1819/AetherAI',
     technologies: ['React', 'FastAPI', 'XGBoost', 'Gemini', 'SQLite'],
     image: '/images/aetherai_home.webp',
     featured: true,

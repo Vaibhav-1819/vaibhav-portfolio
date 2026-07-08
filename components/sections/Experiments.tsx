@@ -27,19 +27,12 @@ export function Experiments() {
             <MatchPredictionWidget />
           </div>
 
-          {/* Experiment 02: Analytics Explorer */}
-          <div className="min-w-[85vw] md:min-w-0 snap-center p-6 md:p-8 rounded-3xl bg-surface/30 border border-border/50 flex flex-col h-[500px]">
-            <div className="mb-6">
-              <span className="text-[11px] font-mono text-muted uppercase tracking-[0.2em]">Experiment 02</span>
-              <h3 className="font-heading font-bold text-2xl mt-2 tracking-[-0.02em]">Analytics Explorer</h3>
-            </div>
-            <AnalyticsExplorerWidget />
-          </div>
+
 
           {/* Experiment 03: ML Pipeline Explorer */}
           <div className="min-w-[85vw] md:min-w-0 snap-center p-6 md:p-8 rounded-3xl bg-surface/30 border border-border/50 flex flex-col lg:col-span-2 h-[500px] md:h-[400px]">
             <div className="mb-6">
-              <span className="text-[11px] font-mono text-muted uppercase tracking-[0.2em]">Experiment 03</span>
+              <span className="text-[11px] font-mono text-muted uppercase tracking-[0.2em]">Experiment 02</span>
               <h3 className="font-heading font-bold text-2xl mt-2 tracking-[-0.02em]">ML Pipeline Explorer</h3>
             </div>
             <MLPipelineWidget />
@@ -52,6 +45,22 @@ export function Experiments() {
 
 export function MatchPredictionWidget() {
   const [status, setStatus] = useState<"idle" | "predicting" | "result">("idle");
+  const [teamA, setTeamA] = useState("India");
+  const [teamB, setTeamB] = useState("Australia");
+  const [venue, setVenue] = useState("Wankhede Stadium");
+
+  // Determine prediction based on venue
+  const getPrediction = () => {
+    if (venue === "Wankhede Stadium") {
+      return { winTeam: teamA, winProb: "62%", confidence: "High", score: "185-195" };
+    } else if (venue === "MCG") {
+      return { winTeam: teamB, winProb: "55%", confidence: "Medium", score: "155-165" };
+    } else {
+      return { winTeam: teamA, winProb: "51%", confidence: "Low", score: "170-180" };
+    }
+  };
+
+  const prediction = getPrediction();
 
   return (
     <div className="flex-1 bg-background/50 rounded-2xl border border-border/50 p-6 flex flex-col relative overflow-hidden">
@@ -59,13 +68,23 @@ export function MatchPredictionWidget() {
         <div>
           <label className="text-xs font-mono text-muted uppercase">Team A vs Team B</label>
           <div className="flex items-center gap-2 mt-2">
-            <select aria-label="Select Team A" className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary">
+            <select 
+              aria-label="Select Team A" 
+              value={teamA}
+              onChange={(e) => setTeamA(e.target.value)}
+              className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary"
+            >
               <option>India</option>
               <option>Australia</option>
               <option>England</option>
             </select>
             <span className="text-muted text-xs">vs</span>
-            <select aria-label="Select Team B" className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary">
+            <select 
+              aria-label="Select Team B" 
+              value={teamB}
+              onChange={(e) => setTeamB(e.target.value)}
+              className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary outline-none focus:border-primary"
+            >
               <option>Australia</option>
               <option>India</option>
               <option>England</option>
@@ -74,7 +93,12 @@ export function MatchPredictionWidget() {
         </div>
         <div>
           <label className="text-xs font-mono text-muted uppercase">Venue</label>
-          <select aria-label="Select Venue" className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary mt-2 outline-none focus:border-primary">
+          <select 
+            aria-label="Select Venue" 
+            value={venue}
+            onChange={(e) => setVenue(e.target.value)}
+            className="w-full bg-surface border border-border rounded-lg p-2 text-sm text-secondary mt-2 outline-none focus:border-primary"
+          >
             <option>Wankhede Stadium</option>
             <option>MCG</option>
             <option>Lord's</option>
@@ -119,16 +143,16 @@ export function MatchPredictionWidget() {
             </div>
             <div>
               <p className="text-xs font-mono text-muted uppercase">Win Probability</p>
-              <p className="text-2xl font-bold text-primary tracking-tight">India 62%</p>
+              <p className="text-2xl font-bold text-primary tracking-tight">{prediction.winTeam} {prediction.winProb}</p>
             </div>
             <div className="flex gap-6">
               <div>
                 <p className="text-xs font-mono text-muted uppercase">Confidence</p>
-                <p className="text-sm font-bold text-emerald-400">High</p>
+                <p className={`text-sm font-bold ${prediction.confidence === 'High' ? 'text-emerald-400' : prediction.confidence === 'Medium' ? 'text-yellow-400' : 'text-red-400'}`}>{prediction.confidence}</p>
               </div>
               <div>
                 <p className="text-xs font-mono text-muted uppercase">Exp. Score</p>
-                <p className="text-sm font-bold text-secondary">185-195</p>
+                <p className="text-sm font-bold text-secondary">{prediction.score}</p>
               </div>
             </div>
             <button 
@@ -145,48 +169,7 @@ export function MatchPredictionWidget() {
   );
 }
 
-export function AnalyticsExplorerWidget() {
-  const [tab, setTab] = useState(0);
-  const tabs = [
-    { name: "Runs", icon: BarChart3 },
-    { name: "Venues", icon: PieChart },
-    { name: "Trends", icon: Activity }
-  ];
 
-  return (
-    <div className="flex-1 bg-background/50 rounded-2xl border border-border/50 p-6 flex flex-col">
-      <div className="flex gap-2 mb-6 border-b border-border/50 pb-4">
-        {tabs.map((t, i) => (
-          <button 
-            key={t.name}
-            aria-label={t.name}
-            onClick={() => setTab(i)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors ${tab === i ? 'bg-primary/20 text-primary border border-primary/30' : 'text-muted hover:bg-surface border border-transparent'}`}
-          >
-            <t.icon size={14} /> {t.name}
-          </button>
-        ))}
-      </div>
-      
-      <div className="flex-1 relative flex items-end justify-between gap-2 pb-4">
-        {/* Mock Animated Chart Bars */}
-        {[...Array(6)].map((_, i) => {
-          // generate mock heights based on active tab
-          const h = 20 + Math.random() * 60 + (tab * 10);
-          return (
-            <motion.div 
-              key={i + tab * 10}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: `${h}%`, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.05 }}
-              className="w-full bg-primary/20 border-t-2 border-primary rounded-t-sm"
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
 
 export function MLPipelineWidget() {
   const [activeNode, setActiveNode] = useState(0);

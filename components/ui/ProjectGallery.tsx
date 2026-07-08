@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageIcon, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
 import Image from "next/image";
@@ -44,15 +44,49 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
     }
   }, [lightboxIndex, images.length]);
 
+  const lastWheelTime = useRef(0);
+
+  const handleDragEnd = (e: any, { offset, velocity }: any) => {
+    const swipe = offset.x;
+    const swipePower = Math.abs(swipe) * velocity.x;
+
+    if (swipe < -50 || swipePower < -500) {
+      setCurrentIndex((prev) => Math.min(images.length - 1, prev + 1));
+    } else if (swipe > 50 || swipePower > 500) {
+      setCurrentIndex((prev) => Math.max(0, prev - 1));
+    }
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    // Only capture horizontal scroll or mostly horizontal scroll
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      const now = Date.now();
+      if (now - lastWheelTime.current < 400) return; // Debounce
+
+      if (e.deltaX > 20) {
+        setCurrentIndex((prev) => Math.min(images.length - 1, prev + 1));
+        lastWheelTime.current = now;
+      } else if (e.deltaX < -20) {
+        setCurrentIndex((prev) => Math.max(0, prev - 1));
+        lastWheelTime.current = now;
+      }
+    }
+  };
+
   if (!images || images.length === 0) return null;
 
   return (
     <div className="w-full flex flex-col items-center">
       {/* 3D Coverflow Section */}
-      <div className="w-full flex flex-col items-center overflow-hidden py-12 bg-surface/10 border-y border-border/50 rounded-3xl">
-        <div 
-          className="relative w-full max-w-7xl h-[300px] sm:h-[400px] md:h-[600px] flex items-center justify-center"
+      <div className="w-full flex flex-col items-center overflow-hidden py-12 bg-surface/10 border-y border-border/50 rounded-3xl touch-pan-y">
+        <motion.div 
+          className="relative w-full max-w-7xl h-[300px] sm:h-[400px] md:h-[600px] flex items-center justify-center cursor-grab active:cursor-grabbing"
           style={{ perspective: "1200px" }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.1}
+          onDragEnd={handleDragEnd}
+          onWheel={handleWheel}
         >
               {images.map((img, i) => {
                 const offset = i - currentIndex;
@@ -117,7 +151,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                   </motion.div>
                 );
               })}
-        </div>
+        </motion.div>
 
         {/* Controls */}
         <div className="flex items-center gap-6 mt-8">
@@ -175,11 +209,24 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={lightboxIndex}
-                    initial={{ opacity: 0, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, filter: "blur(10px)" }}
+                    initial={{ opacity: 0, filter: "blur(10px)", x: 20 }}
+                    animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+                    exit={{ opacity: 0, filter: "blur(10px)", x: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 flex items-center justify-center p-4 md:p-12"
+                    className="absolute inset-0 flex items-center justify-center p-4 md:p-12 cursor-grab active:cursor-grabbing"
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(e, { offset, velocity }) => {
+                      const swipe = offset.x;
+                      const swipePower = Math.abs(swipe) * velocity.x;
+                      
+                      if (swipe < -50 || swipePower < -500) {
+                        setLightboxIndex((prev) => (prev !== null ? (prev + 1) % images.length : null));
+                      } else if (swipe > 50 || swipePower > 500) {
+                        setLightboxIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : null));
+                      }
+                    }}
                   >
                     <Image
                       src={images[lightboxIndex]}
