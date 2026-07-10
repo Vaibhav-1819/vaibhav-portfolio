@@ -7,7 +7,7 @@ import { resumes } from "@/content/resume";
 
 export default function ResumeSelectionPage() {
   return (
-    <main className="min-h-screen relative flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
+    <main className="min-h-screen relative flex flex-col items-center pt-24 pb-20 px-6 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900/10 via-background to-background pointer-events-none" />
@@ -21,25 +21,25 @@ export default function ResumeSelectionPage() {
         <div className="font-heading font-bold text-lg tracking-tighter">Resume</div>
       </nav>
 
-      <div className="relative z-10 max-w-4xl w-full flex flex-col items-center">
+      <div className="relative z-10 max-w-6xl w-full flex flex-col items-center">
         {/* Header Section */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16 space-y-4"
+          className="mb-16 space-y-4 w-full"
         >
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-secondary tracking-tight">
-            Select <span className="text-primary">Resume</span> Profile
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em]">
+            <span className="text-secondary">Select</span> <span className="text-primary">Resume</span>
           </h1>
-          <p className="text-muted max-w-lg mx-auto font-mono text-sm">
+          <p className="text-muted font-mono text-sm md:text-base leading-relaxed max-w-2xl">
             Choose the resume that best aligns with your requirements. 
             Each version is tailored to specific roles and technology stacks.
           </p>
         </motion.div>
 
         {/* Resumes Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl self-start">
           {resumes.map((resume, index) => {
             const Icon = resume.icon;
             return (

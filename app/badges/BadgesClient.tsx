@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Search, Award, Calendar } from 'lucide-react';
+import { ExternalLink, Search, Award, Calendar, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useMemo } from 'react';
 
@@ -111,6 +111,15 @@ export default function BadgesClient() {
       <div className="absolute top-[20%] left-[20%] w-[40%] h-[40%] bg-surface/20 blur-[150px] rounded-full mix-blend-screen pointer-events-none" />
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center bg-background/80 backdrop-blur-md border-b border-border/50">
+        <a href="/" className="flex items-center gap-2 text-muted hover:text-primary transition-colors group">
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <span className="font-mono text-sm">Back to Workspace</span>
+        </a>
+        <div className="font-heading font-bold text-lg tracking-tighter">Badges</div>
+      </nav>
+
       <div className="max-w-[90rem] mx-auto px-6 w-full relative z-10">
 
         {/* Header Section */}
@@ -178,9 +187,9 @@ export default function BadgesClient() {
                 className="relative group flex flex-col w-full md:w-[calc(50%-1rem)] xl:w-[calc(33.333%-1.5rem)]"
               >
                 {/* Glow Background */}
-                <div className="absolute -inset-0.5 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl blur-md opacity-0 group-hover:opacity-100 transition duration-700" />
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/40 to-blue-500/30 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative flex flex-col h-full bg-surface/30 backdrop-blur-xl border border-border/50 group-hover:border-primary/50 rounded-3xl transition-all duration-500 overflow-hidden">
+                <div className="relative flex flex-col h-full bg-surface/80 backdrop-blur-sm border border-border group-hover:border-primary/50 rounded-3xl transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
 
                   {/* Subtle Top Gradient Accent */}
                   <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />

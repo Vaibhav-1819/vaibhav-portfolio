@@ -19,12 +19,12 @@ export function EngineeringHighlights() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)]" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="mb-24 space-y-6 text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em] text-secondary">
-            Engineering Highlights
+        <div className="mb-24 space-y-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em]">
+            <span className="text-secondary">Engineering</span> <span className="text-primary">Highlights</span>
           </h2>
-          <p className="text-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Raw metrics from the datasets, models, and systems I've built. No fluff, just scale.
+          <p className="text-muted text-lg md:text-xl max-w-2xl leading-relaxed">
+            Raw metrics from the datasets, models, and systems I&apos;ve built. No fluff, just scale.
           </p>
         </div>
 

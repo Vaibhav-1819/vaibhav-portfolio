@@ -1,13 +1,11 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { Trophy, Code2, Award, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { Trophy, Code2, Award } from "lucide-react";
 
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 export function AchievementsSection() {
-  const [showAllCerts, setShowAllCerts] = useState(false);
 
   const stats = [
     { label: "Young Turks Percentile", value: 97, suffix: "", subtitle: "Top 3% Nationwide" },
@@ -32,11 +30,11 @@ export function AchievementsSection() {
   return (
     <section id="achievements" className="py-32 border-t border-border/50 bg-background relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24 space-y-6 text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em] text-secondary">
-            Proof of Work
+        <div className="mb-24 space-y-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em]">
+            <span className="text-secondary">Proof of</span> <span className="text-primary">Work</span>
           </h2>
-          <p className="text-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-muted text-lg md:text-xl max-w-2xl leading-relaxed">
             Competitive programming dashboards, social proof, and cloud foundations.
           </p>
         </div>
@@ -106,33 +104,15 @@ export function AchievementsSection() {
                 </motion.div>
               ))}
 
-              <AnimatePresence>
-                {showAllCerts && hiddenCerts.map((cert, i) => (
-                  <motion.div
-                    key={`hidden-${i}`}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="px-6 py-4 rounded-xl bg-surface/10 border border-border/30 flex items-start gap-3 overflow-hidden"
-                  >
-                    <div className="w-1 h-1 rounded-full bg-border mt-1.5 shrink-0" />
-                    <div>
-                      <p className="text-sm font-bold text-muted leading-tight">{cert.title}</p>
-                      <p className="text-[10px] sm:text-xs font-mono text-muted/60 mt-1.5 uppercase tracking-widest">{cert.provider} • {cert.date}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
 
-              {hiddenCerts.length > 0 && (
-                <button
-                  onClick={() => setShowAllCerts(!showAllCerts)}
-                  className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl border border-border/50 hover:bg-surface/30 transition-colors text-xs font-mono uppercase tracking-widest text-muted hover:text-secondary mt-2"
-                >
-                  {showAllCerts ? 'Hide Certifications' : 'View All Certifications'}
-                  <ChevronDown size={14} className={`transform transition-transform ${showAllCerts ? 'rotate-180' : ''}`} />
-                </button>
-              )}
+
+              <a
+                href="/badges"
+                className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors text-xs font-mono uppercase tracking-widest text-primary hover:text-primary mt-2"
+              >
+                <Award size={14} />
+                View Verified Credly Badges
+              </a>
             </div>
           </div>
 

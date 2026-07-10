@@ -30,8 +30,8 @@ export function JourneyTimeline() {
     <section id="journey" className="py-32 border-t border-border/50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-24">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-secondary">
-            Development Journey
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em]">
+            <span className="text-secondary">Development</span> <span className="text-primary">Journey</span>
           </h2>
         </div>
 

@@ -80,14 +80,14 @@ export function HeroDashboard() {
               Building intelligent software <br className="hidden md:block" />
               <span className="text-muted tracking-[-0.02em]">from data to intelligent products.</span>
             </h1>
-            <p className="text-base md:text-xl text-muted max-w-lg leading-relaxed hidden md:block">
+            <p className="text-base md:text-xl text-muted max-w-lg leading-relaxed">
               {heroContent.philosophy}
             </p>
           </div>
 
-          <div className="hidden md:flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3">
             {heroContent.roles.map((role) => (
-              <span key={role} className="px-4 py-2 rounded-full text-xs font-mono font-medium tracking-wide bg-surface border border-border text-primary uppercase block">
+              <span key={role} className="px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-mono font-medium tracking-wide bg-surface border border-border text-primary uppercase block">
                 {role}
               </span>
             ))}
@@ -98,8 +98,8 @@ export function HeroDashboard() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-surface border border-border/50 text-xs font-mono">
               <span className="text-muted select-none">$ current_status:</span>
               <span className="text-secondary">seeking SWE/AI roles</span>
-              <span className="text-muted/50 hidden md:inline">|</span>
-              <span className="text-primary hidden md:inline">open_to: May 2027</span>
+              <span className="text-muted/50 mx-1">|</span>
+              <span className="text-primary">open_to: May 2027</span>
             </div>
           </div>
 

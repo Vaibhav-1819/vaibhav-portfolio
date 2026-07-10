@@ -24,7 +24,7 @@ export function FeaturedBuild() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <h2 
-              className="text-5xl md:text-7xl lg:text-[80px] font-heading font-black tracking-[-0.04em] leading-[1.05] text-secondary"
+              className="text-4xl md:text-7xl lg:text-[80px] font-heading font-black tracking-[-0.04em] leading-[1.05] text-secondary"
             >
               {cricsphere.title}
             </h2>
