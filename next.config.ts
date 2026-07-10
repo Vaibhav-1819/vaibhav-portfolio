@@ -7,7 +7,16 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   experimental: {
     mdxRs: true,
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.credly.com',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 const withMDX = createMDX({
