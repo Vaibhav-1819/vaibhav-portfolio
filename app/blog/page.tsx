@@ -7,7 +7,7 @@ import { blogs } from "@/content/blogs";
 
 export default function BlogListingPage() {
   return (
-    <main className="min-h-screen relative flex flex-col items-center py-20 px-6 overflow-hidden">
+    <main className="min-h-screen relative flex flex-col items-center pt-24 pb-20 px-6 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
 
@@ -20,23 +20,18 @@ export default function BlogListingPage() {
         <div className="font-heading font-bold text-lg tracking-tighter">Blog</div>
       </nav>
 
-      <div className="relative z-10 max-w-5xl w-full flex flex-col items-center mt-12">
+      <div className="relative z-10 max-w-6xl w-full flex flex-col items-center">
         {/* Header Section */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16 space-y-4 w-full"
+          className="mb-16 space-y-4 w-full"
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="p-3 bg-primary/10 rounded-2xl border border-primary/20">
-               <BookOpen size={24} className="text-primary" />
-            </div>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-secondary tracking-tight">
-            Technical <span className="text-primary">Writings</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-[-0.03em]">
+            <span className="text-secondary">Technical</span> <span className="text-primary">Writings</span>
           </h1>
-          <p className="text-muted max-w-xl mx-auto font-mono text-sm leading-relaxed">
+          <p className="text-muted font-mono text-sm md:text-base leading-relaxed max-w-2xl">
             Explorations, tutorials, and deep dives into software engineering, artificial intelligence, and modern web architecture.
           </p>
         </motion.div>

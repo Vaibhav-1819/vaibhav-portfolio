@@ -74,6 +74,10 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
     return () => clearTimeout(timeout);
   }, [pathname, isIndex]);
 
+  if (isIndex) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="relative w-full">
       {/* Progress Bar */}
