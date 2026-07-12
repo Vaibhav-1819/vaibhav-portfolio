@@ -10,6 +10,15 @@ export type BlogPost = {
 
 export const blogs: BlogPost[] = [
   {
+    id: "nexus-workspace",
+    slug: "nexus-workspace",
+    title: "Engineering Nexus: An Enterprise-Grade Real-Time Workspace",
+    description: "How I built an AI-ready collaboration platform featuring HD video and persistent channels using Next.js 14, Stream SDK, and Clerk.",
+    date: "July 13, 2026",
+    readTime: "12 min read",
+    tags: ["Next.js 14", "Stream SDK", "Clerk", "WebRTC"]
+  },
+  {
     id: "building-realtime-sfu",
     slug: "building-realtime-sfu",
     title: "Building a Real-Time SFU with LiveKit",

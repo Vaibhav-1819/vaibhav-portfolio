@@ -10,7 +10,8 @@ import { ProjectGallery } from "@/components/ui/ProjectGallery";
 const project = projects.find(p => p.slug === 'nexus');
 
 const nexusImages = [
-  "/images/nexus_home.webp"
+  "/images/nexus.webp",
+  "/images/nexus_dashboard.webp"
 ];
 
 export default function NexusPage() {
@@ -48,10 +49,10 @@ export default function NexusPage() {
             Case Study • Real-Time Systems
           </div>
           <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight mb-8">
-            Real-Time Collaboration, Scaled.
+            Enterprise Collaboration, Unified.
           </h1>
           <p className="text-xl text-muted max-w-3xl mx-auto leading-relaxed mb-12">
-            As an academic exploration into WebRTC, I built an SFU-based platform using LiveKit. What started as a peer-to-peer mesh experiment evolved into a highly scalable video and chat infrastructure handling complex WebSocket states.
+            Nexus is a comprehensive workspace built on Next.js 14. What started as an exploration into real-time systems evolved into an enterprise-grade platform featuring HD video meetings, persistent channels, and secure role-based access using Stream SDK and Clerk.
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 text-sm font-mono text-muted mb-20">
@@ -81,7 +82,7 @@ export default function NexusPage() {
               In an era of remote work, seamless collaboration is non-negotiable. Yet, many conferencing platforms feel bloated, resource-heavy, and disconnected from the asynchronous tools we use daily. I built Nexus to challenge this standard.
             </p>
             <p>
-              Nexus is a unified communication layer. The vision was to tightly couple real-time, low-latency video and audio streaming with instantaneous text chat—all within a lightweight, highly responsive web interface that doesn't melt your laptop's CPU.
+              Nexus is a unified communication layer. The vision was to tightly couple real-time, low-latency HD video with persistent, threaded text chat—all within a lightning-fast web interface built on the Next.js 14 App Router that feels native and responsive.
             </p>
           </div>
         </div>
@@ -98,16 +99,16 @@ export default function NexusPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
               <Zap className="text-emerald-500" size={32} />
-              <h4 className="font-bold text-xl">The SFU Migration</h4>
+              <h4 className="font-bold text-xl">Global Edge Infrastructure</h4>
               <p className="text-muted leading-relaxed">
-                I initially built Nexus on a traditional WebRTC Mesh architecture. It worked for 3 users, but by 6 users, bandwidth collapsed under <code>O(N²)</code> connections. I migrated the entire pipeline to a Selective Forwarding Unit (SFU) using LiveKit, dropping client load massively to <code>O(N)</code> connections and allowing smooth scaling.
+                Instead of managing low-level WebRTC SFUs from scratch, I leveraged the <strong>Stream Video and Chat SDKs</strong>. This offloaded the heavy lifting of global media routing, allowing the platform to deliver crystal-clear 1080p video and spatial audio with sub-50ms latency across regions.
               </p>
             </div>
             <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
               <Shield className="text-accent" size={32} />
-              <h4 className="font-bold text-xl">State Synchronization</h4>
+              <h4 className="font-bold text-xl">Secure Workspaces</h4>
               <p className="text-muted leading-relaxed">
-                Keeping the video layout, mute states, and the Socket.IO chat perfectly in sync required a robust state machine. I decoupled the WebRTC transport layer from the UI using React Context, ensuring that complex media track updates don't cause cascading re-renders across the chat interface.
+                Enterprise tools demand strict access control. By integrating <strong>Clerk</strong> for authentication and <strong>Firebase</strong> for real-time document sync, Nexus provides isolated, secure workspaces. Users only have access to meetings and persistent channels they are explicitly invited to.
               </p>
             </div>
           </div>
@@ -125,16 +126,16 @@ export default function NexusPage() {
             
             <div className="grid sm:grid-cols-3 gap-6">
               <div>
-                <div className="text-3xl font-bold text-primary mb-2">O(N)</div>
-                <div className="text-sm text-muted">WebRTC connection complexity using the LiveKit SFU.</div>
+                <div className="text-3xl font-bold text-primary mb-2">1080p</div>
+                <div className="text-sm text-muted">HD Video support via Stream's Edge Network.</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary mb-2">Sub-sec</div>
-                <div className="text-sm text-muted">Latency on synchronized Socket.IO messaging.</div>
+                <div className="text-3xl font-bold text-primary mb-2">&lt;50ms</div>
+                <div className="text-sm text-muted">Global latency for real-time streaming and chat.</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-accent mb-2">JWT</div>
-                <div className="text-sm text-muted">Token-based authentication for secure room handshakes.</div>
+                <div className="text-3xl font-bold text-accent mb-2">Clerk</div>
+                <div className="text-sm text-muted">Enterprise-grade authentication and session management.</div>
               </div>
             </div>
           </div>

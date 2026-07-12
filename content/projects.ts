@@ -22,10 +22,10 @@ export const projects: Project[] = [
   {
     title: 'Nexus',
     slug: 'nexus',
-    description: 'Explored real-time collaboration by building an SFU-based platform using LiveKit and WebRTC. Features authentication and real-time chat alongside video layers.',
+    description: 'An enterprise-grade collaboration platform built on Next.js 14. Features HD video meetings, persistent channels, and secure workspaces using Stream SDK and Clerk.',
     github: 'https://github.com/Vaibhav-1819',
-    technologies: ['React', 'Node.js', 'Socket.IO', 'Firebase', 'LiveKit'],
-    image: '/images/nexus_home.webp',
+    technologies: ['Next.js 14', 'Stream SDK', 'Clerk', 'Firebase', 'Tailwind CSS'],
+    image: '/images/nexus.webp',
     featured: true,
     year: 2024,
     status: 'In Progress'
