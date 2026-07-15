@@ -11,7 +11,9 @@ const project = projects.find(p => p.slug === 'nexus');
 
 const nexusImages = [
   "/images/nexus.webp",
-  "/images/nexus_dashboard.webp"
+  "/images/nexus_dashboard.webp",
+  "/images/nexus_inbox.webp",
+  "/images/nexus_workspace.webp",
 ];
 
 export default function NexusPage() {
@@ -52,9 +54,9 @@ export default function NexusPage() {
             Enterprise Collaboration, Unified.
           </h1>
           <p className="text-xl text-muted max-w-3xl mx-auto leading-relaxed mb-12">
-            Nexus is a comprehensive workspace built on Next.js 14. What started as an exploration into real-time systems evolved into an enterprise-grade platform featuring HD video meetings, persistent channels, and secure role-based access using Stream SDK and Clerk.
+            Nexus is a comprehensive workspace built on Next.js 14. What started as an exploration into real-time systems evolved into an enterprise-grade platform featuring HD video meetings, context-aware AI assistants, universal semantic search, and zero-trust security using Stream, Clerk, and OpenAI.
           </p>
-          
+
           <div className="flex flex-wrap justify-center gap-4 text-sm font-mono text-muted mb-20">
             {project.technologies.map(tech => (
               <span key={tech} className="px-4 py-2 border border-border/50 rounded-lg bg-surface/30">
@@ -72,7 +74,7 @@ export default function NexusPage() {
 
       {/* Deep Dive Case Study */}
       <section className="py-20 px-6 max-w-4xl mx-auto space-y-32">
-        
+
         {/* The Vision */}
         <div className="space-y-6">
           <h3 className="font-heading font-bold text-3xl">The Vision</h3>
@@ -95,7 +97,7 @@ export default function NexusPage() {
               Building a synchronous real-time app forces you to confront the realities of network latency, browser resource limits, and state synchronization.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
               <Zap className="text-emerald-500" size={32} />
@@ -106,9 +108,23 @@ export default function NexusPage() {
             </div>
             <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
               <Shield className="text-accent" size={32} />
-              <h4 className="font-bold text-xl">Secure Workspaces</h4>
+              <h4 className="font-bold text-xl">Zero-Trust Architecture</h4>
               <p className="text-muted leading-relaxed">
-                Enterprise tools demand strict access control. By integrating <strong>Clerk</strong> for authentication and <strong>Firebase</strong> for real-time document sync, Nexus provides isolated, secure workspaces. Users only have access to meetings and persistent channels they are explicitly invited to.
+                Enterprise tools demand strict access control. By integrating <strong>Clerk</strong> for authentication and a server-brokered approach for <strong>Firebase Storage</strong>, Nexus provides isolated workspaces. All file uploads and downloads are governed by signed URLs verified via the Admin SDK, ensuring immediate access revocation.
+              </p>
+            </div>
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Server className="text-blue-500" size={32} />
+              <h4 className="font-bold text-xl">Universal Semantic Search</h4>
+              <p className="text-muted leading-relaxed">
+                Finding information shouldn't be a chore. I built a real-time indexing pipeline using <strong>Liveblocks webhooks</strong> and <strong>OpenAI embeddings</strong> to sync document and whiteboard content directly into a <strong>Pinecone</strong> vector database, accessible instantly via a global CMD+K search modal.
+              </p>
+            </div>
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <MessageSquare className="text-purple-500" size={32} />
+              <h4 className="font-bold text-xl">Context-Aware AI</h4>
+              <p className="text-muted leading-relaxed">
+                Powered by the <strong>Vercel AI SDK</strong> and <code>gpt-4o-mini</code>, Nexus includes a floating context assistant that reads your active canvas to summarize or analyze data. It also aggregates the past 24 hours of workspace activity into a daily cached brief to keep the whole team aligned.
               </p>
             </div>
           </div>
@@ -117,14 +133,14 @@ export default function NexusPage() {
         {/* The Machine Learning Pipeline / Architecture Dashboard */}
         <div className="p-10 rounded-3xl bg-surface border border-border/50 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          
+
           <div className="relative z-10 space-y-8">
             <div>
               <h3 className="font-heading font-bold text-2xl mb-2">Network Architecture</h3>
               <p className="text-muted">Metrics from the core streaming and signaling infrastructure.</p>
             </div>
-            
-            <div className="grid sm:grid-cols-3 gap-6">
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div>
                 <div className="text-3xl font-bold text-primary mb-2">1080p</div>
                 <div className="text-sm text-muted">HD Video support via Stream's Edge Network.</div>
@@ -134,8 +150,12 @@ export default function NexusPage() {
                 <div className="text-sm text-muted">Global latency for real-time streaming and chat.</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-accent mb-2">Clerk</div>
-                <div className="text-sm text-muted">Enterprise-grade authentication and session management.</div>
+                <div className="text-3xl font-bold text-accent mb-2">Vector</div>
+                <div className="text-sm text-muted">Real-time Pinecone indexing via Liveblocks webhooks.</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-accent mb-2">Zero-Trust</div>
+                <div className="text-sm text-muted">Server-brokered storage using Firebase Admin SDK.</div>
               </div>
             </div>
           </div>
@@ -147,9 +167,9 @@ export default function NexusPage() {
       <section className="py-32 px-6 text-center border-t border-border/50">
         <h2 className="text-3xl font-heading font-bold mb-8">View the source.</h2>
         {project.github && (
-          <a 
-            href={project.github} 
-            target="_blank" 
+          <a
+            href={project.github}
+            target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-surface border border-border hover:border-primary transition-colors font-bold"
           >

@@ -22,9 +22,9 @@ export const projects: Project[] = [
   {
     title: 'Nexus',
     slug: 'nexus',
-    description: 'An enterprise-grade collaboration platform built on Next.js 14. Features HD video meetings, persistent channels, and secure workspaces using Stream SDK and Clerk.',
+    description: 'An enterprise-grade collaboration platform built on Next.js 14. Features HD video meetings, persistent channels, a context-aware AI assistant, semantic search, and secure zero-trust workspaces.',
     github: 'https://github.com/Vaibhav-1819',
-    technologies: ['Next.js 14', 'Stream SDK', 'Clerk', 'Firebase', 'Tailwind CSS'],
+    technologies: ['Next.js 14', 'Stream', 'Clerk', 'Firebase', 'OpenAI', 'Pinecone', 'Liveblocks'],
     image: '/images/nexus.webp',
     featured: true,
     year: 2024,
