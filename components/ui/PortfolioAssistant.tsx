@@ -914,7 +914,7 @@ export function PortfolioAssistant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 15 }}
             transition={{ type: "tween", ease: "easeOut", duration: 0.22 }}
-            className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:right-6 z-40 sm:w-[440px] h-[320px] bg-surface/95 border rounded-2xl flex flex-col overflow-hidden backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.4)] hud-flicker ${
+            className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:right-6 z-40 sm:w-[440px] h-[320px] bg-surface/95 border rounded-none flex flex-col overflow-hidden backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.4)] hud-flicker ${
               alertMode 
                 ? 'border-rose-500 animate-[shake_0.2s_ease-in-out_infinite] shadow-[0_0_20px_rgba(239,68,68,0.25)]' 
                 : starkMode 
@@ -932,10 +932,10 @@ export function PortfolioAssistant() {
             </div>
 
             {/* Glowing Corner HUD Brackets */}
-            <div className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 pointer-events-none rounded-tl-sm ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
-            <div className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 pointer-events-none rounded-tr-sm ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
-            <div className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 pointer-events-none rounded-bl-sm ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
-            <div className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 pointer-events-none rounded-br-sm ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
+            <div className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 pointer-events-none rounded-none ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
+            <div className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 pointer-events-none rounded-none ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
+            <div className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 pointer-events-none rounded-none ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
+            <div className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 pointer-events-none rounded-none ${starkMode ? 'border-rose-500/70' : 'border-primary/60'}`} />
 
             {/* HUD Header bar */}
             <div className="px-4 py-2 border-b border-border/50 bg-background/60 flex justify-between items-center select-none z-10">
