@@ -851,10 +851,55 @@ export function PortfolioAssistant() {
           animation: hudFlicker 6s infinite;
         }
       `}} />
+      {/* Holographic Light Beam Projection */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            exit={{ opacity: 0, scaleY: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            style={{ originY: "bottom" }}
+            className="fixed bottom-0 right-0 z-30 pointer-events-none select-none w-[480px] h-[360px]"
+          >
+            <svg 
+              className="w-full h-full overflow-visible"
+              viewBox="0 0 480 360"
+            >
+              <defs>
+                <linearGradient id="holoCone" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stopColor={starkMode ? "#f43f5e" : "#06b6d4"} stopOpacity="0.45" />
+                  <stop offset="25%" stopColor={starkMode ? "#f43f5e" : "#06b6d4"} stopOpacity="0.18" />
+                  <stop offset="100%" stopColor={starkMode ? "#f43f5e" : "#06b6d4"} stopOpacity="0.0" />
+                </linearGradient>
+              </defs>
+              
+              {/* Light cone body */}
+              <path
+                d="M 432,312 L 16,264 L 456,264 Z"
+                fill="url(#holoCone)"
+                className="animate-pulse"
+              />
+
+              {/* Holographic border lines */}
+              <line x1="432" y1="312" x2="16" y2="264" stroke={starkMode ? "#f43f5e" : "#06b6d4"} strokeWidth="0.5" className="opacity-25" />
+              <line x1="432" y1="312" x2="456" y2="264" stroke={starkMode ? "#f43f5e" : "#06b6d4"} strokeWidth="0.5" className="opacity-25" />
+            </svg>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Spinning Holographic Arc Reactor floating bubble button */}
-      <div className="fixed bottom-6 right-6 z-40 group flex items-center justify-end">
+      <div className="fixed bottom-6 right-4 z-40 group flex flex-col items-center justify-end">
+        {/* Holographic Tooltip */}
+        <div className={`absolute bottom-14 right-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 font-mono text-[9px] font-bold tracking-widest select-none bg-background/90 px-2 py-1 border backdrop-blur-sm whitespace-nowrap shadow-md rounded-none ${
+          starkMode ? 'border-rose-500/40 text-rose-400' : 'border-primary/40 text-primary'
+        }`}>
+          ⌜ J.A.R.V.I.S. ⌝
+        </div>
+
         {/* Outer concentric holographic HUD scanner rings */}
-        <div className="absolute right-[-24px] bottom-[-24px] pointer-events-none w-32 h-32 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-110 transition-all duration-500 ease-out select-none">
+        <div className="absolute pointer-events-none w-32 h-32 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-110 transition-all duration-500 ease-out select-none">
           <div className={`absolute w-16 h-16 border border-dashed rounded-full animate-[spin_8s_linear_infinite] ${starkMode ? 'border-rose-500/25' : 'border-primary/25'}`} />
           <div className={`absolute w-24 h-24 border border-dotted rounded-full animate-[spin_14s_linear_infinite_reverse] ${starkMode ? 'border-rose-500/15' : 'border-primary/15'}`} />
           <div className={`absolute w-28 h-28 border-[0.5px] rounded-full opacity-30 ${starkMode ? 'border-rose-500/5' : 'border-primary/5'}`} />
@@ -863,7 +908,7 @@ export function PortfolioAssistant() {
         <button
           onClick={toggleConsole}
           onMouseEnter={() => playSound("click")}
-          className={`relative h-12 w-12 hover:w-36 rounded-full hover:rounded-lg transition-all duration-300 ease-out bg-surface border flex items-center justify-start px-3.5 py-3.5 overflow-hidden cursor-pointer hover:scale-105 ${
+          className={`relative h-12 w-12 rounded-full transition-all duration-300 ease-out bg-surface border flex items-center justify-center p-3 cursor-pointer hover:scale-105 ${
             starkMode 
               ? 'border-rose-500 hover:border-rose-400 text-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.3)]' 
               : 'border-border/80 hover:border-primary/50 text-primary shadow-xl hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)]'
@@ -874,21 +919,14 @@ export function PortfolioAssistant() {
           <span className={`absolute inset-0 rounded-full scale-100 group-hover:scale-125 animate-ping opacity-50 pointer-events-none ${starkMode ? 'bg-rose-500/10' : 'bg-primary/5'}`} />
 
           {/* Glowing Arc Reactor */}
-          <div className="flex items-center justify-start gap-2.5 select-none pointer-events-none w-full">
-            <div className="w-5 h-5 shrink-0 flex items-center justify-center">
-              <svg viewBox="0 0 100 100" className={`w-full h-full transition-transform ${isOpen ? 'rotate-45' : 'animate-[spin_14s_linear_infinite]'} ${starkMode ? 'text-rose-500' : 'text-primary'}`}>
-                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="12, 6" className="opacity-25" />
-                <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="6, 12" className="opacity-70" />
-                <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-30" />
-                <path d="M 50,22 L 50,12 M 50,78 L 50,88 M 22,50 L 12,50 M 78,50 L 88,50 M 31,31 L 23,23 M 69,69 L 77,77 M 31,69 L 23,77 M 69,31 L 77,23" stroke="currentColor" strokeWidth="3" className="opacity-90" />
-                <circle cx="50" cy="50" r="8" fill="currentColor" className="animate-pulse" />
-              </svg>
-            </div>
-            <span className={`opacity-0 group-hover:opacity-100 max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-300 font-mono text-[9px] font-bold tracking-widest shrink-0 ${
-              starkMode ? 'text-rose-400' : 'text-primary'
-            }`}>
-              ⌜ J.A.R.V.I.S. ⌝
-            </span>
+          <div className="w-5 h-5 flex items-center justify-center select-none pointer-events-none">
+            <svg viewBox="0 0 100 100" className={`w-full h-full transition-transform ${isOpen ? 'rotate-45' : 'animate-[spin_14s_linear_infinite]'} ${starkMode ? 'text-rose-500' : 'text-primary'}`}>
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="12, 6" className="opacity-25" />
+              <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="6, 12" className="opacity-70" />
+              <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-30" />
+              <path d="M 50,22 L 50,12 M 50,78 L 50,88 M 22,50 L 12,50 M 78,50 L 88,50 M 31,31 L 23,23 M 69,69 L 77,77 M 31,69 L 23,77 M 69,31 L 77,23" stroke="currentColor" strokeWidth="3" className="opacity-90" />
+              <circle cx="50" cy="50" r="8" fill="currentColor" className="animate-pulse" />
+            </svg>
           </div>
         </button>
       </div>
@@ -922,7 +960,7 @@ export function PortfolioAssistant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 15 }}
             transition={{ type: "tween", ease: "easeOut", duration: 0.22 }}
-            className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:right-6 z-40 sm:w-[440px] h-[320px] bg-surface/95 border rounded-none flex flex-col overflow-hidden backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.4)] hud-flicker ${
+            className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:right-4 z-40 sm:w-[440px] h-[320px] bg-surface/95 border rounded-none flex flex-col overflow-hidden backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.4)] hud-flicker ${
               alertMode 
                 ? 'border-rose-500 animate-[shake_0.2s_ease-in-out_infinite] shadow-[0_0_20px_rgba(239,68,68,0.25)]' 
                 : starkMode 
