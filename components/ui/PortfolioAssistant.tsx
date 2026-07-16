@@ -32,8 +32,14 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "  projects   - Detailed summaries of active builds",
       "  blog       - Progressive 3-part Nexus dev logs",
       "  experience - Professional logs (CITD, Swecha)",
+      "  diagnostics- System diagnostics audit reports",
+      "  timeline   - Sir's chronological workspace journey",
+      "  education  - Academic studies & DSA focus",
       "  contact    - Establish direct communication link",
       "  hire       - Recruiter package / download CVs",
+      "  github     - Source repositories link",
+      "  linkedin   - Professional profile connect link",
+      "  status     - HUD console system specifications",
       "  coffee     - System temperature status check",
       "  matrix     - Dynamic ocular code rain simulation",
       "  clear      - Flush terminal logs history buffer",
@@ -168,6 +174,48 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "══════════════════════════════════════"
     ]
   },
+  diagnostics: {
+    briefing: "RUNNING SYSTEM CORE DIAGNOSTICS...",
+    lines: [
+      "========================================",
+      "J.A.R.V.I.S. FULL SYSTEM AUDIT",
+      "----------------------------------------",
+      "  COGNITIVE NEURONS : STABLE [100%]",
+      "  ELO CACHE ENGINE  : SYNCHRONIZED",
+      "  DATABASE LATENCY  : 4ms (OCI / AWS)",
+      "  WERTC VIDEO LINK  : READY (STREAM HUD)",
+      "  PDF RESUME KEY    : SECURED (AES-256)",
+      "  THERMAL OVERLOAD  : 0% NOMINAL",
+      "========================================"
+    ]
+  },
+  timeline: {
+    briefing: "RETRIEVING SIR'S CHRONOLOGICAL TIMELINE...",
+    lines: [
+      "========================================",
+      "SIR'S PROJECT & CAREER TIMELINE",
+      "----------------------------------------",
+      "  2023 :: CRICKIQ RELEASE (ARCHIVED)",
+      "  2024 :: SWECHA AI INTERNSHIP PROGRAM",
+      "  2024 :: CRICSPHERE PREDICTION ENGINE",
+      "  2025 :: CITD HYD DEEP LEARNING MODEL",
+      "  2026 :: NEXUS COLLABORATIVE WORKSPACE",
+      "========================================"
+    ]
+  },
+  education: {
+    briefing: "RETRIEVING ACADEMIC RECORDS...",
+    lines: [
+      "========================================",
+      "ACADEMIC QUALIFICATIONS",
+      "----------------------------------------",
+      "  INSTITUTION :: IARE, Hyderabad",
+      "  STREAM      :: B.Tech Information Tech",
+      "  STATUS      :: Undergraduate",
+      "  CORE STUDY  :: DSA, DBMS, SWE, ML Pipelines",
+      "========================================"
+    ]
+  },
   contact: {
     briefing: "ENCRYPTION ACTIVE. DIRECT CHANNELS:",
     lines: [
@@ -180,6 +228,52 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "LINK : linkedin.com/in/vaibhav-bharathula",
       "GIT  : github.com/Vaibhav-1819",
       "══════════════════════════════════════"
+    ]
+  },
+  github: {
+    briefing: "OPENING GITHUB ARCHIVES...",
+    lines: [
+      "========================================",
+      "GITHUB SOURCE PORTAL",
+      "----------------------------------------",
+      "  Handle: Vaibhav-1819",
+      "  Repos : Nexus, CricSphere, AetherAI",
+      "----------------------------------------",
+      "Select direct link button below, Sir.",
+      "========================================"
+    ],
+    links: [
+      { label: "Open GitHub Profile", href: "https://github.com/Vaibhav-1819" }
+    ]
+  },
+  linkedin: {
+    briefing: "OPENING LINKEDIN SECURE PROTOCOL...",
+    lines: [
+      "========================================",
+      "LINKEDIN NETWORKING SYSTEM",
+      "----------------------------------------",
+      "  Profile: Vaibhav Bharathula",
+      "  Status : Actively seeking SDE/ML roles",
+      "----------------------------------------",
+      "Select connect button below, Sir.",
+      "========================================"
+    ],
+    links: [
+      { label: "Connect on LinkedIn", href: "https://linkedin.com/in/vaibhav-bharathula" }
+    ]
+  },
+  status: {
+    briefing: "HUD SYS STATUS REPORT:",
+    lines: [
+      "========================================",
+      "CONSOLE RUNTIME READOUT",
+      "----------------------------------------",
+      "  POWER GRID  : ONLINE (100% LOAD)",
+      "  NETWORK     : SECURE / NO LEAKS",
+      "  SOUNDS CORE : SYNTHESIZED WEBAUDIO",
+      "  HUD STYLE   : HOLO COMPACT 440px",
+      "  SYS THEME   : STARK-RED / STEALTH-BLUE",
+      "========================================"
     ]
   },
   mission: {
@@ -237,7 +331,13 @@ const SYNONYMS: Record<string, string> = {
   projects: "projects", portfolio: "projects", repos: "projects", work: "projects", latest: "projects", builds: "projects",
   blog: "blog", blogs: "blog", writings: "blog", post: "blog", posts: "blog",
   experience: "experience", intern: "experience", internship: "experience", citd: "experience", swecha: "experience",
+  diagnostics: "diagnostics", diagnostic: "diagnostics", audit: "diagnostics", test: "diagnostics",
+  timeline: "timeline", journey: "timeline", career: "timeline", path: "timeline",
+  education: "education", college: "education", iare: "education", study: "education",
   contact: "contact", email: "contact", phone: "contact", social: "contact", message: "contact",
+  github: "github", git: "github",
+  linkedin: "linkedin", connect: "linkedin",
+  status: "status", system: "status", specs: "status", metrics_hud: "status",
   mission: "mission", purpose: "mission", utility: "mission",
   coffee: "coffee", caffeine: "coffee", stark: "coffee",
   hire: "hire", recruiter: "hire", resume: "hire", cv: "hire", download: "hire", document: "hire",
@@ -358,6 +458,23 @@ export function PortfolioAssistant() {
       consoleEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [logs, bootingLogs, isJarvisThinking, bootStep, isOpen]);
+
+  // Dynamic J.A.R.V.I.S. background log updates when idle
+  useEffect(() => {
+    if (!isOpen || bootStep < 5) return;
+    const sysMessages = [
+      "J.A.R.V.I.S. : CORE MONITOR: ARC REACTOR TEMPERATURE REGULATED AT 98.4 C",
+      "J.A.R.V.I.S. : WORKSPACE INTERFACE: RECRUITER DIRECTORIES RETRIEVED",
+      "J.A.R.V.I.S. : PROTOCOLS SCAN: SECURE SOCKET PORTS 100% OPERATIONAL",
+      "J.A.R.V.I.S. : MEMORY DUMP: DICTIONARY MAPPING COMPACTED"
+    ];
+    const timer = setInterval(() => {
+      const randomMsg = sysMessages[Math.floor(Math.random() * sysMessages.length)];
+      setLogs(prev => [...prev, { type: "system", text: randomMsg }]);
+      playSound("click");
+    }, 20000);
+    return () => clearInterval(timer);
+  }, [isOpen, bootStep]);
 
   // Keyboard listeners: Ctrl+K toggle & Konami code triggers
   useEffect(() => {
@@ -706,6 +823,19 @@ export function PortfolioAssistant() {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes hudFlicker {
+          0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+            opacity: 0.985;
+          }
+          20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+            opacity: 0.94;
+          }
+        }
+        .hud-flicker {
+          animation: hudFlicker 6s infinite;
+        }
+      `}} />
       {/* Spinning Holographic Arc Reactor floating bubble button */}
       <div className="fixed bottom-6 right-6 z-40">
         <button
@@ -769,7 +899,7 @@ export function PortfolioAssistant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 15 }}
             transition={{ type: "tween", ease: "easeOut", duration: 0.22 }}
-            className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:right-6 z-40 sm:w-[440px] h-[320px] bg-surface/95 border rounded-2xl flex flex-col overflow-hidden backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.4)] ${
+            className={`fixed bottom-24 right-4 left-4 sm:left-auto sm:right-6 z-40 sm:w-[440px] h-[320px] bg-surface/95 border rounded-2xl flex flex-col overflow-hidden backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.4)] hud-flicker ${
               alertMode 
                 ? 'border-rose-500 animate-[shake_0.2s_ease-in-out_infinite] shadow-[0_0_20px_rgba(239,68,68,0.25)]' 
                 : starkMode 
