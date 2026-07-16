@@ -45,13 +45,13 @@ Through academic projects, internships, and self-learning, I continue to strengt
   - Worked with Text-to-Speech and Voice Avatar technologies
 
 # Projects
-**1. Nexus – Real-Time Collaboration Platform**
+**1. Nexus – AI-Native Collaboration Operating System**
 - **Status:** Currently Working
-- **Tech Stack:** React, Node.js, Socket.IO, Firebase, LiveKit
-- **Description:** Explored real-time collaboration by building an SFU-based platform using LiveKit and WebRTC.
-- **Problem Statement:** As an academic exploration, I wanted to understand the complexities of building a real-time communication platform that scales better than traditional WebRTC mesh networks.
-- **Approach:** I migrated a basic WebRTC mesh architecture toward a Selective Forwarding Unit (SFU) model using LiveKit. I integrated Firebase for authentication and Socket.IO for real-time text chat alongside the video layer.
-- **Learnings/Challenges:** I gained a deep understanding of video streaming protocols, managing complex WebSocket states in React, and balancing scalability with performance when dealing with multiple video tracks.
+- **Tech Stack:** Next.js 14, Stream, Clerk, Firebase, OpenAI, Pinecone, Liveblocks (Yjs)
+- **Description:** Built a unified workspace platform combining chat, documents, whiteboards, and video calls into a single application context.
+- **Problem Statement:** Traditional communication tools are highly fragmented (e.g. Slack vs. Notion vs. Zoom). I set out to build an enterprise-ready workspace where all communication and shared assets live under the same organizational context.
+- **Approach:** Offloaded real-time media to Stream's global edge network. Implemented real multiplayer document and whiteboard editors with Liveblocks and Yjs CRDTs. Brokered storage transactions through serverless Next.js edge functions (using Firebase Admin SDK) to enforce zero-trust access control, and built a universal vector index (Pinecone & OpenAI embeddings) to perform secure semantic search on workspace documents.
+- **Learnings/Challenges:** Addressed multi-tenant data leak vectors, hydration conflicts in Clerk providers, and LLM query latency. Strengthened skills in server-brokered security patterns, vector data pipelines, and conflict-free client synchronization.
 
 **2. AetherAI – Environmental Intelligence Platform**
 - **Tech Stack:** React, FastAPI, XGBoost, Gemini, SQLite

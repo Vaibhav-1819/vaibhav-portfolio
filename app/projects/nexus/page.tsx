@@ -114,6 +114,13 @@ export default function NexusPage() {
               </p>
             </div>
             <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Users className="text-yellow-500" size={32} />
+              <h4 className="font-bold text-xl">Multiplayer CRDT Canvas</h4>
+              <p className="text-muted leading-relaxed">
+                We integrated <strong>Yjs CRDTs</strong> and <strong>Liveblocks</strong> to drive real-time multiplayer states. Whether typing rich text or drawing whiteboard components, user actions merge conflict-free locally before syncing, guaranteeing high performance even offline.
+              </p>
+            </div>
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
               <Server className="text-blue-500" size={32} />
               <h4 className="font-bold text-xl">Universal Semantic Search</h4>
               <p className="text-muted leading-relaxed">
@@ -125,6 +132,13 @@ export default function NexusPage() {
               <h4 className="font-bold text-xl">Context-Aware AI</h4>
               <p className="text-muted leading-relaxed">
                 Powered by the <strong>Vercel AI SDK</strong> and <code>gpt-4o-mini</code>, Nexus includes a floating context assistant that reads your active canvas to summarize or analyze data. It also aggregates the past 24 hours of workspace activity into a daily cached brief to keep the whole team aligned.
+              </p>
+            </div>
+            <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
+              <Video className="text-orange-500" size={32} />
+              <h4 className="font-bold text-xl">Phase 5 Parity Features</h4>
+              <p className="text-muted leading-relaxed">
+                Designed for scale, the architecture outlines one-to-many <strong>Webinars</strong> with registration workflows, dynamic <strong>Breakout Rooms</strong> for splitting calls, and persistent <strong>Voice Channels</strong> for drop-in drop-out audio cooperation.
               </p>
             </div>
           </div>

@@ -1,16 +1,16 @@
 # 1. Nexus – Real-Time Collaboration Platform
 
 - **Status:** Currently Working
-- **Tech Stack:** React, Node.js, Socket.IO, Firebase, LiveKit
+- **Tech Stack:** Next.js 14, Stream, Clerk, Firebase, OpenAI, Pinecone, Liveblocks (Yjs)
 
 ## Problem Statement
-As an academic exploration, I wanted to understand the complexities of building a real-time communication platform that scales better than traditional WebRTC mesh networks.
+Traditional communication suites are fragmented (Slack vs. Notion vs. Miro vs. Zoom). I wanted to build an AI-native workspace where huddles, chat, docs, and whiteboards are a single unified context.
 
 ## Approach
-I migrated a basic WebRTC mesh architecture toward a Selective Forwarding Unit (SFU) model using LiveKit. I integrated Firebase for authentication and Socket.IO for real-time text chat alongside the video layer.
+I architected the application using Next.js 14 App Router and composable edge APIs. Offloaded audio/video media routing to Stream's global edge network. Implemented real multiplayer document and whiteboard editors using Liveblocks and Yjs CRDTs. Hardened Firebase Storage through server-brokered signed upload/download URLs to enforce workspace isolation, and integrated Pinecone and OpenAI to enable universal semantic search across all team files.
 
 ## Challenges & Learnings
-I gained a deep understanding of video streaming protocols, managing complex WebSocket states in React, and balancing scalability with performance when dealing with multiple video tracks.
+Confronted challenges around secure data isolation, React hydration anomalies, and synchronizing offline edits. I mastered server-brokered security architectures, LLM response caching, and embedding generation via document updates.
 
 ---
 

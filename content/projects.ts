@@ -7,7 +7,7 @@ export const projects: Project[] = [
     description: 'The Ultimate Cricket Destination with AI-ML Powered Analytics. A comprehensive hub for live scores, schedules, and player statistics with real-time prediction engines.',
     github: 'https://github.com/Vaibhav-1819',
     demo: 'https://cricsphere-version1.vercel.app/',
-    technologies: ['React', 'Node.js', 'Express.js', 'RapidAPI'],
+    technologies: ['React', 'Node.js', 'Express.js', 'RapidAPI', 'LightGBM', 'Python', 'Machine Learning'],
     image: '/images/cricsphere_landing.webp',
     metrics: [
       { label: 'Matches', value: '22,000+' },

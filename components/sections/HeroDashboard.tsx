@@ -133,7 +133,7 @@ export function HeroDashboard() {
                   </div>
                   
                   <div className="pt-2 text-sm text-muted leading-relaxed font-mono">
-                    Scalable WebRTC infrastructure built with LiveKit and complex WebSocket states.
+                    AI-native workspace featuring HD video, persistent channels, Pinecone-backed semantic search, and zero-trust security.
                   </div>
                </div>
             </div>
@@ -146,7 +146,7 @@ export function HeroDashboard() {
                   <Server size={14} /> Current Stack
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {['React', 'Spring Boot', 'TensorFlow', 'DuckDB', 'Framer Motion'].map(tech => (
+                  {['Java', 'Python', 'AI/ML', 'SQL', 'Data Structures'].map(tech => (
                     <span key={tech} className="px-2 py-1 text-[10px] md:text-xs bg-background rounded-md text-secondary border border-border/50 block">
                       {tech}
                     </span>

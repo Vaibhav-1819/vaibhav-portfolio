@@ -144,27 +144,71 @@ export default function CricSpherePage() {
         </div>
 
         {/* The Machine Learning Pipeline */}
-        <div className="p-10 rounded-3xl bg-surface border border-border/50 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          
-          <div className="relative z-10 space-y-8">
-            <div>
-              <h3 className="font-heading font-bold text-2xl mb-2">Model Architecture</h3>
-              <p className="text-muted">A look inside the 4-tier ensemble model driving live predictions.</p>
+        <div className="space-y-12">
+          <div className="p-10 rounded-3xl bg-surface border border-border/50 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            
+            <div className="relative z-10 space-y-8">
+              <div>
+                <h3 className="font-heading font-bold text-2xl mb-2">Model Pipeline Architecture</h3>
+                <p className="text-muted">Three production LightGBM models trained on leak-free chronological splits with early stopping.</p>
+              </div>
+              
+              <div className="grid sm:grid-cols-3 gap-6">
+                <div>
+                  <div className="text-3xl font-bold text-primary mb-2">22,000+</div>
+                  <div className="text-sm text-muted">Raw JSON match files parsed into an optimized schema.</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-primary mb-2">638K+</div>
+                  <div className="text-sm text-muted">Historical PvP stats processed for matchup feature extraction.</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-accent mb-2">~63.0%</div>
+                  <div className="text-sm text-muted">Real outcome prediction accuracy (Elo + venue + H2H), beating 50% baseline.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Detailed Model Breakdown */}
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-surface/30 border border-border/50 space-y-3">
+              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-primary/10 text-primary border border-primary/20 uppercase">Model 1</span>
+              <h4 className="font-bold text-base">Match Outcome Classifier</h4>
+              <p className="text-xs text-muted leading-relaxed">
+                Uses format-grouped <strong>LGBMClassifier</strong> (T20, ODI, Test, DOM_LO) predicting outcomes from Elo ratings, rolling head-to-head ratios, and recent venue records.
+              </p>
+              <div className="text-[10px] font-mono text-muted space-y-1 border-t border-border/30 pt-2.5">
+                <p className="text-primary">• Time-respecting train/val splits</p>
+                <p className="text-primary">• Symmetric team-swapped training rows</p>
+                <p className="text-accent">• ~63% Accuracy / 0.684 AUC</p>
+              </div>
             </div>
             
-            <div className="grid sm:grid-cols-3 gap-6">
-              <div>
-                <div className="text-3xl font-bold text-primary mb-2">22,000+</div>
-                <div className="text-sm text-muted">Raw JSON match files parsed into an optimized schema.</div>
+            <div className="p-6 rounded-2xl bg-surface/30 border border-border/50 space-y-3">
+              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-primary/10 text-primary border border-primary/20 uppercase">Model 2</span>
+              <h4 className="font-bold text-base">Next-Innings Runs Regressor</h4>
+              <p className="text-xs text-muted leading-relaxed">
+                Leverages a player-level <strong>LGBMRegressor</strong> predicting runs in their next innings from chronological shift-expanding averages, rolling last-5/10 match metrics, and boundary index scores.
+              </p>
+              <div className="text-[10px] font-mono text-muted space-y-1 border-t border-border/30 pt-2.5">
+                <p className="text-primary">• Non-overlapping player aggregates</p>
+                <p className="text-primary">• Early stopping on MAE score</p>
+                <p className="text-accent">• Outperforms simple average baseline</p>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-primary mb-2">638K+</div>
-                <div className="text-sm text-muted">Historical PvP records processed for feature extraction.</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-accent mb-2">~61.7%</div>
-                <div className="text-sm text-muted">Baseline prediction accuracy achieved across all formats.</div>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-surface/30 border border-border/50 space-y-3">
+              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-primary/10 text-primary border border-primary/20 uppercase">Model 3</span>
+              <h4 className="font-bold text-base">Dismissal Matchup Regressor</h4>
+              <p className="text-xs text-muted leading-relaxed">
+                An ensemble regressor mapping historical matchup profiles (batter average/strike-rate/dot-percentage vs bowler economy/strike-rate) to predict long-run dismissal rates.
+              </p>
+              <div className="text-[10px] font-mono text-muted space-y-1 border-t border-border/30 pt-2.5">
+                <p className="text-primary">• 70/15/15 train/val/test splits</p>
+                <p className="text-primary">• Static matchup correlation matrix</p>
+                <p className="text-accent">• Persisted as joblib and metadata schema</p>
               </div>
             </div>
           </div>

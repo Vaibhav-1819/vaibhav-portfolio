@@ -10,13 +10,31 @@ export type BlogPost = {
 
 export const blogs: BlogPost[] = [
   {
-    id: "nexus-workspace",
-    slug: "nexus-workspace",
-    title: "Engineering Nexus: An Enterprise-Grade Real-Time Workspace",
-    description: "How I built an AI-ready collaboration platform featuring HD video and persistent channels using Next.js 14, Stream SDK, and Clerk.",
+    id: "nexus-part1-foundation-collaboration",
+    slug: "nexus-part1-foundation-collaboration",
+    title: "Building Nexus (Part 1): The Foundation & Real-Time Collaborative Canvas",
+    description: "How I built the foundation of Nexus: pairing Next.js 14, Clerk authentication, and Stream Video/Chat SDKs with a Liveblocks and Yjs collaborative editor.",
     date: "July 13, 2026",
-    readTime: "12 min read",
-    tags: ["Next.js 14", "Stream SDK", "Clerk", "WebRTC"]
+    readTime: "9 min read",
+    tags: ["Next.js 14", "Stream SDK", "Clerk", "Liveblocks", "Yjs"]
+  },
+  {
+    id: "nexus-part2-workspace-architecture",
+    slug: "nexus-part2-workspace-architecture",
+    title: "Building Nexus (Part 2): Unified Workspaces, Universal Inbox, and Folder Infrastructure",
+    description: "Deep diving into Nexus workspace management: building the Workspace Home dashboard, a universal inbox, and structured file navigation.",
+    date: "July 14, 2026",
+    readTime: "8 min read",
+    tags: ["Next.js 14", "Firebase", "State Management", "Tailwind CSS"]
+  },
+  {
+    id: "nexus-part3-ai-native-security",
+    slug: "nexus-part3-ai-native-security",
+    title: "Building Nexus (Part 3): The AI-Native Layer & Zero-Trust Security Architecture",
+    description: "Architecting the final pieces of Nexus: building server-brokered storage security, OpenAI activity briefs, and Pinecone-based semantic search.",
+    date: "July 16, 2026",
+    readTime: "10 min read",
+    tags: ["OpenAI", "Pinecone", "Vercel AI SDK", "Zero-Trust", "Security"]
   },
   {
     id: "building-realtime-sfu",

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import './globals.css';
 
 const CursorGlow = dynamic(() => import('@/components/ui/CursorGlow').then(mod => mod.CursorGlow));
-const CommandPalette = dynamic(() => import('@/components/ui/CommandPalette').then(mod => mod.CommandPalette));
+const PortfolioAssistant = dynamic(() => import('@/components/ui/PortfolioAssistant').then(mod => mod.PortfolioAssistant));
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-heading' });
@@ -54,7 +54,7 @@ export default function RootLayout({
       >
         <Navbar />
         <CursorGlow />
-        <CommandPalette />
+        <PortfolioAssistant />
         {children}
       </body>
     </html>

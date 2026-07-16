@@ -1,0 +1,107 @@
+export const metadata = {
+  title: 'Building Nexus (Part 2): Unified Workspaces, Universal Inbox, and Folder Infrastructure',
+  description: 'Deep diving into Nexus workspace management: building the Workspace Home dashboard, a universal inbox, and structured file navigation.',
+}
+
+# Building Nexus (Part 2): Unified Workspaces, Universal Inbox, and Folder Infrastructure
+
+*July 14, 2026 • 8 min read*
+
+---
+
+> **Hook**: In a fast-moving team, context switching is the silent productivity killer. Going from Slack to check a notification, to Notion to update a doc, to Google Drive to upload a asset, fractures focus. In Part 2 of the Nexus build, we examine how we created a cohesive operating system with unified workspaces, a multi-tenant command center, and custom file hierarchies.
+
+In **Part 1**, we covered the underlying real-time communication and multiplayer canvas. Now, we dive into how Nexus structures and links these elements into a single workspace context.
+
+---
+
+## 1. The Atomic Workspace & Templates
+
+In early mockups, workspace creation was loose. A user could create a workspace, but default channels like `#general` or introductory documents were created asynchronously, leading to database race conditions.
+
+To solve this, we redesigned workspace creation to be **atomic**. When a user creates a new workspace, the client triggers a server action that:
+1. Provisions the **Clerk Organization** for the workspace.
+2. Writes the Firestore `/workspaces/{workspaceId}` document.
+3. Automatically applies a selected **Workspace Template** (e.g., Software Team, Design Agency, Blank) to build initial channels (`#general`, `#announcements`, `#sprint-planning`), seed a "Getting Started" document, and instantiate default folders.
+
+```typescript
+// Seeding template folders and channels in Firestore
+export async function seedWorkspaceTemplate(workspaceId: string, templateType: string) {
+  const db = adminDb;
+  const batch = db.batch();
+  
+  const templateConfig = TEMPLATES[templateType] || TEMPLATES.blank;
+  
+  // 1. Seed Channels
+  templateConfig.channels.forEach((channel) => {
+    const channelRef = db.collection(`workspaces/${workspaceId}/channels`).doc();
+    batch.set(channelRef, {
+      name: channel.name,
+      description: channel.description,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      isSystem: true
+    });
+  });
+  
+  // 2. Seed Default Document
+  const docRef = db.collection(`workspaces/${workspaceId}/documents`).doc();
+  batch.set(docRef, {
+    title: "Welcome & Getting Started 🚀",
+    content: templateConfig.welcomeDocContent,
+    createdAt: admin.firestore.FieldValue.serverTimestamp()
+  });
+
+  await batch.commit();
+}
+```
+
+---
+
+## 2. Workspace Home: The Team Hub
+
+Each workspace features a **Workspace Home** page, modeled after a Git repository landing view. Instead of loading directly into an empty chat channel, users land on an active dashboard containing:
+- **Online Members**: Real-time status widgets showing who is active.
+- **Activity Timeline**: A chronological history of occurrences within the workspace (e.g., *"John updated Sprint Whiteboard 20m ago"*, *"Design Discussion call started"*).
+- **Recent Docs**: Quick links to canvases or files the user was recently viewing.
+
+---
+
+## 3. Universal Inbox & "Continue Working"
+
+### Universal Inbox
+A major challenge of multi-tenant apps is tracking alerts. If you are in Workspace A, how do you know you were tagged in Workspace B? We built the **Universal Inbox**—a unified notifications engine. Every mention, task assignment, or meeting invitation is piped into `/users/{userId}/notifications` with metadata indicating the source workspace. The Inbox filters and groups notifications chronologically ("Today", "Yesterday").
+
+### "Continue Working" Widget
+When a user opens Nexus, we display a context recovery screen rather than a static list of directories. This widget tracks the user's latest sessions and displays cards linking directly back to their exact position in a document, whiteboard, or thread:
+
+```typescript
+// Hook to track user's active context history
+export function useActiveContextTrack(workspaceId: string, assetId: string, assetType: 'doc' | 'whiteboard' | 'chat') {
+  useEffect(() => {
+    if (!workspaceId || !assetId) return;
+    
+    // Update local state and sync with Firestore user activity history
+    updateUserRecents(workspaceId, {
+      assetId,
+      assetType,
+      lastVisited: new Date()
+    });
+  }, [workspaceId, assetId, assetType]);
+}
+```
+
+---
+
+## 4. Workspace File Infrastructure
+
+A collaboration workspace must handle files cleanly. Instead of integrating third-party storage links, we built an integrated files explorer:
+- **Workspace Isolation**: Files are uploaded to Firebase Storage inside path structures mapped directly to the workspace ID (`workspaces/{workspaceId}/files/{fileId}`).
+- **Drag-and-Drop Uploader**: Fully integrated client component supporting drag events and multi-file queues.
+- **Dynamic Previews**: Custom components rendering inline previews for images, PDF documents, markdown files, and video uploads.
+- **Structured Directories**: Teams can organize files into dynamic folders, which are persisted as path structures in the Firestore metadata documents.
+
+## What's Next?
+
+With dynamic workspaces, structured files, and unified tracking completed, the final step was securing this ecosystem and infusing it with intelligence. In **Part 3**, we will look at how we implemented **Zero-Trust Firebase Storage Security** using server-brokered signed URLs, integrated **Pinecone Vector Search**, and built a **Context-Aware AI Assistant** using the Vercel AI SDK.
+
+*Check out the [GitHub Repository](https://github.com/Vaibhav-1819) to see the folder infrastructure code!*

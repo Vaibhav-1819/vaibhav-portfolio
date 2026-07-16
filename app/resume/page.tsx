@@ -1,11 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Download, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, ArrowLeft, Eye, X, FileText } from "lucide-react";
 import { resumes } from "@/content/resume";
 
 export default function ResumeSelectionPage() {
+  const [activeResume, setActiveResume] = useState<typeof resumes[0] | null>(null);
+
+  // Lock body scroll when modal is active to prevent double scrollbars
+  useEffect(() => {
+    if (activeResume) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [activeResume]);
+
+  // Escape key listener to close the modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveResume(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <main className="min-h-screen relative flex flex-col items-center pt-24 pb-20 px-6 overflow-hidden">
       {/* Background Effects */}
@@ -74,25 +101,160 @@ export default function ResumeSelectionPage() {
                     {resume.description}
                   </p>
 
-                  {/* Download Action */}
-                  <a 
-                    href={resume.file} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="flex items-center justify-between w-full px-6 py-3 rounded-xl bg-background border border-border hover:border-primary/50 text-secondary hover:text-primary transition-all group/btn"
-                  >
-                    <span className="font-mono text-sm font-bold tracking-wide">Download PDF</span>
-                    <Download 
-                      size={18} 
-                      className="opacity-70 group-hover/btn:opacity-100 group-hover/btn:-translate-y-0.5 transition-all" 
-                    />
-                  </a>
+                  {/* Actions Grid */}
+                  <div className="flex gap-3 w-full mt-auto relative z-10">
+                    {/* View Button */}
+                    <button 
+                      onClick={() => setActiveResume(resume)}
+                      className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-background border border-border hover:border-primary/50 text-secondary hover:text-primary transition-all font-mono text-sm font-bold tracking-wide cursor-pointer"
+                    >
+                      <Eye size={16} />
+                      <span>View Resume</span>
+                    </button>
+
+                    {/* Download Button */}
+                    <a 
+                      href={resume.file} 
+                      download={resume.file.split('/').pop()}
+                      className="flex items-center justify-center p-3.5 rounded-xl bg-background border border-border hover:border-primary/50 text-secondary hover:text-primary transition-all cursor-pointer group/btn"
+                      title="Download instantly"
+                    >
+                      <Download 
+                        size={18} 
+                        className="opacity-70 group-hover/btn:opacity-100 group-hover/btn:-translate-y-0.5 transition-all" 
+                      />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
       </div>
+
+      {/* Immersive PDF Viewer Modal */}
+      <AnimatePresence>
+        {activeResume && (
+          <div className="fixed inset-0 z-50 flex flex-col items-center justify-between p-4 md:p-6 lg:p-8">
+            {/* Immersive backdrop with custom blur fade */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveResume(null)}
+              className="absolute inset-0 bg-background/90 backdrop-blur-xl cursor-pointer"
+            />
+
+            {/* Immersive Header - floats at top */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="relative z-10 w-full max-w-4xl flex items-center justify-between px-4 py-2"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg bg-surface border border-border/50 shadow-inner ${activeResume.iconColor}`}>
+                  <FileText size={18} />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-base text-secondary">{activeResume.title} Resume</h3>
+                  <p className="text-[10px] font-mono text-muted">Viewing document in-app</p>
+                </div>
+              </div>
+
+              {/* Close (Top-Right Shortcut) */}
+              <button
+                onClick={() => setActiveResume(null)}
+                className="p-2 rounded-xl border border-border/50 hover:bg-surface/80 text-muted hover:text-primary transition-colors cursor-pointer md:flex hidden items-center gap-1.5 font-mono text-xs"
+              >
+                <X size={14} />
+                <span>Close (Esc)</span>
+              </button>
+            </motion.div>
+
+            {/* Immersive Canvas containing the PDF iframe */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: 10 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="relative w-full max-w-4xl flex-1 bg-surface/50 border border-border/80 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(var(--primary-rgb),0.05)] z-10 mt-3 mb-6 flex flex-col"
+            >
+              {/* Desktop Iframe Viewer */}
+              <div className="hidden md:block w-full h-full flex-1">
+                <iframe 
+                  src={`${activeResume.file}#toolbar=1`}
+                  className="w-full h-full border-0 bg-surface/10"
+                  title={`${activeResume.title} Resume PDF Viewer`}
+                />
+              </div>
+
+              {/* Mobile Fallback (Iframes for PDFs are buggy on iOS/Android) */}
+              <div className="md:hidden flex flex-col items-center justify-center text-center p-6 flex-1 space-y-4">
+                <FileText size={48} className={`opacity-60 ${activeResume.iconColor}`} />
+                <h4 className="font-heading font-bold text-lg text-secondary">Ready to View</h4>
+                <p className="text-sm text-muted max-w-xs font-mono leading-relaxed">
+                  Mobile devices display PDFs best when opened directly. Download it below to view.
+                </p>
+                <a
+                  href={activeResume.file}
+                  download={activeResume.file.split('/').pop()}
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-background font-mono text-sm font-bold tracking-wide hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} />
+                  Download PDF
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Immersive Floating Action Bar - floats at bottom */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="relative z-10 px-6 py-3 rounded-full bg-surface/90 border border-border/80 backdrop-blur-md shadow-2xl flex items-center gap-5"
+            >
+              {/* Segmented Switcher */}
+              <div className="flex bg-background/50 border border-border/50 p-1 rounded-xl">
+                {resumes.map((r) => (
+                  <button
+                    key={r.id}
+                    onClick={() => setActiveResume(r)}
+                    className={`px-4 py-2 rounded-lg text-xs font-mono font-bold tracking-wider transition-all cursor-pointer ${
+                      activeResume.id === r.id
+                        ? "bg-primary text-background shadow-md"
+                        : "text-muted hover:text-secondary"
+                    }`}
+                  >
+                    {r.id === 'java-developer' ? 'Java Version' : 'AI/ML Version'}
+                  </button>
+                ))}
+              </div>
+
+              <div className="w-[1px] h-6 bg-border/50" />
+
+              {/* Download Icon */}
+              <a
+                href={activeResume.file}
+                download={activeResume.file.split('/').pop()}
+                className="p-2.5 rounded-xl border border-border/80 hover:border-primary/50 text-muted hover:text-primary hover:bg-background/40 transition-all cursor-pointer flex items-center justify-center"
+                title="Download PDF"
+              >
+                <Download size={16} />
+              </a>
+
+              {/* Close Icon */}
+              <button
+                onClick={() => setActiveResume(null)}
+                className="p-2.5 rounded-xl border border-border/80 hover:border-red-500/50 hover:bg-red-500/10 text-muted hover:text-red-500 transition-all cursor-pointer flex items-center justify-center"
+                title="Close Viewer"
+              >
+                <X size={16} />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
