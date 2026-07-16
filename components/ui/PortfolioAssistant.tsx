@@ -21,28 +21,36 @@ interface CommandResponse {
 
 const COMMAND_DATABASE: Record<string, CommandResponse> = {
   help: {
-    briefing: "ACTIVE MAIN FRAME SYSTEM OVERRIDES:",
+    briefing: "ACTIVE OVERRIDES MATRIX:",
     lines: [
       "========================================",
-      "PROTOCOL COMMAND OVERRIDES LIST",
+      "SYSTEM OVERRIDES & COGNITIVE CONTROLS",
       "----------------------------------------",
-      "  about      - Sir's engineering profile & funny roles",
-      "  skills     - Technical stack index",
-      "  stats      - Performance & platform metric gauges",
-      "  projects   - Detailed summaries of active builds",
-      "  blog       - Progressive 3-part Nexus dev logs",
-      "  experience - Professional logs (CITD, Swecha)",
-      "  diagnostics- System diagnostics audit reports",
-      "  timeline   - Sir's chronological workspace journey",
-      "  education  - Academic studies & DSA focus",
-      "  contact    - Establish direct communication link",
-      "  hire       - Recruiter package / download CVs",
-      "  github     - Source repositories link",
-      "  linkedin   - Professional profile connect link",
-      "  status     - HUD console system specifications",
-      "  coffee     - System temperature status check",
-      "  matrix     - Dynamic ocular code rain simulation",
-      "  clear      - Flush terminal logs history buffer",
+      "SYSTEM",
+      "  status      - Display HUD telemetry",
+      "  diagnostics - Run system integrity audit",
+      "  clear       - Flush console logs buffer",
+      "----------------------------------------",
+      "PROFILE",
+      "  about       - Decrypt subject profile",
+      "  skills      - Retrieve technical database",
+      "  experience  - Open mission archives",
+      "  academy     - Retrieve study & academic records",
+      "  history     - Extract chronological records",
+      "----------------------------------------",
+      "PROJECTS",
+      "  projects    - Access workspace project registry",
+      "  logs        - Retrieve progressive dev logs",
+      "----------------------------------------",
+      "NETWORK",
+      "  contact     - Establish direct communication link",
+      "  github      - Connect source repositories",
+      "  linkedin    - Open professional network",
+      "  hire        - Unlock recruitment protocol",
+      "----------------------------------------",
+      "FUN",
+      "  coffee      - Analyze caffeine reserves",
+      "  matrix      - Enable ocular rain simulation",
       "========================================"
     ]
   },
@@ -73,7 +81,7 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "building responsive web apps and forecasting models.",
       "Primary availability window opens: May 2027.",
       "--------------------------------------",
-      "Type 'skills', 'projects', or 'blog' for logs."
+      "Type 'skills', 'projects', or 'logs' for logs."
     ]
   },
   skills: {
@@ -88,7 +96,7 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "AI & ML    :: LightGBM, TensorFlow, XGBoost, Pinecone",
       "DATABASES  :: MySQL, Firebase, NoSQL, Redis, DuckDB",
       "--------------------------------------",
-      "Tip: Type 'experience' or 'stats' for more context."
+      "Tip: Type 'experience' or 'status' for more context."
     ]
   },
   stats: {
@@ -134,8 +142,8 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "Tip: Type 'nexus', 'cricsphere', or 'aether' for details."
     ]
   },
-  blog: {
-    briefing: "DECRYPTING WRITINGS FEED...",
+  logs: {
+    briefing: "DECRYPTING WORKSPACE DEV LOG MATRIX...",
     lines: [
       "══════════════════════════════════════",
       "NEXUS PROGRESSIVE BLOG POSTS series",
@@ -147,13 +155,13 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "Part 3: The AI-Native Layer & Zero-Trust Security",
       "  - Focus: Signed download URLs, Pinecone vector search",
       "--------------------------------------",
-      "Action: Click a link below to read the post:",
+      "Action: Select a log file to extract:",
       "══════════════════════════════════════"
     ],
     links: [
-      { label: "Part 1: Canvas Sync", href: "/blog/nexus-part1-foundation-collaboration" },
-      { label: "Part 2: Folders & Inbox", href: "/blog/nexus-part2-workspace-architecture" },
-      { label: "Part 3: Security & AI", href: "/blog/nexus-part3-ai-native-security" }
+      { label: "[Log Part 1]", href: "/blog/nexus-part1-foundation-collaboration" },
+      { label: "[Log Part 2]", href: "/blog/nexus-part2-workspace-architecture" },
+      { label: "[Log Part 3]", href: "/blog/nexus-part3-ai-native-security" }
     ]
   },
   experience: {
@@ -189,11 +197,11 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "========================================"
     ]
   },
-  timeline: {
-    briefing: "RETRIEVING SIR'S CHRONOLOGICAL TIMELINE...",
+  history: {
+    briefing: "EXTRACTING CHRONOLOGICAL WORKSPACE JOURNEY...",
     lines: [
       "========================================",
-      "SIR'S PROJECT & CAREER TIMELINE",
+      "SIR'S PROJECT & CAREER RECORD",
       "----------------------------------------",
       "  2023 :: CRICKIQ RELEASE (ARCHIVED)",
       "  2024 :: SWECHA AI INTERNSHIP PROGRAM",
@@ -203,11 +211,11 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "========================================"
     ]
   },
-  education: {
-    briefing: "RETRIEVING ACADEMIC RECORDS...",
+  academy: {
+    briefing: "RETRIEVING ACADEMY ARCHIVES...",
     lines: [
       "========================================",
-      "ACADEMIC QUALIFICATIONS",
+      "ACADEMIC TRAINING PROFILE",
       "----------------------------------------",
       "  INSTITUTION :: IARE, Hyderabad",
       "  STREAM      :: B.Tech Information Tech",
@@ -243,7 +251,7 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "========================================"
     ],
     links: [
-      { label: "Open GitHub Profile", href: "https://github.com/Vaibhav-1819" }
+      { label: "[GitHub Profile]", href: "https://github.com/Vaibhav-1819" }
     ]
   },
   linkedin: {
@@ -259,7 +267,7 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
       "========================================"
     ],
     links: [
-      { label: "Connect on LinkedIn", href: "https://linkedin.com/in/vaibhav-bharathula" }
+      { label: "[LinkedIn Connect]", href: "https://linkedin.com/in/vaibhav-bharathula" }
     ]
   },
   status: {
@@ -302,22 +310,21 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
     ]
   },
   hire: {
-    briefing: "RECRUITER ACCESS CONFIRMED. PROTOCOLS UNLOCKED.",
+    briefing: "RECRUITMENT PROTOCOL ACKNOWLEDGED.",
     lines: [
       "══════════════════════════════════════",
-      "RECRUITMENT ON-BOARDING MANIFEST",
-      "══════════════════════════════════════",
-      "Thank you for reviewing Sir's workspace.",
-      "Decrypting credentials and resume links.",
-      "Toggles dynamically in immersive viewer canvas.",
-      "Select a secure manifest action below:",
+      "Preparing candidate dossier...",
+      "Credentials verified.",
+      "Opening recruiter package:",
       "══════════════════════════════════════"
     ],
     links: [
-      { label: "Download Java CV", href: "/docs/Vaibhav_JavaDeveloper.pdf", download: "Vaibhav_JavaDeveloper.pdf" },
-      { label: "Download AI/ML CV", href: "/docs/Vaibhav_MLEngineer.pdf", download: "Vaibhav_MLEngineer.pdf" },
-      { label: "View Resume Canvas", href: "/resume" },
-      { label: "LinkedIn Connect", href: "https://linkedin.com/in/vaibhav-bharathula" }
+      { label: "[CV (Java)]", href: "/docs/Vaibhav_JavaDeveloper.pdf", download: "Vaibhav_JavaDeveloper.pdf" },
+      { label: "[CV (AI/ML)]", href: "/docs/Vaibhav_MLEngineer.pdf", download: "Vaibhav_MLEngineer.pdf" },
+      { label: "[GitHub]", href: "https://github.com/Vaibhav-1819" },
+      { label: "[LinkedIn]", href: "https://linkedin.com/in/vaibhav-bharathula" },
+      { label: "[Email]", href: "mailto:bharathulavaibhav@gmail.com" },
+      { label: "[Viewer Canvas]", href: "/resume" }
     ]
   }
 };
@@ -329,11 +336,11 @@ const SYNONYMS: Record<string, string> = {
   skills: "skills", stack: "skills", tech: "skills", technologies: "skills", java: "skills", python: "skills",
   stats: "stats", metrics: "stats", achievements: "stats", grades: "stats", leetcode: "stats", codechef: "stats",
   projects: "projects", portfolio: "projects", repos: "projects", work: "projects", latest: "projects", builds: "projects",
-  blog: "blog", blogs: "blog", writings: "blog", post: "blog", posts: "blog",
+  logs: "logs", blog: "logs", blogs: "logs", writings: "logs", journal: "logs", archive: "logs", post: "logs", posts: "logs",
   experience: "experience", intern: "experience", internship: "experience", citd: "experience", swecha: "experience",
   diagnostics: "diagnostics", diagnostic: "diagnostics", audit: "diagnostics", test: "diagnostics",
-  timeline: "timeline", journey: "timeline", career: "timeline", path: "timeline",
-  education: "education", college: "education", iare: "education", study: "education",
+  history: "history", timeline: "history", journey: "history", career: "history", records: "history", path: "history",
+  academy: "academy", education: "academy", college: "academy", iare: "academy", study: "academy", training: "academy",
   contact: "contact", email: "contact", phone: "contact", social: "contact", message: "contact",
   github: "github", git: "github",
   linkedin: "linkedin", connect: "linkedin",
