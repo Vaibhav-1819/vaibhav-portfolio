@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Terminal, ShieldAlert, Volume2, VolumeX } from "lucide-react";
+import { X, Terminal, ShieldAlert, Volume2, VolumeX } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { resumes } from "@/content/resume";
 
@@ -1085,13 +1085,6 @@ export function PortfolioAssistant() {
                   spellCheck={false}
                   autoComplete="off"
                 />
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isJarvisThinking}
-                  className="p-1 text-primary hover:text-primary/80 disabled:opacity-20 transition-all flex items-center justify-center cursor-pointer"
-                >
-                  <Send size={11} />
-                </button>
               </form>
             )}
           </motion.div>
