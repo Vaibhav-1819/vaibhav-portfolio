@@ -358,6 +358,8 @@ export function PortfolioAssistant() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [input, setInput] = useState("");
   const [logs, setLogs] = useState<LogLine[]>([]);
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
   
   // HUD Diagnostics & State parameters
   const [sysMetrics, setSysMetrics] = useState({ cpu: 13, mem: 28 });
@@ -690,19 +692,11 @@ export function PortfolioAssistant() {
     }
   };
 
-  // Processes input rules progressively
-  const executeCommand = (e: React.FormEvent) => {
-    e.preventDefault();
-    const query = input.trim();
-    if (!query) return;
-
-    playSound("click");
-    setAlertMode(false);
-
-    // Append user input
+  // Unified parser/executor for input commands
+  const submitQuery = (query: string) => {
+    // Append user input to logs console
     const userLog: LogLine = { type: "user", text: `guest@vaibhav:~$ ${query}` };
     setLogs(prev => [...prev, userLog]);
-    setInput("");
     setIsJarvisThinking(true);
 
     // Resolve synonym mapping
@@ -836,6 +830,74 @@ export function PortfolioAssistant() {
     }, 700);
   };
 
+  // Web Speech recognition toggle control
+  const toggleListening = () => {
+    playSound("click");
+    const SpeechRecognitionClass = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognitionClass) {
+      setLogs(prev => [...prev, {
+        type: "error",
+        text: "SYSTEM ERROR // SPEECH INTERFACE NOT SUPPORTED BY CLIENT WEB AGENT. USE CHROME OR EDGE PROTOCOLS."
+      }]);
+      playSound("beep");
+      return;
+    }
+
+    if (isListening) {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      setIsListening(false);
+    } else {
+      try {
+        const rec = new SpeechRecognitionClass();
+        rec.continuous = false;
+        rec.interimResults = false;
+        rec.lang = "en-US";
+
+        rec.onstart = () => {
+          setIsListening(true);
+          playSound("beep");
+        };
+
+        rec.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          if (transcript) {
+            setInput(transcript);
+            setTimeout(() => {
+              setInput("");
+              submitQuery(transcript);
+            }, 600);
+          }
+        };
+
+        rec.onerror = (err: any) => {
+          setIsListening(false);
+        };
+
+        rec.onend = () => {
+          setIsListening(false);
+        };
+
+        recognitionRef.current = rec;
+        rec.start();
+      } catch (e) {
+        setIsListening(false);
+      }
+    }
+  };
+
+  const executeCommand = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = input.trim();
+    if (!query) return;
+
+    playSound("click");
+    setAlertMode(false);
+    setInput("");
+    submitQuery(query);
+  };
+
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
@@ -890,18 +952,20 @@ export function PortfolioAssistant() {
       </AnimatePresence>
 
       {/* Spinning Holographic Arc Reactor floating bubble button */}
-      <div className="fixed bottom-6 right-4 z-40 group flex flex-col items-center justify-end">
-        {/* Holographic Tooltip */}
-        <div className={`absolute bottom-14 right-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0 font-mono text-[9px] font-bold tracking-widest select-none bg-background/90 px-2 py-1 border backdrop-blur-sm whitespace-nowrap shadow-md rounded-none ${
+      <div 
+        className="fixed bottom-6 right-4 z-40 group flex flex-col items-center justify-end"
+      >
+        {/* Holographic Tooltip beside the button */}
+        <div className={`absolute right-14 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 font-mono text-[9px] font-bold tracking-widest select-none bg-background/95 px-3 py-1.5 border backdrop-blur-sm whitespace-nowrap shadow-md rounded-none ${
           starkMode ? 'border-rose-500/40 text-rose-400' : 'border-primary/40 text-primary'
         }`}>
-          ⌜ J.A.R.V.I.S. ⌝
+          ⌜ J.A.R.V.I.S. // ONLINE ⌝
         </div>
 
         {/* Outer concentric holographic HUD scanner rings */}
         <div className="absolute pointer-events-none w-32 h-32 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-110 transition-all duration-500 ease-out select-none">
-          <div className={`absolute w-16 h-16 border border-dashed rounded-full animate-[spin_8s_linear_infinite] ${starkMode ? 'border-rose-500/25' : 'border-primary/25'}`} />
-          <div className={`absolute w-24 h-24 border border-dotted rounded-full animate-[spin_14s_linear_infinite_reverse] ${starkMode ? 'border-rose-500/15' : 'border-primary/15'}`} />
+          <div className={`absolute w-16 h-16 border border-dashed rounded-full animate-[spin_10s_linear_infinite] group-hover:animate-[spin_2.5s_linear_infinite] transition-all duration-300 ${starkMode ? 'border-rose-500/25' : 'border-primary/25'}`} />
+          <div className={`absolute w-24 h-24 border border-dotted rounded-full animate-[spin_16s_linear_infinite_reverse] group-hover:animate-[spin_4s_linear_infinite_reverse] transition-all duration-300 ${starkMode ? 'border-rose-500/15' : 'border-primary/15'}`} />
           <div className={`absolute w-28 h-28 border-[0.5px] rounded-full opacity-30 ${starkMode ? 'border-rose-500/5' : 'border-primary/5'}`} />
         </div>
 
@@ -910,8 +974,8 @@ export function PortfolioAssistant() {
           onMouseEnter={() => playSound("click")}
           className={`relative h-12 w-12 rounded-full transition-all duration-300 ease-out bg-surface border flex items-center justify-center p-3 cursor-pointer hover:scale-105 ${
             starkMode 
-              ? 'border-rose-500 hover:border-rose-400 text-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.3)]' 
-              : 'border-border/80 hover:border-primary/50 text-primary shadow-xl hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)]'
+              ? 'border-rose-500 hover:border-rose-400 text-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.35)] hover:shadow-[0_0_25px_rgba(244,63,94,0.7)]' 
+              : 'border-border/80 hover:border-primary/50 text-primary shadow-xl hover:shadow-[0_0_25px_rgba(6,182,212,0.5)]'
           }`}
           aria-label="Toggle J.A.R.V.I.S. Console"
         >
@@ -1125,12 +1189,29 @@ export function PortfolioAssistant() {
                   type="text"
                   value={input}
                   onChange={handleInputChange}
-                  placeholder="type help..."
-                  disabled={isJarvisThinking}
+                  placeholder={isListening ? "Listening, Sir..." : "type help..."}
+                  disabled={isJarvisThinking || isListening}
                   className="flex-1 min-w-0 bg-transparent text-secondary text-[11px] font-mono focus:outline-none border-0 caret-primary placeholder:text-muted/30"
                   spellCheck={false}
                   autoComplete="off"
                 />
+                
+                {/* Speech Microphone trigger */}
+                <button
+                  type="button"
+                  onClick={toggleListening}
+                  className={`p-1.5 rounded-lg transition-all cursor-pointer flex items-center justify-center ${
+                    isListening 
+                      ? "text-rose-500 animate-pulse bg-rose-500/10 shadow-[0_0_8px_rgba(244,63,94,0.3)]" 
+                      : "text-muted hover:text-primary hover:bg-background/80"
+                  }`}
+                  title="Toggle J.A.R.V.I.S. Voice listener"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                    <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v3M8 22h8" />
+                  </svg>
+                </button>
               </form>
             )}
           </motion.div>

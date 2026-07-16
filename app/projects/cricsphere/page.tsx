@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Database, GitBranch, Terminal, Zap, LineChart, BrainCircuit } from "lucide-react";
+import { ArrowLeft, Database, GitBranch, Terminal, Zap, LineChart, BrainCircuit, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { projects } from "@/content/projects";
@@ -27,6 +28,32 @@ const cricsphereImages = [
 
 export default function CricSpherePage() {
   const router = useRouter();
+  
+  // CricSphere ML Simulator State parameters
+  const [targetScore, setTargetScore] = useState(165);
+  const [currentScore, setCurrentScore] = useState(115);
+  const [oversCompleted, setOversCompleted] = useState(14);
+  const [wicketsFallen, setWicketsFallen] = useState(4);
+  const [batterMatchup, setBatterMatchup] = useState(3);
+
+  // Compute log-odds match win probability based on live parameters
+  const getWinProbability = () => {
+    const remainingRuns = targetScore - currentScore;
+    const remainingBalls = Math.max(0, (20 - oversCompleted) * 6);
+    
+    if (remainingRuns <= 0) return 100;
+    if (remainingBalls <= 0 || wicketsFallen >= 10) return 0;
+    
+    const requiredRunRate = (remainingRuns / remainingBalls) * 6;
+    const wicketsRemaining = 10 - wicketsFallen;
+    
+    // Stark-tuned outcome formula proxying the LightGBM classifier behavior
+    const logOdds = 1.6 - 0.42 * requiredRunRate + 0.28 * wicketsRemaining + 0.22 * (batterMatchup - 3);
+    const prob = 1 / (1 + Math.exp(-logOdds));
+    return Math.min(Math.max(Math.round(prob * 100), 0), 100);
+  };
+
+  const prob = getWinProbability();
 
   const handleBack = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -166,6 +193,147 @@ export default function CricSpherePage() {
                 <div>
                   <div className="text-3xl font-bold text-accent mb-2">~63.0%</div>
                   <div className="text-sm text-muted">Real outcome prediction accuracy (Elo + venue + H2H), beating 50% baseline.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stark-styled CricSphere ML Live Simulator */}
+          <div className="bg-surface/50 border border-border/60 p-8 rounded-3xl relative overflow-hidden space-y-6">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold text-primary/80 uppercase tracking-widest border-b border-border/40 pb-4 select-none">
+              <Sparkles size={14} className="text-primary" />
+              <span>Target Prediction Simulation Registry</span>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Sliders Side */}
+              <div className="space-y-4 font-mono">
+                {/* Target Score */}
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted">Target Score</span>
+                    <span className="text-primary font-bold">{targetScore} Runs</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="100"
+                    max="240"
+                    value={targetScore}
+                    onChange={(e) => setTargetScore(Number(e.target.value))}
+                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
+                  />
+                </div>
+
+                {/* Current Score */}
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted">Current Score</span>
+                    <span className="text-primary font-bold">{currentScore} Runs</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max={targetScore}
+                    value={currentScore}
+                    onChange={(e) => setCurrentScore(Number(e.target.value))}
+                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
+                  />
+                </div>
+
+                {/* Overs Completed */}
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted">Overs Completed</span>
+                    <span className="text-primary font-bold">{oversCompleted} / 20 Overs</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="19"
+                    step="1"
+                    value={oversCompleted}
+                    onChange={(e) => setOversCompleted(Number(e.target.value))}
+                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
+                  />
+                </div>
+
+                {/* Wickets Fallen */}
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted">Wickets Fallen</span>
+                    <span className="text-primary font-bold">{wicketsFallen} Wickets</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="10"
+                    value={wicketsFallen}
+                    onChange={(e) => setWicketsFallen(Number(e.target.value))}
+                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
+                  />
+                </div>
+
+                {/* Batter Matchup Dominance */}
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted">Batter Matchup Index</span>
+                    <span className="text-primary font-bold">
+                      {batterMatchup === 1 && "Extreme Bowler Dominant"}
+                      {batterMatchup === 2 && "Slight Bowler Dominant"}
+                      {batterMatchup === 3 && "Neutral Matchup"}
+                      {batterMatchup === 4 && "Slight Batter Dominant"}
+                      {batterMatchup === 5 && "Extreme Batter Dominant"}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    value={batterMatchup}
+                    onChange={(e) => setBatterMatchup(Number(e.target.value))}
+                    className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
+                  />
+                </div>
+              </div>
+
+              {/* Gauge Dial Side */}
+              <div className="flex flex-col items-center justify-center p-4 border border-border/40 rounded-2xl bg-surface/40 select-none">
+                <div className="relative w-36 h-36 flex items-center justify-center">
+                  <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                    {/* Background Circle */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      fill="transparent"
+                      stroke="rgba(255, 255, 255, 0.05)"
+                      strokeWidth="6"
+                    />
+                    {/* Active Probability Arc */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      fill="transparent"
+                      stroke={prob < 30 ? "#f43f5e" : prob < 70 ? "#eab308" : "#06b6d4"}
+                      strokeWidth="6"
+                      strokeDasharray="251.3"
+                      strokeDashoffset={251.3 - (251.3 * prob) / 100}
+                      className="transition-all duration-500 ease-out"
+                    />
+                  </svg>
+                  
+                  {/* Central Text Value */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center font-mono">
+                    <span className="text-3xl font-bold tracking-tighter" style={{ color: prob < 30 ? "#f43f5e" : prob < 70 ? "#eab308" : "#06b6d4" }}>
+                      {prob}%
+                    </span>
+                    <span className="text-[7px] text-muted uppercase tracking-widest font-bold">WIN PROB</span>
+                  </div>
+                </div>
+                
+                <div className="mt-4 font-mono text-[9px] text-muted text-center max-w-[200px] leading-relaxed">
+                  Real-time regression predicting outcome likelihood from rolling wickets & required run rate coordinates.
                 </div>
               </div>
             </div>
