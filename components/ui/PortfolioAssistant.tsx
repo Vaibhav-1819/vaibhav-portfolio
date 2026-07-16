@@ -645,15 +645,19 @@ export function PortfolioAssistant() {
       setTimeout(() => {
         playSound("typing");
         setLogs(prev => {
-          const newLogs = [...prev];
-          const lastLog = newLogs[newLogs.length - 1];
+          const lastLog = prev[prev.length - 1];
           if (lastLog && lastLog.type === "jarvis" && !lastLog.links) {
-            // Append line to the last log
-            lastLog.text = lastLog.text + "\n" + line;
+            // Append line to the last log non-mutating
+            return [
+              ...prev.slice(0, -1),
+              {
+                ...lastLog,
+                text: lastLog.text + "\n" + line
+              }
+            ];
           } else {
-            newLogs.push({ type: "jarvis", text: line });
+            return [...prev, { type: "jarvis", text: line }];
           }
-          return newLogs;
         });
       }, (index + 1) * 80);
     });
@@ -662,14 +666,18 @@ export function PortfolioAssistant() {
       setTimeout(() => {
         playSound("startup");
         setLogs(prev => {
-          const newLogs = [...prev];
-          const lastLog = newLogs[newLogs.length - 1];
+          const lastLog = prev[prev.length - 1];
           if (lastLog && lastLog.type === "jarvis") {
-            lastLog.links = links;
+            return [
+              ...prev.slice(0, -1),
+              {
+                ...lastLog,
+                links: links
+              }
+            ];
           } else {
-            newLogs.push({ type: "jarvis", text: "", links });
+            return [...prev, { type: "jarvis", text: "", links }];
           }
-          return newLogs;
         });
       }, (lines.length + 1) * 80);
     }
