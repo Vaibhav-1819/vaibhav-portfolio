@@ -18,10 +18,12 @@ export function Navbar() {
     });
   }, [scrollY]);
 
-  // Close mobile menu on route change
-  useEffect(() => {
+  // Close mobile menu on route change by adjusting state during rendering
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setIsMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   const navLinks = [
     { name: "Projects", href: "/#projects" },
@@ -48,8 +50,45 @@ export function Navbar() {
         >
           <div className="flex items-center justify-between px-6 py-3">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-              <span className="font-heading font-bold tracking-[-0.02em] text-secondary text-sm md:text-base hover:text-primary transition-colors">
+            <Link href="/" className="flex items-center gap-2.5 group" onClick={() => setIsMobileMenuOpen(false)}>
+              <svg
+                width="26" height="26" viewBox="0 0 32 32" fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="transition-all duration-500 group-hover:scale-110"
+              >
+                <defs>
+                  <linearGradient id="bv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="var(--primary)" />
+                    <stop offset="100%" stopColor="var(--accent)" />
+                  </linearGradient>
+                  <filter id="bv-glow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="2.5" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                {/* Diamond frame — rotated square */}
+                <rect
+                  x="3" y="3" width="18.5" height="18.5"
+                  rx="2"
+                  transform="rotate(45 16 16)"
+                  stroke="url(#bv-grad)"
+                  strokeWidth="1.4"
+                  fill="none"
+                  className="opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                />
+
+                {/* Bold B slash — thick diagonal */}
+                <line x1="11" y1="21" x2="17" y2="11" stroke="url(#bv-grad)" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Thin V slash — lighter accent */}
+                <line x1="16" y1="21" x2="22" y2="11" stroke="url(#bv-grad)" strokeWidth="1.6" strokeLinecap="round" strokeOpacity="0.75" />
+
+                {/* Glow dot at intersection */}
+                <circle cx="16" cy="16" r="1.8" fill="url(#bv-grad)" filter="url(#bv-glow)" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </svg>
+
+              <span className="font-heading font-bold tracking-[-0.02em] text-secondary text-sm md:text-base group-hover:text-primary transition-colors duration-300">
                 BV Workspace
               </span>
             </Link>
