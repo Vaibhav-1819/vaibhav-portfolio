@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 const apiKey = process.env.GEMINI_API_KEY || "";
 const genAI = new GoogleGenerativeAI(apiKey);
 
+// Stream endpoint
 export async function POST(req: Request) {
   try {
     const { query } = await req.json();
@@ -32,17 +33,33 @@ Here is the data in your mainframe regarding Vaibhav:
 
 Answer the user's query concisely and accurately in a manner fitting your J.A.R.V.I.S. persona. Keep responses brief and straight to the point, as if delivering a status report to Tony Stark. Speak on behalf of Vaibhav, referring to him as "Sir". Use markdown for code or lists if necessary, but keep plain text stylish. End your response cleanly.`;
 
-    // Using system instruction if supported, or prepending to prompt.
-    // To be safe with older/different SDK versions, we prepend it to the prompt.
     const fullPrompt = `${systemInstruction}\n\nUSER QUERY: ${query}\n\nJ.A.R.V.I.S. RESPONSE:`;
 
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    const result = await model.generateContent(fullPrompt);
-    const response = await result.response;
-    const text = response.text();
+    // Stream the response
+    const result = await model.generateContentStream(fullPrompt);
 
-    return NextResponse.json({ reply: text });
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            controller.enqueue(new TextEncoder().encode(chunkText));
+          }
+          controller.close();
+        } catch (e) {
+          controller.error(e);
+        }
+      }
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+      },
+    });
   } catch (error: any) {
     console.error("Jarvis API Error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
