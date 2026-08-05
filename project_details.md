@@ -1,16 +1,16 @@
 # 1. Nexus – Real-Time Collaboration Platform
 
 - **Status:** Currently Working
-- **Tech Stack:** Next.js 14, Stream, Clerk, Firebase, OpenAI, Pinecone, Liveblocks (Yjs)
+- **Tech Stack:** Next.js 14, Stream, Clerk, Firebase, Google Gemini, Pinecone, Liveblocks (Yjs)
 
 ## Problem Statement
 Traditional communication suites are fragmented (Slack vs. Notion vs. Miro vs. Zoom). I wanted to build an AI-native workspace where huddles, chat, docs, and whiteboards are a single unified context.
 
 ## Approach
-I architected the application using Next.js 14 App Router and composable edge APIs. Offloaded audio/video media routing to Stream's global edge network. Implemented real multiplayer document and whiteboard editors using Liveblocks and Yjs CRDTs. Hardened Firebase Storage through server-brokered signed upload/download URLs to enforce workspace isolation, and integrated Pinecone and OpenAI to enable universal semantic search across all team files.
+I architected the application using Next.js 14 App Router and composable edge APIs. Offloaded audio/video media routing to Stream's global edge network (delivering <50ms media latency). Implemented multiplayer document and whiteboard editors using Liveblocks and Yjs CRDTs. Hardened Firebase Storage with short-TTL (5m) signed URLs to enforce zero-trust workspace boundaries (revocation propagation delay of ~1.1s). Integrated Pinecone, Google Gemini API (`gemini-embedding-001`), and `gemini-2.5-flash` to establish multi-tenant semantic search, including a sub-millisecond (0.36 ms mean) in-memory cosine similarity fallback. Added automatic admin auditing and a server-only notification system.
 
 ## Challenges & Learnings
-Confronted challenges around secure data isolation, React hydration anomalies, and synchronizing offline edits. I mastered server-brokered security architectures, LLM response caching, and embedding generation via document updates.
+Confronted challenges around secure data isolation, React hydration anomalies, and synchronizing offline edits. I mastered server-brokered security architectures, role-based access control checking with telemetry logs, in-memory vector algorithms, LLM response caching, and embedding generation via document updates. Built automated stress-testing suites to verify security cutoff delays and database read metrics.
 
 ---
 

@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function ProjectsGrid() {
-  const mainProjects = projects.filter(p => p.slug === 'nexus' || p.slug === 'aetherai');
+  const mainProjects = projects.filter(p => p.slug === 'cricsphere' || p.slug === 'aetherai');
 
   return (
     <section id="projects" className="py-32 border-t border-border/50">
@@ -27,46 +27,50 @@ export function ProjectsGrid() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="relative h-[400px] bg-surface/30 border border-border/50 rounded-3xl overflow-hidden active:scale-[0.98] transition-transform"
+                className="relative flex flex-col h-[460px] bg-surface/30 border border-border/50 rounded-3xl overflow-hidden active:scale-[0.98] transition-all hover:border-primary/40"
               >
-                {/* Image Background */}
+                {/* Image Frame */}
                 {project.image ? (
-                  <div className="absolute inset-0 z-0">
-                    <Image src={project.image} alt={project.title} fill className="object-cover opacity-60 group-hover:opacity-30 transition-all duration-700 scale-100 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+                  <div className="relative h-[220px] w-full bg-background/40 overflow-hidden border-b border-border/30">
+                    <Image 
+                      src={project.image} 
+                      alt={project.title} 
+                      fill 
+                      className="object-cover group-hover:scale-102 transition-transform duration-500" 
+                      sizes="(max-width: 768px) 100vw, 50vw" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface/10 to-transparent" />
                   </div>
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0" />
+                  <div className="relative h-[220px] w-full bg-gradient-to-br from-primary/5 to-accent/5 border-b border-border/30" />
                 )}
 
-                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-10 pointer-events-none">
-                  <div className="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-2xl md:text-3xl font-heading font-bold text-secondary">
+                {/* Content Panel */}
+                <div className="p-6 flex flex-col justify-between flex-grow">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl md:text-2xl font-heading font-bold text-secondary group-hover:text-primary transition-colors">
                         {project.title}
                       </h3>
-                      <div className="flex gap-3 opacity-100 md:opacity-0 group-hover:opacity-100 translate-x-0 md:translate-x-4 group-hover:translate-x-0 transition-all duration-500 delay-100">
-                        <div className="p-2 md:p-3 bg-background/80 backdrop-blur-md rounded-full border border-border/50 text-secondary transition-colors">
-                          <ArrowRight size={20} />
-                        </div>
+                      <div className="p-2 bg-background/80 backdrop-blur-md rounded-full border border-border/50 text-secondary group-hover:text-primary group-hover:border-primary/40 transition-colors">
+                        <ArrowRight size={16} />
                       </div>
                     </div>
 
-                    <p className="text-sm md:text-base text-muted line-clamp-2 mb-6 pr-4">
+                    <p className="text-xs md:text-sm text-muted font-mono leading-relaxed line-clamp-3">
                       {project.description}
                     </p>
+                  </div>
 
-                    <div className="flex flex-wrap gap-2 opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-                      {project.technologies.map((tech, j) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-background/50 border border-border/50 text-[10px] md:text-xs font-mono text-muted rounded-md transform translate-y-0 md:translate-y-2 group-hover:translate-y-0 transition-transform duration-500"
-                          style={{ transitionDelay: `${j * 50}ms` }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-1.5 pt-4">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 bg-background/50 border border-border/50 text-[10px] font-mono text-muted rounded-md"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </motion.div>

@@ -47,11 +47,11 @@ Through academic projects, internships, and self-learning, I continue to strengt
 # Projects
 **1. Nexus – AI-Native Collaboration Operating System**
 - **Status:** Currently Working
-- **Tech Stack:** Next.js 14, Stream, Clerk, Firebase, OpenAI, Pinecone, Liveblocks (Yjs)
+- **Tech Stack:** Next.js 14, Stream, Clerk, Firebase, Google Gemini, Pinecone, Liveblocks (Yjs)
 - **Description:** Built a unified workspace platform combining chat, documents, whiteboards, and video calls into a single application context.
 - **Problem Statement:** Traditional communication tools are highly fragmented (e.g. Slack vs. Notion vs. Zoom). I set out to build an enterprise-ready workspace where all communication and shared assets live under the same organizational context.
-- **Approach:** Offloaded real-time media to Stream's global edge network. Implemented real multiplayer document and whiteboard editors with Liveblocks and Yjs CRDTs. Brokered storage transactions through serverless Next.js edge functions (using Firebase Admin SDK) to enforce zero-trust access control, and built a universal vector index (Pinecone & OpenAI embeddings) to perform secure semantic search on workspace documents.
-- **Learnings/Challenges:** Addressed multi-tenant data leak vectors, hydration conflicts in Clerk providers, and LLM query latency. Strengthened skills in server-brokered security patterns, vector data pipelines, and conflict-free client synchronization.
+- **Approach:** Offloaded real-time media to Stream's global edge network (sub-50ms latency). Implemented multiplayer document and whiteboard editors with Liveblocks and Yjs CRDTs. Brokered storage transactions through serverless Next.js edge functions (using Firebase Admin SDK) to enforce zero-trust access control with short-TTL URLs (revocation delay ~1.1s), and built a dual-engine vector index (Google Gemini embeddings and Pinecone/Firestore in-memory similarity fallback) to perform secure semantic search on workspace documents.
+- **Learnings/Challenges:** Addressed multi-tenant data leak vectors, hydration conflicts in Clerk providers, and LLM query latency. Strengthened skills in server-brokered security patterns, in-memory vector algorithms, latency telemetry analysis, and conflict-free client synchronization.
 
 **2. AetherAI – Environmental Intelligence Platform**
 - **Tech Stack:** React, FastAPI, XGBoost, Gemini, SQLite
@@ -82,7 +82,7 @@ Through academic projects, internships, and self-learning, I continue to strengt
 
 # Accomplishments
 ## Coding Profiles
-- **CodeChef:** 716 Rating (Max: 834), 153 Problems
+- **CodeChef:** 716 Rating (Max: 834), 253 Problems
 - **LeetCode:** 113+ Solved Problems
 - **HackerRank:** Badges in SQL, Java, Python
 - **GeeksforGeeks:** 69+ Solved Problems

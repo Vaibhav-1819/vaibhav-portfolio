@@ -60,7 +60,7 @@ export default function CricSpherePage() {
     if (window.history.length > 1 && document.referrer.includes(window.location.host)) {
       router.back();
     } else {
-      router.push('/#featured-build');
+      router.push('/#projects');
     }
   };
 

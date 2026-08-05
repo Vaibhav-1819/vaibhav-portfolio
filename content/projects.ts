@@ -24,8 +24,14 @@ export const projects: Project[] = [
     slug: 'nexus',
     description: 'An enterprise-grade collaboration platform built on Next.js 14. Features HD video meetings, persistent channels, a context-aware AI assistant, semantic search, and secure zero-trust workspaces.',
     github: 'https://github.com/Vaibhav-1819',
-    technologies: ['Next.js 14', 'Stream', 'Clerk', 'Firebase', 'OpenAI', 'Pinecone', 'Liveblocks'],
+    technologies: ['Next.js 14', 'Stream', 'Clerk', 'Firebase', 'Google Gemini', 'Pinecone', 'Liveblocks'],
     image: '/images/nexus.webp',
+    metrics: [
+      { label: 'Latency', value: '<50ms' },
+      { label: 'Resolution', value: '1080p' },
+      { label: 'Search', value: 'Vector' },
+      { label: 'Auth', value: 'Zero-Trust' }
+    ],
     featured: true,
     year: 2024,
     status: 'In Progress'

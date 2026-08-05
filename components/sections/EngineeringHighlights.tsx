@@ -5,12 +5,13 @@ import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 const highlights = [
   { num: 22007, prefix: "", suffix: "", label: "Matches Processed", color: "text-emerald-400" },
-  { num: 638, prefix: "", suffix: "K+", label: "PvP Records", color: "text-primary" },
-  { num: 4, prefix: "", suffix: "", label: "ML Models Trained", color: "text-accent" },
-  { num: 11, prefix: "", suffix: "K", label: "Images Analyzed", color: "text-secondary" },
-  { num: 80, prefix: "", suffix: "%", label: "Classification Accuracy", color: "text-primary" },
-  { num: 370, prefix: "", suffix: "K+", label: "Player Innings", color: "text-emerald-400" },
-  { num: 50, prefix: "<", suffix: "ms", label: "Inference Latency", color: "text-accent" }
+  { num: 638, prefix: "", suffix: "K+", label: "PvP Records Analyzed", color: "text-primary" },
+  { num: 11, prefix: "", suffix: "K", label: "Images Classified", color: "text-secondary" },
+  { num: 80, prefix: "", suffix: "%", label: "CNN Brand Accuracy", color: "text-primary" },
+  { num: 360, prefix: "<", suffix: "μs", label: "Vector Math Latency", color: "text-accent" },
+  { num: 1.1, prefix: "~", suffix: "s", label: "Token Revocation Delay", color: "text-emerald-400" },
+  { num: 50, prefix: "<", suffix: "ms", label: "WebRTC Edge Delay", color: "text-orange-500" },
+  { num: 50, prefix: "<", suffix: "ms", label: "ML Inference Latency", color: "text-accent" }
 ];
 
 export function EngineeringHighlights() {

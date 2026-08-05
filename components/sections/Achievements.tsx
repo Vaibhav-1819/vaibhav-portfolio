@@ -9,7 +9,7 @@ export function AchievementsSection() {
 
   const stats = [
     { label: "Young Turks Percentile", value: 97, suffix: "", subtitle: "Top 3% Nationwide" },
-    { label: "CodeChef Max Rating", value: 834, suffix: "", subtitle: "Division 4" },
+    { label: "CodeChef Max Rating", value: 834, suffix: "", subtitle: "253 Problems Solved" },
     { label: "LeetCode Solved", value: 113, suffix: "+", subtitle: "Data Structures & Algorithms" },
     { label: "GeeksforGeeks", value: 69, suffix: "+", subtitle: "Problem Solving" }
   ];
