@@ -157,26 +157,41 @@ export function FeaturedBuild() {
           </ScrollReveal>
         </div>
 
-        {/* Massive Hero Image */}
+        {/* Massive Hero Image & Details Card */}
         <ScrollReveal
           y={40}
-          className="relative rounded-3xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5 w-full min-h-[400px] sm:min-h-[500px] md:aspect-[16/9] md:min-h-0"
+          className="flex flex-col rounded-3xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5 w-full bg-surface/30"
         >
-          <Image src="/images/nexus.webp" alt="Nexus Collaboration Dashboard" fill className="object-cover" priority sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+          {/* Image Section */}
+          <div className="relative w-full aspect-video min-h-[300px] md:min-h-[450px]">
+            <Image 
+              src="/images/nexus.webp" 
+              alt="Nexus Collaboration Dashboard" 
+              fill 
+              className="object-cover" 
+              priority 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" 
+            />
+            {/* Subtle bottom shadow gradient for smooth transition */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
+          </div>
           
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 z-10 w-full">
-            <div className="flex flex-wrap gap-3">
+          {/* Content Section (Moved out of the absolute overlay to prevent overlapping) */}
+          <div className="p-6 md:p-10 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8 bg-surface/50 backdrop-blur-sm border-t border-border/50">
+            {/* Technologies */}
+            <div className="flex flex-wrap gap-2 md:gap-3 flex-1">
               {nexus.technologies.map(tech => (
-                <span key={tech} className="px-4 py-2 bg-background/80 backdrop-blur-md border border-border/50 rounded-lg text-sm font-mono text-secondary">
+                <span key={tech} className="px-3 py-1.5 md:px-4 md:py-2 bg-background border border-border/60 shadow-sm rounded-lg text-[11px] md:text-sm font-mono text-secondary hover:border-primary/40 transition-colors">
                   {tech}
                 </span>
               ))}
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 items-center w-full sm:w-auto">
+            
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center w-full xl:w-auto">
               <Link 
                 href="/projects/nexus"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-surface/90 backdrop-blur-md text-secondary border border-border/50 text-sm font-semibold hover:bg-surface hover:border-primary/50 transition-all shrink-0 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-background text-secondary border border-border/60 text-sm font-semibold hover:border-primary/50 transition-all shrink-0 w-full sm:w-auto shadow-sm"
               >
                 View Case Study & Gallery
               </Link>
@@ -185,9 +200,9 @@ export function FeaturedBuild() {
                   href={nexus.github} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity shrink-0 w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity shrink-0 w-full sm:w-auto shadow-md"
                 >
-                  GitHub Repository <ArrowRight size={15} />
+                  GitHub Repository <ArrowRight size={16} />
                 </a>
               )}
             </div>
