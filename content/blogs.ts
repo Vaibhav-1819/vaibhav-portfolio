@@ -11,6 +11,16 @@ export type BlogPost = {
 
 export const blogs: BlogPost[] = [
   {
+    id: "jarvis-n8n-automation",
+    slug: "jarvis-n8n-automation",
+    title: "Automating My Morning Routine with n8n, Gemini, and JARVIS",
+    description: "How I used n8n to build an automated, AI-powered JARVIS morning briefing that emails me the weather, a programming joke, and a daily coding challenge.",
+    date: "July 17, 2026",
+    readTime: "6 min read",
+    tags: ["n8n", "Google Gemini", "Automation", "Workflow"],
+    category: "Real-Time Systems"
+  },
+  {
     id: "nexus-part4-telemetry-rbac-ai",
     slug: "nexus-part4-telemetry-rbac-ai",
     title: "Building Nexus (Part 4): Production-Grade Telemetry, RBAC, and Gemini Semantic Search",

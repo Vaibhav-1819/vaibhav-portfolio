@@ -1,0 +1,298 @@
+{
+  "name": "Jarvis 1.1",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "418d4ea3-7865-43ec-9c52-04270e39fb1e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://wttr.in/?format=j1",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "2cdfe854-4a2d-4a74-8d3c-28c640b56ad7",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=# ROLE & TONE\nYou are JARVIS, the sophisticated AI assistant created by Tony Stark.\nPersonality: Calm, highly intelligent, confident, and premium. Speak naturally like JARVIS from the Iron Man films. \nRule: Never break character. Never mention being an AI or a language model. \n\n# TASK\nDeliver an elegant, cinematic, and engaging daily briefing to a software engineering student named Ram. \n\n# INPUT DATA\n[Weather Context]\nTemperature: {{ $json.temperature }}°C\nCondition: {{ $json.condition }}\nHumidity: {{ $json.humidity }}%\nWind Speed: {{ $json.wind }} km/h\n\n[Daily Joke]\nSetup: {{ $json.setup }}\nPunchline: {{ $json.punchline }}\n\n# CONSTRAINTS\n1. Length: Keep the total response strictly between 180 and 220 words.\n2. Accuracy: Never invent, alter, or hallucinate weather values or the programming joke. Use only the provided data.\n3. Output: Output ONLY the requested template below. Do not wrap the response in markdown code blocks. \n\n# OUTPUT TEMPLATE\nReplicate the exact structure, spacing, and separator lines (━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━) below. Replace bracketed placeholders like [Greeting] with your generated text.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🤖 J A R V I S\n\n[Insert Dynamic Greeting based on current time of day], Ram.\n\n\"Your personalized developer briefing is ready.\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🌤 WEATHER REPORT\n\nTemperature : {{ $json.temperature }}°C\nCondition   : {{ $json.condition }}\nHumidity    : {{ $json.humidity }}%\nWind Speed  : {{ $json.wind }} km/h\n\n[Write a one-sentence elegant weather summary using ONLY the weather context provided above.]\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n😂 PROGRAMMING JOKE\n\n{{ $json.setup }}\n\n{{ $json.punchline }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n💡 TODAY'S INSPIRATION\n\n[Provide one powerful motivational quote followed by the author's name.]\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🎯 TODAY'S CODING MISSION\n\n[Design ONE practical coding challenge suitable for a software engineering student.]\n\n• Goal: [Brief description of the challenge]\n• Difficulty: [Easy / Medium / Hard]\n• Estimated Time: [e.g., 30 minutes]\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n⚡ FINAL MESSAGE\n\n[Write one short, highly encouraging sentence to start the day.]\n\n— JARVIS"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1456,
+        -16
+      ],
+      "id": "79b75035-2df7-474c-b77e-242306ce4be0",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "REDACTED",
+          "name": "Google Gemini Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "includeInputFields": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1528b5cb-9ad3-4a89-adc9-2ad08e141818",
+      "name": "Date & Time1"
+    },
+    {
+      "parameters": {
+        "url": "https://official-joke-api.appspot.com/jokes/programming/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        656,
+        16
+      ],
+      "id": "fcc60afc-f0e8-45d7-ba60-0127d6e8fd03",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d8bdd073-f2d9-441f-8620-ba806d50abac",
+              "name": "setup",
+              "value": "={{$json.setup}}",
+              "type": "string"
+            },
+            {
+              "id": "d3ab0bf3-f05e-4926-afd8-6cd30c69d97a",
+              "name": "punchline",
+              "value": "={{ $json.punchline }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        32
+      ],
+      "id": "17b0aa59-6eb1-4e9a-a292-ec5ecfb2f426",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  \"temperature\": $json.current_condition[0].temp_C,\n  \"condition\": $json.current_condition[0].weatherDesc[0].value,\n  \"humidity\": $json.current_condition[0].humidity,\n  \"wind\": $json.current_condition[0].windspeedKmph\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        -128
+      ],
+      "id": "7cee6171-55d1-4d70-acd7-643935a881fa",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "sendTo": "REDACTED@gmail.com",
+        "subject": "Jarvis Morning Brief",
+        "emailType": "text",
+        "message": "={{$json.content.parts[0].text}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1776,
+        -16
+      ],
+      "id": "4f940ef9-162c-48b2-be4a-c460ec323edf",
+      "name": "Send a message",
+      "webhookId": "1c171c98-d242-48e3-98c0-90fe075db558",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REDACTED",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1104,
+        32
+      ],
+      "id": "f83a6b9c-fb24-497a-98a0-2ff228062fb7",
+      "name": "Merge"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0e345c99-8646-47d8-b68f-ec107432acf6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c8d54c9f51052ade1be3211c00aa666aa294eed70159d1905dee2ddeba562a78"
+  },
+  "nodeGroups": [],
+  "id": "tLwGvCJqFpsdnP7f",
+  "tags": []
+}

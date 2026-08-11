@@ -1,0 +1,263 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "418d4ea3-7865-43ec-9c52-04270e39fb1e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://wttr.in/?format=j1",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "2cdfe854-4a2d-4a74-8d3c-28c640b56ad7",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=={{\n`You are JARVIS, Tony Stark's AI assistant.\n\nAddress the user as \"Ram\".\n\nToday's weather:\n🌡 Temperature: ${$json.temperature}°C\n🌤 Condition: ${$json.condition}\n💧 Humidity: ${$json.humidity}%\n💨 Wind Speed: ${$json.wind} km/h\n\nProgramming Joke:\n${$json.setup}\n\n${$json.punchline}\n\nCreate a beautiful morning briefing.\n\nRules:\n- Start with \"Good Morning, Ram.\" (or choose the appropriate greeting based on the time of day.)\n- Summarize the weather.\n- Include the programming joke exactly as provided.\n- Add one motivational quote.\n- Give one coding challenge for today.\n- End with \"Have a productive day.\"\n- Keep the response under 150 words.\n`\n}}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1552,
+        -16
+      ],
+      "id": "79b75035-2df7-474c-b77e-242306ce4be0",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "REDACTED",
+          "name": "Google Gemini Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "includeInputFields": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1528b5cb-9ad3-4a89-adc9-2ad08e141818",
+      "name": "Date & Time1"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1248,
+        16
+      ],
+      "id": "f83a6b9c-fb24-497a-98a0-2ff228062fb7",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "https://official-joke-api.appspot.com/jokes/programming/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        656,
+        16
+      ],
+      "id": "fcc60afc-f0e8-45d7-ba60-0127d6e8fd03",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d8bdd073-f2d9-441f-8620-ba806d50abac",
+              "name": "setup",
+              "value": "={{$json.setup}}",
+              "type": "string"
+            },
+            {
+              "id": "d3ab0bf3-f05e-4926-afd8-6cd30c69d97a",
+              "name": "punchline",
+              "value": "={{ $json.punchline }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        32
+      ],
+      "id": "17b0aa59-6eb1-4e9a-a292-ec5ecfb2f426",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n  \"temperature\": $json.current_condition[0].temp_C,\n  \"condition\": $json.current_condition[0].weatherDesc[0].value,\n  \"humidity\": $json.current_condition[0].humidity,\n  \"wind\": $json.current_condition[0].windspeedKmph\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        -128
+      ],
+      "id": "7cee6171-55d1-4d70-acd7-643935a881fa",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f0e7fe84-4219-41f9-abdf-f9482e2c3320",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c8d54c9f51052ade1be3211c00aa666aa294eed70159d1905dee2ddeba562a78"
+  },
+  "nodeGroups": [],
+  "id": "tLwGvCJqFpsdnP7f",
+  "tags": []
+}
