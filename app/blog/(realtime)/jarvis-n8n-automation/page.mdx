@@ -1,7 +1,6 @@
-export const metadata = {
-  title: 'Automating My Morning Routine with n8n, Gemini, and JARVIS',
-  description: 'How I used n8n to build an automated, AI-powered JARVIS morning briefing that emails me the weather, a programming joke, and a daily coding challenge.',
-}
+import { getBlogMetadata } from '@/utils/seo';
+export const metadata = getBlogMetadata('jarvis-n8n-automation');
+
 
 # Automating My Morning Routine with n8n, Gemini, and JARVIS
 
@@ -13,13 +12,12 @@ export const metadata = {
 
 In this post, I'll walk you through how I built my own personal JARVIS morning briefing system using **n8n**, **Google Gemini 2.5 Flash**, and a couple of free APIs. 
 
-> [!NOTE]
-> **The Tech Stack**
-> - **n8n**: The core automation workflow engine (running locally or cloud).
-> - **wttr.in API**: For lightning-fast, zero-auth JSON weather data.
-> - **Official Joke API**: For daily programming humor.
-> - **Google Gemini 2.5 Flash**: The LLM engine acting as JARVIS.
-> - **Gmail API**: For automated email delivery via OAuth2.
+### The Tech Stack
+- **n8n**: The core automation workflow engine (running locally or cloud).
+- **wttr.in API**: For lightning-fast, zero-auth JSON weather data.
+- **Official Joke API**: For daily programming humor.
+- **Google Gemini 2.5 Flash**: The LLM engine acting as JARVIS.
+- **Gmail API**: For automated email delivery via OAuth2.
 
 ---
 
@@ -36,7 +34,7 @@ To achieve this without writing a monolithic backend service, I turned to **n8n*
 
 ---
 
-## 2. Iteration 1: The Initial Draft (`My workflow.json`)
+## 2. Iteration 1: The Initial Draft (My workflow.json)
 
 The first version of the workflow was all about proving the concept. The pipeline looked like this:
 
@@ -53,11 +51,11 @@ It worked beautifully! Gemini took the raw JSON and generated a highly conversat
 
 ---
 
-## 3. Iteration 2: The Production Pipeline (`Jarvis 1.1.json`)
+## 3. Iteration 2: The Production Pipeline (Jarvis 1.1.json)
 
 To make this a true daily assistant, I needed a delivery mechanism and strict formatting. I upgraded the pipeline to its final form: **Jarvis 1.1**.
 
-### Strict Prompting & Formatting
+## 4. Strict Prompting & Formatting
 LLMs can be unpredictable with formatting. I updated the Gemini prompt with a strict **Output Template**. I instructed JARVIS to never break character, to keep the response strictly between 180 and 220 words, and to output the text exactly matching a visual structure bordered by cinematic lines. 
 
 Here is the exact System Prompt I engineered for the Gemini Node:
@@ -82,7 +80,7 @@ Condition: {{ $json.condition }}
 2. Output: Output ONLY the requested template below. Do not wrap the response in markdown code blocks. 
 ```
 
-### The Gmail Node (Delivery)
+## 5. The Gmail Node (Delivery)
 Once Gemini generates the perfect Markdown string, the output is passed directly into an **n8n Gmail Node**. Using OAuth2, the node automatically constructs an email with the subject *"Jarvis Morning Brief"* and sends the raw text directly to my inbox.
 
 ```mermaid
@@ -94,7 +92,7 @@ graph TD
     Gemini --> Email["Gmail Node (Send Email)"]
 ```
 
-## The Final Result
+## 6. The Final Result
 
 Now, at 7:00 AM sharp, my phone buzzes with an email looking exactly like this:
 
