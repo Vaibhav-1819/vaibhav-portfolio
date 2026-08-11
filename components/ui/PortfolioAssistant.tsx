@@ -458,6 +458,22 @@ export function PortfolioAssistant() {
         return;
       }
 
+      // Dynamic API fetch for Stats
+      if (matchedCommand === "stats") {
+        setLogs(prev => [...prev, { type: "system", text: "INITIATING LIVE API FETCH // CONTACTING CODING MAINFRAMES..." }]);
+        fetch('/api/stats')
+          .then(res => res.json())
+          .then(data => {
+            const markdown = `**VAIBHAV'S PLATFORM METRICS**\n\n- **LeetCode**: ${data.leetcode}+ Solved\n- **CodeChef**: ${data.codechef} Rating\n- **GeeksForGeeks**: ${data.gfg}+ Solved\n\n*All databases synchronized.*`;
+            printMarkdown("LIVE MATRIX METRICS LOADED.", markdown);
+          })
+          .catch(err => {
+            console.error(err);
+            printMarkdown("API FETCH FAILED.", `**ERROR**\n\nFailed to sync live databases.`);
+          });
+        return;
+      }
+
       // Standard command responses
       if (COMMAND_DATABASE[matchedCommand]) {
         const data = COMMAND_DATABASE[matchedCommand];

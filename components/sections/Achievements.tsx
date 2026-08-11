@@ -4,14 +4,32 @@ import { motion } from "framer-motion";
 import { Trophy, Code2, Award } from "lucide-react";
 
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
+import { useState, useEffect } from "react";
 
 export function AchievementsSection() {
+  const [liveStats, setLiveStats] = useState({
+    leetcode: 113,
+    codechef: 894,
+    gfg: 69,
+    youngTurks: 97
+  });
+
+  useEffect(() => {
+    fetch('/api/stats')
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.leetcode === 'number') {
+          setLiveStats(data);
+        }
+      })
+      .catch(err => console.error("Failed to fetch live stats", err));
+  }, []);
 
   const stats = [
-    { label: "Young Turks Percentile", value: 97, suffix: "", subtitle: "Top 3% Nationwide" },
-    { label: "CodeChef Max Rating", value: 894, suffix: "", subtitle: "279 Problems Solved" },
-    { label: "LeetCode Solved", value: 113, suffix: "+", subtitle: "Data Structures & Algorithms" },
-    { label: "GeeksforGeeks", value: 69, suffix: "+", subtitle: "Problem Solving" }
+    { label: "Young Turks Percentile", value: liveStats.youngTurks, suffix: "", subtitle: "Top 3% Nationwide" },
+    { label: "CodeChef Max Rating", value: liveStats.codechef, suffix: "", subtitle: "Live Rating" },
+    { label: "LeetCode Solved", value: liveStats.leetcode, suffix: "+", subtitle: "Data Structures & Algorithms" },
+    { label: "GeeksforGeeks", value: liveStats.gfg, suffix: "+", subtitle: "Problem Solving" }
   ];
 
   const coreCerts = [
