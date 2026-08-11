@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types'
  
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 const Mermaid = dynamic(() => import('@/components/ui/Mermaid'));
 const AetherAIDemo = dynamic(() => import('@/components/ui/AetherAIDemo').then(m => m.AetherAIDemo));
 
@@ -28,6 +29,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const id = text ? text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : '';
       return <h3 id={id} className="text-xl font-heading font-bold text-secondary mt-8 mb-4 scroll-mt-32">{children}</h3>;
     },
+    img: (props) => (
+      <span className="block relative w-full my-8 rounded-xl overflow-hidden border border-border/50 shadow-md bg-surface/30">
+        <Image
+          src={props.src as string}
+          alt={props.alt || ''}
+          width={0}
+          height={0}
+          sizes="(max-width: 768px) 100vw, 800px"
+          style={{ width: '100%', height: 'auto' }}
+          className="object-contain"
+        />
+      </span>
+    ),
     p: ({ children }) => <p className="text-muted leading-relaxed mb-6 text-sm md:text-base">{children}</p>,
     a: ({ href, children }) => <a href={href} className="text-primary hover:underline underline-offset-4">{children}</a>,
     ul: ({ children }) => <ul className="list-disc list-outside ml-5 text-muted mb-6 space-y-2 text-sm md:text-base">{children}</ul>,
