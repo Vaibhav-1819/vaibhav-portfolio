@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Share2 } from "lucide-react";
 import { useEffect, useState, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,47 +31,52 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
       return;
     }
 
-    // Query all h2 tags inside the main content area after mount
-    // setTimeout ensures the MDX components have rendered
-    const timeout = setTimeout(() => {
+    const updateTOC = () => {
       const elements = Array.from(document.querySelectorAll("main h2, main h3"));
-      
+      if (elements.length === 0) return;
+
       const items: TOCItem[] = elements.map((elem) => ({
         id: elem.id,
-        title: elem.textContent?.replace(/^[\d.]+\s*/, '') || "", // Strip leading numbers like "1. " from TOC
+        title: elem.textContent?.replace(/^[\d.]+\s*/, '') || "",
         level: elem.tagName === "H2" ? 2 : 3,
       })).filter(item => item.id);
       
-      setHeadings(items);
-
-      const observerCallback = () => {
-        // Find all headings
-        const elements = Array.from(document.querySelectorAll("main h2, main h3"));
-        
-        // Find the active heading (the one closest to the top but still above a threshold)
-        let currentActive = "";
-        for (const elem of elements) {
-          const rect = elem.getBoundingClientRect();
-          // 150px accounts for the fixed header
-          if (rect.top <= 150) {
-            currentActive = elem.id;
-          }
+      setHeadings(prev => {
+        if (prev.length === items.length && prev.every((p, i) => p.id === items[i].id)) {
+          return prev;
         }
-        
-        if (currentActive) {
-          setActiveId(currentActive);
+        return items;
+      });
+      
+      handleScroll();
+    };
+
+    const handleScroll = () => {
+      const elements = Array.from(document.querySelectorAll("main h2, main h3"));
+      let currentActive = "";
+      for (const elem of elements) {
+        const rect = elem.getBoundingClientRect();
+        if (rect.top <= 150) {
+          currentActive = elem.id;
         }
-      };
+      }
+      if (currentActive) {
+        setActiveId(currentActive);
+      }
+    };
 
-      window.addEventListener("scroll", observerCallback, { passive: true });
-      observerCallback(); // Trigger once on load
+    const observer = new MutationObserver(updateTOC);
+    observer.observe(document.body, { childList: true, subtree: true });
 
-      return () => {
-        window.removeEventListener("scroll", observerCallback);
-      };
-    }, 400); // Slightly longer timeout to allow page transition content to render
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Initial check
+    updateTOC();
 
-    return () => clearTimeout(timeout);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [pathname, isIndex]);
 
   if (isIndex) {
@@ -95,7 +100,28 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-mono text-sm hidden sm:inline">All Blogs</span>
           </Link>
-          <div className="font-heading font-bold text-lg tracking-tighter">Article</div>
+          <div className="flex items-center gap-6">
+            {!isIndex && (
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs text-muted uppercase tracking-widest hidden sm:inline">Share</span>
+                <button 
+                  onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                  className="p-2 rounded-full hover:bg-surface text-muted hover:text-primary transition-colors"
+                  title="Share on Twitter"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+                </button>
+                <button 
+                  onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                  className="p-2 rounded-full hover:bg-surface text-muted hover:text-primary transition-colors"
+                  title="Share on LinkedIn"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </button>
+              </div>
+            )}
+            <div className="font-heading font-bold text-lg tracking-tighter">Article</div>
+          </div>
         </div>
       </nav>
 
@@ -114,7 +140,7 @@ export function BlogLayoutClient({ children }: { children: ReactNode }) {
 
         {/* Floating Table of Contents (Desktop Only) */}
         {!isIndex && (
-          <aside className="hidden xl:block w-64 shrink-0 relative py-32">
+          <aside className="hidden lg:block w-64 shrink-0 relative py-32">
           <div className="sticky top-32">
             <h4 className="font-mono text-xs text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
