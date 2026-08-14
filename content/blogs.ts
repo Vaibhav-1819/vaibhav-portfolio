@@ -31,6 +31,16 @@ export const blogs: BlogPost[] = [
     category: "Real-Time Systems"
   },
   {
+    id: "nexus-part5-feature-parity-realtime-polish",
+    slug: "nexus-part5-feature-parity-realtime-polish",
+    title: "Building Nexus (Part 5): Feature Parity, UI Polish, and Real-Time Voice Rooms",
+    description: "An in-depth look at finalizing the Nexus workspace with Liveblocks Yjs sync fixes, Stream Chat message reactions, Excalidraw restoration, and a fully mobile-responsive architecture.",
+    date: "August 15, 2026",
+    readTime: "8 min read",
+    tags: ["Next.js", "Liveblocks", "Stream Chat", "Firebase", "WebRTC"],
+    category: "Real-Time Systems"
+  },
+  {
     id: "nexus-part1-foundation-collaboration",
     slug: "nexus-part1-foundation-collaboration",
     title: "Building Nexus (Part 1): The Foundation & Real-Time Collaborative Canvas",

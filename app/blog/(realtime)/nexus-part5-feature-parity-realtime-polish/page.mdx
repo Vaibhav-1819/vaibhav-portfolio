@@ -1,0 +1,66 @@
+import { getBlogMetadata } from '@/utils/seo';
+export const metadata = getBlogMetadata('nexus-part5-feature-parity-realtime-polish');
+
+# Building Nexus (Part 5): Feature Parity, UI Polish, and Real-Time Voice Rooms
+
+*August 15, 2026 • 8 min read*
+
+---
+
+> **Hook**: A real-time collaboration tool is only as good as its edge cases. In Part 5 of the Nexus build, we shift our focus from deep infrastructure to the final layer of user experience. We tackled critical Liveblocks Yjs sync issues, fully integrated Stream Chat feature parity, rescued our Excalidraw whiteboards, and built out a fully responsive mobile architecture.
+
+In the previous parts, we laid down the foundations of our Next.js architecture, robust zero-trust security, and AI-native semantic search. Today, we're covering the final sprint to production: polishing the UI, fixing critical state synchronization bugs, and implementing advanced real-time features like voice rooms and unread badges.
+
+---
+
+## 1. Conquering Liveblocks Yjs and Excalidraw 
+
+When integrating highly complex client-side editors like Yjs and Excalidraw into a Next.js App Router environment, bundle collisions and CSS scoping issues are inevitable.
+
+### The Yjs Import Collision
+We encountered a critical crash where our collaborative document and whiteboard editors completely failed to load, throwing a `Yjs was already imported` error. This happens when Next.js and Turbopack accidentally bundle multiple instances of Yjs across different client components. We resolved this by explicitly configuring Next.js to treat `yjs` as an external package in `next.config.js`, ensuring a single singleton instance powers the Liveblocks room.
+
+### Restoring Excalidraw
+Our whiteboard UI suddenly appeared completely unstyled—giant icons and raw text everywhere. The fix was simple but crucial: ensuring the core `@excalidraw/excalidraw/index.css` is imported properly alongside our Tailwind directives, preventing Tailwind's preflight resets from destroying Excalidraw's internal canvas styles.
+
+---
+
+## 2. Workspace Management & Context Menus
+
+A workspace needs intuitive data management. We implemented a unified context menu system across Documents, Whiteboards, and Files. 
+
+- **Universal Context Menus**: Users can now Rename, Delete, and Download directly from a unified 3-dots menu.
+- **Workspace Settings**: We wired up the workspace settings panel to `WorkspaceService.updateWorkspace()`. Users can upload custom avatars (which stream directly to Firebase Storage with live previews) and update workspace descriptions with full type safety.
+- **Guarded Deletions**: Deleting a workspace now requires a strict confirmation dialog where the user must type the workspace name exactly. This triggers a cascading deletion of all members, channels, and activity subcollections in Firestore.
+
+---
+
+## 3. Real-Time Chat Feature Parity
+
+To bring our global chat up to modern standards, we deeply integrated Stream Chat's advanced capabilities:
+
+- **Message Reactions & Threads**: Enabled the `messageActions` prop natively in Stream Chat React components. Users can now react, quote reply, edit, delete, and flag messages seamlessly.
+- **@Mentions Integration**: Connected the Stream `message.new` event to Firestore. Mentioning a user (`@user`) automatically writes a notification directly to their `users/{userId}/notifications` collection.
+- **Unread Badges**: Added real-time unread count badges (the classic blue pill) to each channel entry in the Sidebar using Stream Chat's `countUnread()` API. 
+- **Message Search**: Built a custom Search UI in the header utilizing `client.search()` to query the channel's message history natively.
+
+---
+
+## 4. Voice Rooms and Mobile Responsiveness
+
+The final stretch involved ensuring Nexus works beautifully across all devices and supports live audio.
+
+### Rescuing Voice Rooms
+We discovered a silent crash affecting all workspace views because `useVoiceChannel()` had no parent context. By injecting the `VoiceChannelProvider` into the root `app/layout.tsx`, voice rooms in the sidebar now work end-to-end flawlessly.
+
+### Mobile Navigation Drawer
+A complex sidebar is difficult to translate to mobile. We built a `MobileWorkspaceNav` slide-over drawer to wrap the `Sidebar` on small screens. A floating hamburger menu handles opening the navigation panel and automatically dismisses itself upon route changes.
+
+### Host-Gated Waiting Rooms
+For video meetings, we built a Host-gated `WaitingRoom` flow into `MeetingSetup`. Guests enter a holding state with a live wait timer, while the Host sees a control panel to "Admit" users individually or "Admit All" to start the meeting simultaneously.
+
+---
+
+### Conclusion
+
+Nexus is now functionally complete. From a zero-trust Firebase backend and custom Gemini vector search to a deeply polished, real-time frontend with Liveblocks and Stream, the application is ready for production traffic.
