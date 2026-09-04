@@ -21,25 +21,81 @@ export const blogs: BlogPost[] = [
     category: "Real-Time Systems"
   },
   {
-    id: "nexus-part4-telemetry-rbac-ai",
-    slug: "nexus-part4-telemetry-rbac-ai",
-    title: "Building Nexus (Part 4): Production-Grade Telemetry, RBAC, and Gemini Semantic Search",
-    description: "An in-depth look at implementing role-based access control, serverless-friendly vector similarity, and compiling absolute telemetry data for Nexus.",
-    date: "August 5, 2026",
-    readTime: "11 min read",
-    tags: ["Google Gemini", "RBAC", "Telemetry", "Firebase", "Next.js"],
+    id: "nexus-collaborative-workspace",
+    slug: "nexus-collaborative-workspace",
+    title: "Architecting Nexus: Building an AI-Native Real-Time Collaboration OS",
+    description: "A comprehensive architectural deep-dive into Nexus: combining low-latency WebRTC media, conflict-free multiplayer canvases (CRDTs), zero-trust security boundaries, and localized AI context engines.",
+    date: "August 18, 2026",
+    readTime: "10 min read",
+    tags: ["Next.js 14", "WebRTC", "CRDTs", "Google Gemini", "Liveblocks", "Zero-Trust"],
     category: "Real-Time Systems"
   },
   {
-    id: "nexus-part5-feature-parity-realtime-polish",
-    slug: "nexus-part5-feature-parity-realtime-polish",
-    title: "Building Nexus (Part 5): Feature Parity, UI Polish, and Real-Time Voice Rooms",
-    description: "An in-depth look at finalizing the Nexus workspace with Liveblocks Yjs sync fixes, Stream Chat message reactions, Excalidraw restoration, and a fully mobile-responsive architecture.",
-    date: "August 15, 2026",
+    id: "building-realtime-sfu",
+    slug: "building-realtime-sfu",
+    title: "Building a Real-Time SFU with LiveKit",
+    description: "An deep dive into transitioning from a standard WebRTC mesh network to a scalable Selective Forwarding Unit (SFU) architecture.",
+    date: "May 20, 2026",
     readTime: "8 min read",
-    tags: ["Next.js", "Liveblocks", "Stream Chat", "Firebase", "WebRTC"],
+    tags: ["WebRTC", "LiveKit", "React"],
     category: "Real-Time Systems"
   },
+  {
+    id: "ai-air-quality",
+    slug: "ai-air-quality",
+    title: "Predicting Air Quality with XGBoost & Gemini",
+    description: "How I built AetherAI using Python, FastAPI, and an XGBoost machine learning model to provide real-time localized environmental insights.",
+    date: "March 24, 2026",
+    readTime: "6 min read",
+    tags: ["Machine Learning", "Python", "FastAPI"],
+    category: "Machine Learning"
+  },
+  {
+    id: "cricsphere-architecture",
+    slug: "cricsphere-architecture",
+    title: "Architecting CricSphere: High-Performance Analytics at Scale",
+    description: "An overview of how I built CricSphere, combining full-stack web development with machine learning models to deliver real-time cricket match predictions.",
+    date: "January 14, 2026",
+    readTime: "7 min read",
+    tags: ["Next.js", "Machine Learning", "Data Analytics"],
+    category: "Machine Learning"
+  },
+  {
+    id: "machinaiq-predictive-maintenance",
+    slug: "machinaiq-predictive-maintenance",
+    title: "MachinaIQ: AI-Driven Predictive Maintenance at Scale",
+    description: "Building an explainable AI system using FastAPI, Random Forests, and SMOTE to predict industrial equipment failures in real-time.",
+    date: "June 22, 2026",
+    readTime: "10 min read",
+    tags: ["Machine Learning", "FastAPI", "Explainable AI"],
+    category: "Machine Learning"
+  },
+  {
+    id: "car-brand-classification-efficientnet",
+    slug: "car-brand-classification-efficientnet",
+    title: "Automated Car Brand Classification using EfficientNet",
+    description: "Training a deep learning CNN model on over 11,000 images to identify 50 distinct car brands with transfer learning.",
+    date: "May 10, 2025",
+    readTime: "8 min read",
+    tags: ["Deep Learning", "Computer Vision", "TensorFlow"],
+    category: "Machine Learning"
+  },
+  {
+    id: "cyber-threat-detection-ml",
+    slug: "cyber-threat-detection-ml",
+    title: "Building a Real-Time Cyber Threat Detection System with ML",
+    description: "A deep dive into architecting a real-time network anomaly detection system using Machine Learning, packet inspection, and Python.",
+    date: "October 18, 2025",
+    readTime: "15 min read",
+    tags: ["Machine Learning", "Cybersecurity", "FastAPI", "Python"],
+    category: "Machine Learning"
+  }
+];
+
+/**
+ * Archived detailed implementation posts preserved in codebase but hidden from public listings.
+ */
+export const archivedBlogs: BlogPost[] = [
   {
     id: "nexus-part1-foundation-collaboration",
     slug: "nexus-part1-foundation-collaboration",
@@ -71,63 +127,23 @@ export const blogs: BlogPost[] = [
     category: "Real-Time Systems"
   },
   {
-    id: "building-realtime-sfu",
-    slug: "building-realtime-sfu",
-    title: "Building a Real-Time SFU with LiveKit",
-    description: "An deep dive into transitioning from a standard WebRTC mesh network to a scalable Selective Forwarding Unit (SFU) architecture.",
-    date: "May 2026",
-    readTime: "8 min read",
-    tags: ["WebRTC", "LiveKit", "React"],
+    id: "nexus-part4-telemetry-rbac-ai",
+    slug: "nexus-part4-telemetry-rbac-ai",
+    title: "Building Nexus (Part 4): Production-Grade Telemetry, RBAC, and Gemini Semantic Search",
+    description: "An in-depth look at implementing role-based access control, serverless-friendly vector similarity, and compiling absolute telemetry data for Nexus.",
+    date: "August 5, 2026",
+    readTime: "11 min read",
+    tags: ["Google Gemini", "RBAC", "Telemetry", "Firebase", "Next.js"],
     category: "Real-Time Systems"
   },
   {
-    id: "ai-air-quality",
-    slug: "ai-air-quality",
-    title: "Predicting Air Quality with XGBoost & Gemini",
-    description: "How I built AetherAI using Python, FastAPI, and an XGBoost machine learning model to provide real-time localized environmental insights.",
-    date: "March 2026",
-    readTime: "6 min read",
-    tags: ["Machine Learning", "Python", "FastAPI"],
-    category: "Machine Learning"
-  },
-  {
-    id: "cricsphere-architecture",
-    slug: "cricsphere-architecture",
-    title: "Architecting CricSphere: High-Performance Analytics at Scale",
-    description: "An overview of how I built CricSphere, combining full-stack web development with machine learning models to deliver real-time cricket match predictions.",
-    date: "January 2026",
-    readTime: "7 min read",
-    tags: ["Next.js", "Machine Learning", "Data Analytics"],
-    category: "Machine Learning"
-  },
-  {
-    id: "machinaiq-predictive-maintenance",
-    slug: "machinaiq-predictive-maintenance",
-    title: "MachinaIQ: AI-Driven Predictive Maintenance at Scale",
-    description: "Building an explainable AI system using FastAPI, Random Forests, and SMOTE to predict industrial equipment failures in real-time.",
-    date: "June 2026",
-    readTime: "10 min read",
-    tags: ["Machine Learning", "FastAPI", "Explainable AI"],
-    category: "Machine Learning"
-  },
-  {
-    id: "car-brand-classification-efficientnet",
-    slug: "car-brand-classification-efficientnet",
-    title: "Automated Car Brand Classification using EfficientNet",
-    description: "Training a deep learning CNN model on over 11,000 images to identify 50 distinct car brands with transfer learning.",
-    date: "May 2025",
+    id: "nexus-part5-feature-parity-realtime-polish",
+    slug: "nexus-part5-feature-parity-realtime-polish",
+    title: "Building Nexus (Part 5): Feature Parity, UI Polish, and Real-Time Voice Rooms",
+    description: "An in-depth look at finalizing the Nexus workspace with Liveblocks Yjs sync fixes, Stream Chat message reactions, Excalidraw restoration, and a fully mobile-responsive architecture.",
+    date: "August 15, 2026",
     readTime: "8 min read",
-    tags: ["Deep Learning", "Computer Vision", "TensorFlow"],
-    category: "Machine Learning"
-  },
-  {
-    id: "cyber-threat-detection-ml",
-    slug: "cyber-threat-detection-ml",
-    title: "Building a Real-Time Cyber Threat Detection System with ML",
-    description: "A deep dive into architecting a real-time network anomaly detection system using Machine Learning, packet inspection, and Python.",
-    date: "October 2025",
-    readTime: "15 min read",
-    tags: ["Machine Learning", "Cybersecurity", "FastAPI", "Python"],
-    category: "Machine Learning"
+    tags: ["Next.js", "Liveblocks", "Stream Chat", "Firebase", "WebRTC"],
+    category: "Real-Time Systems"
   }
 ];

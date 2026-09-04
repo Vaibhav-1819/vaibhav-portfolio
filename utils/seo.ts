@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
-import { blogs } from '@/content/blogs';
+import { blogs, archivedBlogs } from '@/content/blogs';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://vaibhav-bharathula.tech';
 
 export function getBlogMetadata(slug: string): Metadata {
-  const post = blogs.find((b) => b.slug === slug);
+  const post = blogs.find((b) => b.slug === slug) || archivedBlogs?.find((b) => b.slug === slug);
 
   if (!post) {
     return {

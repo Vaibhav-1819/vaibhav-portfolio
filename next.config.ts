@@ -17,6 +17,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/blog/:slug(nexus-part.*)',
+        destination: '/blog/nexus-collaborative-workspace',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 const withMDX = createMDX({

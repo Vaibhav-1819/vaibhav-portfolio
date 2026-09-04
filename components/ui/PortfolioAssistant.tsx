@@ -48,11 +48,11 @@ const COMMAND_DATABASE: Record<string, CommandResponse> = {
   },
   logs: {
     briefing: "DECRYPTING WORKSPACE DEV LOG MATRIX...",
-    markdown: `**NEXUS PROGRESSIVE BLOG POSTS SERIES**\n\n1. **Part 1**: The Foundation & Real-Time Canvas\n2. **Part 2**: Workspace Inbox & Folder Infrastructure\n3. **Part 3**: The AI-Native Layer & Zero-Trust Security\n\n*Action: Select a log file to extract below.*`,
+    markdown: `**TECHNICAL WRITINGS & SYSTEM DEV LOGS**\n\n1. **Nexus OS**: High-Performance AI-Native Workspace\n2. **LiveKit SFU**: Scaling Beyond Mesh WebRTC\n3. **JARVIS Routine**: Event-Driven AI Automation\n\n*Action: Select an article to decrypt below.*`,
     links: [
-      { label: "[Log Part 1]", href: "/blog/nexus-part1-foundation-collaboration" },
-      { label: "[Log Part 2]", href: "/blog/nexus-part2-workspace-architecture" },
-      { label: "[Log Part 3]", href: "/blog/nexus-part3-ai-native-security" }
+      { label: "[Nexus Case Study]", href: "/blog/nexus-collaborative-workspace" },
+      { label: "[LiveKit SFU]", href: "/blog/building-realtime-sfu" },
+      { label: "[JARVIS Automation]", href: "/blog/jarvis-n8n-automation" }
     ]
   },
   experience: {
