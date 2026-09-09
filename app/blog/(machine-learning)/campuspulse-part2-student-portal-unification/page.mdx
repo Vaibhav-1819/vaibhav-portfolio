@@ -1,0 +1,188 @@
+import { getBlogMetadata } from '@/utils/seo';
+export const metadata = getBlogMetadata('campuspulse-part2-student-portal-unification');
+
+
+# Building CampusPulse AI (Part 2): Student Portal, Dual-Persona Unification & End-to-End Verification
+
+*September 9, 2026 • 12 min read*
+
+---
+
+> **Hook**: It was the final morning of the 48-Hour IBM SkillsBuild Hackathon. Our backend intelligence engine was purring, and the Admin Command Center had just been merged in PR #1. Then came Pull Request #2: a complete, beautiful student portal that created an `add/add` merge conflict across 10 frontend files. With hours left on the clock, we couldn't just overwrite either developer's code. We had to unify two distinct single-page applications into a single cohesive, dual-persona system.
+
+In [Part 1 of this series](/blog/campuspulse-part1-foundation-admin-intelligence), we explored the foundational layer of CampusPulse AI: frozen API contracts, our Express + SQLite 3 architecture, the dual-tier resilient AI service, deterministic 4-factor correlation mathematics, and the merge of **Pull Request #1** on **September 8, 2026**.
+
+Here in **Part 2**, we cover the dramatic second half of the hackathon on **September 9, 2026**: building the student reporting portal, resolving the 10-file merge conflict, merging **Pull Request #2** (`65bb2ec`), implementing the Raycast-style Universal Command Palette, executing our 19/19 automated test suite, and celebrating the 4-contributor team that made it possible.
+
+---
+
+![CampusPulse AI Landing Showcase](/images/campuspulse_landing.png)
+
+---
+
+## 1. The Student Reporting Portal
+
+While the backend and admin command center were taking shape on September 8, Developer 2 (Sreeshanth S) was independently engineering the **Student Incident Reporting Portal** (`feature/student-ui`).
+
+Students reporting infrastructure failures require zero friction. If a reporting form feels like filling out government paperwork, students will continue complaining in WhatsApp groups instead of submitting actionable telemetry.
+
+![Student Incident Reporting Portal](/images/campuspulse_student.png)
+
+### Key Capabilities of the Student Portal:
+1. **Interactive Category Selector**: High-contrast icon cards representing campus domains (`NETWORK`, `ELECTRICAL`, `PLUMBING`, `HVAC`, `PHYSICAL`, `EQUIPMENT`, `SAFETY`, `OTHER`).
+2. **Preset Demo Buttons**: One-click scenario chips ("CSE Block Lab 3 Wi-Fi Down", "Library 2nd Floor AC Leaking") enabling judges and users to immediately test correlation flows without typing paragraphs.
+3. **Smart Location Suggestions**: Real-time auto-suggest inputs mapped to campus buildings (`CSE Block`, `Mechanical Lab`, `Central Library`, `Admin Block`, `Science Annex`) and rooms.
+4. **Instant Receipt & Tracking History**: Client-side ticket receipt modal providing a copyable UUID ticket receipt, alongside local persistence via `localStorage` so students can check the triage status of their previous reports.
+
+---
+
+## 2. The Gap Between PR #1 and PR #2: The 10-File Merge Conflict
+
+On the morning of **September 9, 2026 at 10:45**, Developer 2 opened **Pull Request #2** (`feature/student-ui`, commit `18e4057`).
+
+### The Architectural Dilemma:
+Because both Developer 2 (Student UI) and Developer 3 (Admin UI) had moved fast in parallel branches to meet the 48-hour deadline:
+- **`App.tsx`**: PR #1 had `App.tsx` rendering only the `AdminDashboard`. PR #2 had `App.tsx` rendering only the `ReportForm`.
+- **`services/api.ts`**: PR #1 had an `ApiClient` configured for incident inspection and status mutations. PR #2 had an independent `reportService` configured for student submissions.
+- **`index.css` & Tokens**: Both branches defined different root styles, color variables, and container layouts.
+- **Types**: Divergent client-side TypeScript definitions across 10 frontend files.
+
+Overwriting either branch would wipe out an entire team member's work.
+
+### The Unification Strategy (Commits `4e8f41c` & `65bb2ec`):
+Between 12:00 PM and 1:07 PM on September 9, 2026, our team resolved the merge conflicts by architecting a **Unified Dual-Persona Role Switcher**:
+
+```typescript
+// App.tsx: Unifying Student and Admin Portals with Role Switching
+export default function App() {
+  const [activeRole, setActiveRole] = useState<'admin' | 'student' | 'landing'>('landing');
+
+  return (
+    <div className="min-h-screen bg-background text-secondary">
+      <Navbar activeRole={activeRole} onRoleChange={setActiveRole} />
+      
+      <main className="container mx-auto px-4 py-8">
+        {activeRole === 'landing' && <LandingPage onNavigate={setActiveRole} />}
+        {activeRole === 'student' && <StudentPortal />}
+        {activeRole === 'admin' && <AdminCommandCenter />}
+      </main>
+
+      <CommandPalette onSelectRole={setActiveRole} />
+    </div>
+  );
+}
+```
+
+- **Unified API Client**: Merged `LiveApiClient` and `mockApi.ts` so both portals seamlessly communicate with either the live Express backend or an offline mock adapter with instant toggle synchronization.
+- **Merged PR #2 (`65bb2ec`)**: At **13:07 on September 9, 2026**, PR #2 was officially merged into `main`, delivering a zero-regression, unified codebase.
+
+---
+
+## 3. Universal Command Palette (`Cmd+K`) & SaaS UI Modernization
+
+Following the PR #2 merge, we dedicated hours 40 through 44 to UI/UX modernization (commits `51d5874` and `681df40`):
+
+### 3.1 Raycast-Style Command Palette (`Cmd+K` / `Ctrl+K`)
+We implemented a centered universal modal allowing campus administrators to navigate instantly:
+- Jump between Admin Command Center, Student Portal, and Public Landing.
+- Instant campus building filter (`CSE Block`, `Central Library`, `Mechanical Lab`).
+- Quick-filter for **Active Emerging Crises**.
+- Dark and Light Slate theme switching.
+
+### 3.2 High-Density Startup SaaS Aesthetics
+- **Color Palette**: Inspired by Linear and Nexus Workspace, using a `#5B4DF5` violet-indigo primary accent, emerald active indicators, and crimson emerging crisis banners.
+- **Subtle Glassmorphism**: `backdrop-blur-md` panels with semi-transparent surfaces (`bg-surface/50`) and crisp micro-borders (`border-border/60`).
+
+---
+
+## 4. End-to-End Verification, QA & Demo Script (Role 4)
+
+A hackathon project is only as good as its live presentation. Co-owned by **Sumanth Teju** and **Vaibhav Bharathula** (Role 4: Integration, QA & Demo), our team created a fully reproducible, automated verification pipeline.
+
+### 4.1 Canonical 6-Report Demo Dataset & CLI Seeder
+We codified our live demonstration into `demo-data/demo-scenario.json` and built a one-line seeder:
+
+```bash
+npm run db:seed
+```
+
+**The Canonical Demo Sequence**:
+1. **Report 1**: *"Wi-Fi is down in CSE Block Lab 3, can't submit assignment"* → Creates anchor Incident: **CSE Block Network Disruption**.
+2. **Report 2**: *"Internet disconnected in Room 204 CSE building"* → Correlated with 82% match score.
+3. **Report 3**: *"Cannot access campus Wi-Fi network anywhere on CSE 2nd floor"* → Correlated; triggers **Emerging Velocity Spike** ($\ge 3$ reports in 60m), boosts impact score, and emits alert banner.
+4. **Report 4**: Unrelated *"Water pipe leaking in Central Library 2nd floor"* → Deterministic engine isolates report; creates separate **Library Plumbing Incident**.
+
+### 4.2 Automated Test Runner (19/19 Passing)
+We wrote automated unit and integration test suites executed by the Node.js native test runner (`node:test`, `node:assert`, `tsx`):
+
+```bash
+npm test
+```
+
+```text
+TAP version 13
+# Subtest: API Integration Tests (8 tests)
+  ok 1 - GET /api/health returns 200 OK and healthy status
+  ok 2 - POST /api/reports with short description returns 400 validation error
+  ok 3 - POST /api/reports with valid data creates report and anchor incident
+  ok 4 - POST /api/reports with related complaint correlates into existing incident
+  ok 5 - GET /api/incidents returns list containing the created incident
+  ok 6 - GET /api/incidents/:id returns incident detail with reports and timeline
+  ok 7 - PATCH /api/incidents/:id/status updates status and logs event
+  ok 8 - GET /api/dashboard/stats returns aggregated KPI statistics
+ok 1 - API Integration Tests
+
+# Subtest: CorrelationEngine Unit Tests (7 tests)
+  ok 1 - cosineSimilarity computes 1.0 for identical normalized vectors
+  ok 2 - cosineSimilarity computes 0.0 for orthogonal vectors
+  ok 3 - calculateLocationScore returns 1.0 for identical building
+  ok 4 - calculateLocationScore returns 0.0 for completely different buildings
+  ok 5 - calculateCategoryScore returns 1.0 for matching category
+  ok 6 - calculateTemporalScore decays over time
+  ok 7 - evaluateCorrelation produces expected score and explainability text
+ok 2 - CorrelationEngine Unit Tests
+
+# Subtest: SeverityCalculator Unit Tests (2 tests)
+  ok 1 - Base impact score matches expected formula
+  ok 2 - Emerging bonus adds +15 points
+ok 3 - SeverityCalculator Unit Tests
+
+# Subtest: EmergingDetector Unit Tests (2 tests)
+  ok 1 - Reports spread out do not trigger emerging status
+  ok 2 - 3 reports within 45 minutes triggers emerging status
+ok 4 - EmergingDetector Unit Tests
+
+# tests 19 | pass 19 | fail 0
+```
+
+---
+
+## 5. Special Contributors & Team Ownership
+
+Delivering a multi-tier AI application in **48 hours** required strict discipline, clear module ownership, and seamless cross-functional collaboration.
+
+Our team was divided into **4 core engineering roles**:
+
+<CampusPulseContributors />
+
+---
+
+## 6. Key Takeaways & Lessons Learned
+
+Reflecting on the 48-hour journey of building CampusPulse AI for the IBM SkillsBuild Hackathon, three core lessons stand out:
+
+1. **Contracts Prevent Merge Disasters**: Freezing `shared/api-contract.md` early allowed our frontend and backend teams to sprint autonomously. Even when PR #1 and PR #2 collided in `App.tsx`, the shared contracts meant the data contracts matched identically.
+2. **Deterministic Grounding Wins Over Pure LLMs**: Using Gemini for fuzzy language extraction while keeping correlation math, impact scoring, and velocity spikes in deterministic code produced a system that was explainable, reproducible, and blazing fast.
+3. **Resilience Is Non-Negotiable**: Building an offline-ready `MockAIService` saved us from API rate limits and network latency during live demonstrations.
+
+---
+
+### Project Links & Series Navigation
+
+- **Read Part 1**: [Building CampusPulse AI (Part 1): Foundation, Multi-Factor Correlation & Admin Command Center](/blog/campuspulse-part1-foundation-admin-intelligence)
+- **GitHub Repository**: [https://github.com/Vaibhav-1819/CampusPulseAI.git](https://github.com/Vaibhav-1819/CampusPulseAI.git)
+- **Tech Stack**: React 19, TypeScript, Vite, Node.js, Express, SQLite 3 (`better-sqlite3`), Google Gemini 1.5 Flash (`@google/generative-ai`), Lucide Icons, Vanilla CSS Design System.
+
+---
+
+*Check out the live code, run the demo seeder, or inspect the correlation engine math on our [CampusPulseAI GitHub repository](https://github.com/Vaibhav-1819/CampusPulseAI.git)!*

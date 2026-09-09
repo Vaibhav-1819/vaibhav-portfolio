@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 const Mermaid = dynamic(() => import('@/components/ui/Mermaid'));
 const AetherAIDemo = dynamic(() => import('@/components/ui/AetherAIDemo').then(m => m.AetherAIDemo));
+const CampusPulseContributors = dynamic(() => import('@/components/ui/CampusPulseContributors').then(m => m.CampusPulseContributors));
 
 const extractText = (children: any): string => {
   if (typeof children === 'string') return children;
@@ -18,6 +19,17 @@ const extractText = (children: any): string => {
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     AetherAIDemo,
+    CampusPulseContributors,
+    table: ({ children }) => (
+      <div className="w-full my-8 overflow-x-auto rounded-2xl border border-border/60 bg-surface/30 backdrop-blur-md shadow-lg">
+        <table className="w-full text-left border-collapse text-xs md:text-sm">{children}</table>
+      </div>
+    ),
+    thead: ({ children }) => <thead className="bg-surface/80 border-b border-border/60 text-secondary font-mono uppercase tracking-wider">{children}</thead>,
+    tbody: ({ children }) => <tbody className="divide-y divide-border/40 font-mono text-muted">{children}</tbody>,
+    tr: ({ children }) => <tr className="hover:bg-surface/40 transition-colors">{children}</tr>,
+    th: ({ children }) => <th className="px-5 py-3.5 font-bold text-secondary text-xs">{children}</th>,
+    td: ({ children }) => <td className="px-5 py-4 align-top leading-relaxed">{children}</td>,
     h1: ({ children }) => <h1 className="text-4xl md:text-5xl font-heading font-bold text-secondary tracking-tight mb-8">{children}</h1>,
     h2: ({ children }) => {
       const text = extractText(children);
