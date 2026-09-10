@@ -1,0 +1,79 @@
+# Vaibhav Bharathula
+
+> Full-Stack & Machine Learning Developer building intelligent software, real-time architectures, and predictive systems from ideas to production.
+
+- Website: https://vaibhavbharathula.tech
+- GitHub: https://github.com/Vaibhav-1819
+- LinkedIn: https://linkedin.com/in/vaibhav-bharathula
+- Email: bharathulavaibhav@gmail.com
+- Location: Hyderabad, India
+- Education: B.Tech in Information Technology, Institute of Aeronautical Engineering (IARE), Hyderabad (2023–Present, CGPA: 8.26/10)
+
+## Technical Summary
+
+Vaibhav Bharathula is a software developer and machine learning engineer who designs scalable systems that combine data science pipelines, modern web applications, and low-latency architectures. His work spans predictive machine learning models, real-time collaboration engines, and multi-factor incident intelligence.
+
+## Core Technical Skills
+
+- Languages: Java, Python, TypeScript, JavaScript, SQL
+- Frontend: Next.js 14, React 19, Tailwind CSS, Framer Motion
+- Backend: Node.js, Express.js, FastAPI, REST APIs
+- AI / Machine Learning: Deep Learning, CNNs, Transfer Learning, XGBoost, LightGBM, Google Gemini API, TensorFlow
+- Databases: SQLite (WAL mode), MySQL, PostgreSQL, Pinecone (Vector), Firebase
+- Real-Time & Systems: WebRTC, Stream SDK, Liveblocks (CRDT / Yjs), Docker basics
+
+## Featured Projects
+
+### CricSphere
+- Description: High-performance cricket intelligence platform with live match data and AI-ML powered analytics.
+- Technologies: React, Node.js, Express.js, RapidAPI, LightGBM, Python, DuckDB
+- Scale: 22,000+ matches processed, 638K+ PvP matchup records analyzed, 4 ML prediction models.
+- Live Demo: https://cricsphere-version1.vercel.app/
+- Case Study: https://vaibhavbharathula.tech/projects/cricsphere
+
+### Nexus
+- Description: AI-native real-time collaboration operating system combining chat, multiplayer canvases, video calls, and zero-trust storage.
+- Technologies: Next.js 14, Stream Video/Chat, Clerk Auth, Firebase Storage, Google Gemini, Pinecone, Liveblocks (Yjs CRDTs)
+- Latency & Security: Sub-50ms WebRTC media, serverless short-TTL signed URLs (~1.1s revocation delay), vector semantic search.
+- Case Study: https://vaibhavbharathula.tech/projects/nexus
+
+### CampusPulse AI
+- Description: Explainable real-time incident intelligence platform for IBM SkillsBuild project submission.
+- Technologies: React 19, TypeScript, Node.js, Express, SQLite 3, Google Gemini 1.5 Flash
+- Architecture: 4-factor deterministic correlation engine (spatial, temporal decay, semantic embeddings, categorical affinity) correlating student complaints into verified incidents.
+- Case Study: https://vaibhavbharathula.tech/projects/campuspulse-ai
+
+### AetherAI
+- Description: Localized environmental intelligence and real-time air quality forecasting engine.
+- Technologies: Python, FastAPI, XGBoost (94.2% confidence), Google Gemini API, SQLite
+- Case Study: https://vaibhavbharathula.tech/projects/aetherai
+
+### BrandRecognizer
+- Description: Computer vision classifier trained via transfer learning with EfficientNetB0 on 11,000+ vehicle images across 50 brands (~80% test accuracy).
+- Technologies: Python, TensorFlow, EfficientNetB0, Data Augmentation
+- Case Study: https://vaibhavbharathula.tech/projects/brandrecognizer
+
+## Work Experience & Internships
+
+- Deep Learning Intern — Central Institute of Tool Design (CITD), Hyderabad (May 2025)
+  - Built EfficientNet CNN classifier trained on 11,000+ images across 50 classes (~80% accuracy).
+  - Designed preprocessing pipelines and evaluation workflows for model optimization.
+- AI Creators Program Intern — Swecha.org, Telangana (Aug 2024)
+  - Contributed to regional language AI initiatives through dataset collection and NLP workflows.
+  - Explored LLM tokenization, Text-to-Speech, and voice avatar technologies.
+
+## Verified Certifications
+
+- AI Upskilling Certificate: Technical Foundation — Qualcomm Academy (Nov 2025)
+- Oracle Cloud Infrastructure (OCI) Foundations Associate — Oracle (Sep 2025)
+- Artificial Intelligence Fundamentals — IBM SkillsBuild (Jul 2025)
+- Generative AI for Data Science — Coursera (May 2025)
+- AWS Academy Graduate: Data Engineering — Amazon Web Services (Apr 2025)
+
+## Key Technical Articles
+
+- Building CampusPulse AI (Part 1): Foundation, Multi-Factor Correlation & Admin Command Center: https://vaibhavbharathula.tech/blog/campuspulse-part1-foundation-admin-intelligence
+- Building CampusPulse AI (Part 2): Student Portal, Dual-Persona Unification & End-to-End Verification: https://vaibhavbharathula.tech/blog/campuspulse-part2-student-portal-unification
+- Architecting Nexus: Building an AI-Native Real-Time Collaboration OS: https://vaibhavbharathula.tech/blog/nexus-collaborative-workspace
+- Architecting CricSphere: High-Performance Analytics at Scale: https://vaibhavbharathula.tech/blog/cricsphere-architecture
+- Predicting Air Quality with XGBoost & Gemini: https://vaibhavbharathula.tech/blog/ai-air-quality

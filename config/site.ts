@@ -1,9 +1,10 @@
 export const siteConfig = {
-  name: "Vaibhav Ram",
-  description: "Building intelligent software from ideas to deployment.",
-  url: "https://vaibhav-portfolio.vercel.app", // Update this when deploying v2
+  name: "Vaibhav Bharathula",
+  description: "Building intelligent software from ideas to deployment. Exploring machine learning, real-time systems, and predictive architectures.",
+  url: "https://vaibhavbharathula.tech",
   links: {
     github: "https://github.com/Vaibhav-1819",
     linkedin: "https://linkedin.com/in/vaibhav-bharathula",
   },
 };
+

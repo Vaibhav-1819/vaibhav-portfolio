@@ -3,27 +3,32 @@ import { projects } from '@/content/projects';
 import { blogs } from '@/content/blogs';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://vaibhav-portfolio-v2.vercel.app'; // Replace with actual domain later
+  const baseUrl = 'https://vaibhavbharathula.tech';
 
+  // Only include routes that genuinely exist as indexable pages
   const routes = [
     '',
-    '/projects',
     '/blog',
-    '/resume',
     '/labs',
+    '/badges',
+    '/resume',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
+    priority: route === '' ? 1.0 : 0.8,
   }));
 
-  const projectRoutes = projects.map((project) => ({
-    url: `${baseUrl}/projects/${project.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
+  // Only include projects that have dedicated case-study pages in app/projects/
+  const validProjectSlugs = ['cricsphere', 'nexus', 'aetherai', 'campuspulse-ai', 'brandrecognizer'];
+  const projectRoutes = projects
+    .filter((project) => validProjectSlugs.includes(project.slug))
+    .map((project) => ({
+      url: `${baseUrl}/projects/${project.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
 
   const blogRoutes = blogs.map((blog) => ({
     url: `${baseUrl}/blog/${blog.slug}`,
@@ -34,3 +39,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...routes, ...projectRoutes, ...blogRoutes];
 }
+

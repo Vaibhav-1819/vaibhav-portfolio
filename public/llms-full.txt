@@ -1,0 +1,92 @@
+# Vaibhav Bharathula — Comprehensive Technical Profile & Systems Architecture
+
+- Canonical Domain: https://vaibhavbharathula.tech
+- Developer: Bharathula Venkata Vaibhav Ram (known as Vaibhav Bharathula / Vaibhav Ram)
+- Roles: Full-Stack Developer, Machine Learning Engineer, Systems Architect
+- Primary Profiles:
+  - GitHub: https://github.com/Vaibhav-1819
+  - LinkedIn: https://linkedin.com/in/vaibhav-bharathula
+  - Email: bharathulavaibhav@gmail.com
+- Academic Background:
+  - B.Tech in Information Technology, Institute of Aeronautical Engineering (IARE), Hyderabad (2023–Present, CGPA: 8.26 / 10)
+  - Intermediate (MPC), Sri Vasishta Junior College, Hyderabad (92.5%)
+
+---
+
+## 1. Technical Philosophy & Stack
+
+Vaibhav focuses on building cohesive, end-to-end intelligent products where machine learning models and real-time backend architectures solve concrete domain problems. Rather than viewing machine learning as isolated notebooks, he integrates model inference directly into production web architectures.
+
+### Languages & Frameworks
+- TypeScript, JavaScript (Node.js, Express.js, React 19, Next.js 14)
+- Python (FastAPI, Flask, Scikit-learn, TensorFlow, XGBoost, LightGBM)
+- Java (Data Structures, OOP, Spring Boot, Enterprise Backend Patterns)
+- SQL (MySQL, PostgreSQL, Oracle SQL, SQLite with WAL mode)
+- Vector Search & Caching (Pinecone, Firestore In-Memory, Redis caching patterns)
+
+---
+
+## 2. Deep Dives into Core Engineering Projects
+
+### CricSphere — High-Performance Sports Intelligence Platform
+- Production URL: https://cricsphere-version1.vercel.app/
+- Case Study: https://vaibhavbharathula.tech/projects/cricsphere
+- Architectural Highlights:
+  - Ingested and normalized 22,000+ historical ball-by-ball cricket match datasets across multiple formats.
+  - Built an analytical warehouse query layer using DuckDB for instant sub-millisecond point-in-time statistics.
+  - Trained 4 distinct machine learning models (including a Stark-tuned LightGBM classifier) to estimate live second-innings win probability dynamically using remaining runs, balls, wickets, and batter-bowler matchups.
+  - Implemented server-side response caching to handle rate-limited third-party cricket data streams with minimal latency overhead.
+
+### Nexus — Real-Time Collaborative Operating System
+- Case Study: https://vaibhavbharathula.tech/projects/nexus
+- Technical Architecture:
+  - Media Routing: Offloaded WebRTC video and audio streams to Stream global edge SFU nodes, maintaining sub-50ms transmission latencies.
+  - Multiplayer Sync: Integrated Liveblocks with Yjs CRDTs (Conflict-free Replicated Data Types) for collaborative document and whiteboard editors, ensuring concurrent edits merge deterministically without data loss.
+  - Zero-Trust Storage: Enforced tenant isolation by brokering file upload and download requests through serverless Next.js edge functions using Firebase Admin SDK. Generates short-TTL signed URLs with immediate revocation triggers (~1.1s revocation delay).
+  - Dual-Engine Vector Search: Built semantic document search leveraging Google Gemini embedding-001 (768-dim) vectors indexed via Pinecone with in-memory Firestore cosine similarity fallback.
+
+### CampusPulse AI — Incident Intelligence & Correlation Engine
+- Case Study: https://vaibhavbharathula.tech/projects/campuspulse-ai
+- Context: Built for the IBM SkillsBuild learning plan project submission with an automated 19/19 test suite.
+- Technical Architecture:
+  - 4-Factor Deterministic Correlation Engine: Correlates raw, unstructured student complaints into cohesive infrastructure incident clusters:
+    1. Spatial Proximity: Haversine geodesic distance scoring between campus locations.
+    2. Temporal Exponential Decay: Weighting recent grievances higher using half-life decay modeling.
+    3. Semantic Similarity: Gemini embeddings with cosine similarity matrix calculation.
+    4. Categorical Affinity: Subsystem classification matching (e.g., electrical, sanitation, lab infrastructure).
+  - Dual-Tier Gemini Integration: Tier 1 for low-latency JSON entity extraction and classification; Tier 2 for root-cause synthesis, impact severity classification, and administrative action brief generation.
+  - SQLite WAL Database: High-throughput local storage supporting concurrent reader-writer operations.
+
+### AetherAI — Localized Environmental Intelligence Platform
+- Case Study: https://vaibhavbharathula.tech/projects/aetherai
+- Technical Architecture:
+  - Built an asynchronous ML inference API with Python and FastAPI.
+  - Trained an XGBoost regression model achieving 94.2% test confidence for multi-pollutant AQI forecasting.
+  - Integrated Google Gemini 1.5 Flash to synthesize raw numerical forecasts into personalized health advice based on demographic sensitivities (asthma, outdoor athletic activity).
+
+### BrandRecognizer — Computer Vision Vehicle Classifier
+- Case Study: https://vaibhavbharathula.tech/projects/brandrecognizer
+- Technical Architecture:
+  - Transfer learning architecture utilizing EfficientNetB0 pre-trained on ImageNet.
+  - Trained on 11,000+ car images across 50 distinct vehicle brands.
+  - Reached ~80% top-1 validation accuracy utilizing aggressive data augmentation (random rotation, zoom, shear, and contrast adjustments) to prevent overfitting.
+
+---
+
+## 3. Competitive Programming & Coding Profiles
+
+- LeetCode: 113+ Solved Problems (Data Structures & Algorithms in Java)
+- CodeChef: 894 Peak Rating (Problem Solving)
+- GeeksforGeeks: 69+ Solved Problems
+- Young Turks 2025 (Naukri Campus): 97th Percentile Nationwide
+- Salesforce Agentblazer: Champion 2026
+
+---
+
+## 4. Professional Certifications
+
+1. AI Upskilling Certificate: Technical Foundation — Qualcomm Academy (Nov 2025)
+2. Oracle Cloud Infrastructure 2024 Foundations Associate — Oracle (Sep 2025)
+3. Artificial Intelligence Fundamentals — IBM SkillsBuild (Jul 2025)
+4. Generative AI for Data Science — Coursera (May 2025)
+5. AWS Academy Graduate: Data Engineering — AWS Training and Certification (Apr 2025)
