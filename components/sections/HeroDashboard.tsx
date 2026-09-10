@@ -146,7 +146,7 @@ export function HeroDashboard() {
                   <Server size={14} /> Current Stack
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {['Java', 'Python', 'AI/ML', 'SQL', 'Data Structures'].map(tech => (
+                  {['TypeScript', 'Next.js 14', 'Python / ML', 'Node.js', 'Java', 'SQL'].map(tech => (
                     <span key={tech} className="px-2 py-1 text-[10px] md:text-xs bg-background rounded-md text-secondary border border-border/50 block">
                       {tech}
                     </span>

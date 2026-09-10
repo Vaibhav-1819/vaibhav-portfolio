@@ -1,109 +1,103 @@
 "use client";
 
 import React from 'react';
-import { Server, Layout, ShieldCheck, GitMerge, CheckCircle2, Star, Mail, Sparkles } from 'lucide-react';
+import { Server, Layout, ShieldCheck, GitMerge, CheckCircle2, Star, Mail, Sparkles, BrainCircuit } from 'lucide-react';
 
-const GithubIcon = ({ size = 15 }: { size?: number }) => (
+const GithubIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
   </svg>
 );
 
-interface Contributor {
+export interface Contributor {
+  id: string;
   roleId: string;
   roleTitle: string;
-  names: string[];
-  emails: string[];
+  name: string;
+  email: string;
   focusArea: string;
   isSpecialHighlight?: boolean;
   highlightNote?: string;
   icon: React.ReactNode;
-  accentColor: string;
-  deliverables: string[];
+  accentBorder: string;
+  keyDeliverable: string;
 }
 
-const contributors: Contributor[] = [
+export const contributors: Contributor[] = [
   {
+    id: "role-1",
     roleId: "Role 01",
-    roleTitle: "Backend & Architecture Owner",
-    names: ["Vaibhav Bharathula"],
-    emails: ["bharathulavaibhav@gmail.com"],
-    focusArea: "Backend API, SQLite Engine & Intelligence Core",
+    roleTitle: "Backend & Architecture Lead",
+    name: "Vaibhav Bharathula",
+    email: "bharathulavaibhav@gmail.com",
+    focusArea: "API, SQLite & Intelligence Core",
     isSpecialHighlight: true,
-    highlightNote: "Spearheaded Architecture & Math Engine",
-    icon: <Server className="text-indigo-400" size={20} />,
-    accentColor: "from-indigo-500/20 to-purple-500/10 border-indigo-500/40",
-    deliverables: [
-      "Engineered Express REST API with strict separation between controllers and domain services.",
-      "Designed SQLite 3 persistence layer with Write-Ahead Logging (WAL) and foreign key integrity.",
-      "Architected AIService interface: Gemini 1.5 Flash (strict JSON Schema) + offline MockAIService fallback.",
-      "Implemented IncidentIntelligenceEngine: 4-factor correlation math, dynamic impact scoring, and explainability generator."
-    ]
+    highlightNote: "Architecture Lead",
+    icon: <Server className="text-indigo-400" size={15} />,
+    accentBorder: "border-indigo-500/30 hover:border-indigo-500/60",
+    keyDeliverable: "Designed Express REST API, SQLite 3 (WAL mode), Gemini AI service, and 4-factor deterministic correlation math."
   },
   {
+    id: "role-2",
     roleId: "Role 02",
-    roleTitle: "Student Frontend Owner",
-    names: ["Sreeshanth S"],
-    emails: ["sreeshanthsanapala883@gmail.com"],
+    roleTitle: "Student Frontend Lead",
+    name: "Sreeshanth S",
+    email: "sreeshanthsanapala883@gmail.com",
     focusArea: "Student Portal & Reporting UX",
-    icon: <Layout className="text-cyan-400" size={20} />,
-    accentColor: "from-cyan-500/20 to-blue-500/10 border-cyan-500/40",
-    deliverables: [
-      "Built the mobile-first Student Incident Reporting Portal (/features/student).",
-      "Developed interactive category selector cards with visual icon badges and quick-selection presets.",
-      "Implemented real-time campus building and room auto-suggest with demo presets.",
-      "Engineered client-side form validation, copyable ticket receipt modal, and localStorage tracker."
-    ]
+    icon: <Layout className="text-cyan-400" size={15} />,
+    accentBorder: "border-cyan-500/30 hover:border-cyan-500/60",
+    keyDeliverable: "Built mobile-first reporting portal with interactive category presets, auto-suggest locations, and UUID receipts."
   },
   {
+    id: "role-3",
     roleId: "Role 03",
-    roleTitle: "Admin Frontend Owner",
-    names: ["Vignesh Mandadapu"],
-    emails: ["mandadapuvignesh@gmail.com"],
+    roleTitle: "Admin Frontend Lead",
+    name: "Vignesh Mandadapu",
+    email: "mandadapuvignesh@gmail.com",
     focusArea: "Admin Command Center & Telemetry",
-    icon: <ShieldCheck className="text-amber-400" size={20} />,
-    accentColor: "from-amber-500/20 to-orange-500/10 border-amber-500/40",
-    deliverables: [
-      "Engineered the Admin Incident Command Center (/features/admin) with real-time KPI telemetry.",
-      "Built multi-factor filter & search controls for status triage, severity tiers, and campus buildings.",
-      "Created Incident Detail Drawer featuring chronological audit timelines (incident_events).",
-      "Implemented administrative status mutation workflows (INVESTIGATING, IN_PROGRESS, RESOLVED, CLOSED)."
-    ]
+    icon: <ShieldCheck className="text-amber-400" size={15} />,
+    accentBorder: "border-amber-500/30 hover:border-amber-500/60",
+    keyDeliverable: "Engineered real-time KPI telemetry bar, multi-factor triage filters, and incident event audit timeline drawers."
   },
   {
+    id: "role-4",
     roleId: "Role 04",
-    roleTitle: "Integration, QA & Demo Owners",
-    names: ["Sumanth Teju", "Vaibhav Bharathula"],
-    emails: ["23951a12d7@iare.ac.in", "bharathulavaibhav@gmail.com"],
-    focusArea: "End-to-End Integration, Automated Testing & Verification",
-    isSpecialHighlight: true,
-    highlightNote: "Dual Role Co-Owner & Full Stack QA",
-    icon: <GitMerge className="text-emerald-400" size={20} />,
-    accentColor: "from-emerald-500/20 to-teal-500/10 border-emerald-500/40",
-    deliverables: [
-      "Connected decoupled frontend and backend services via live API fetch clients and proxy configurations.",
-      "Authored canonical 6-report test sequence (demo-scenario.json) and database seeder (npm run db:seed).",
-      "Constructed and validated full 19/19 automated test suite covering unit math and API integration.",
-      "Resolved complex multi-file Git merge conflicts across 10 frontend files during portal unification."
-    ]
+    roleTitle: "Integration & Demo Lead",
+    name: "Sumanth Teju",
+    email: "23951a12d7@iare.ac.in",
+    focusArea: "Client-Server Wiring & Seeder",
+    icon: <GitMerge className="text-emerald-400" size={15} />,
+    accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
+    keyDeliverable: "Wired live API fetch clients, authored canonical 6-report demo dataset, and automated database seeder pipeline."
+  },
+  {
+    id: "role-5",
+    roleId: "Role 05",
+    roleTitle: "Research & Domain Intelligence Lead",
+    name: "Venkata Rohit",
+    email: "venkatrohit8317@gmail.com",
+    focusArea: "Taxonomy, User Needs & Problem Framing",
+    icon: <BrainCircuit className="text-purple-400" size={15} />,
+    accentBorder: "border-purple-500/30 hover:border-purple-500/60",
+    keyDeliverable: "Researched campus infrastructure failure patterns, formalized the 8-domain incident taxonomy, and structured diagnostic prompt schemas."
   }
 ];
 
 export function CampusPulseContributors() {
   return (
-    <div className="not-prose my-12 space-y-6">
-      {/* Header Banner */}
-      <div className="p-6 rounded-3xl bg-surface/40 backdrop-blur-md border border-border/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="not-prose my-8 space-y-4">
+      {/* Compact Header Bar */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-surface/40 backdrop-blur-md border border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <div className="flex items-center gap-2 text-primary font-mono text-xs font-bold uppercase tracking-widest mb-1.5">
-            <Sparkles size={14} />
-            <span>IBM SkillsBuild Hackathon Engineering Team</span>
+          <div className="flex items-center gap-1.5 text-primary font-mono text-[11px] font-bold uppercase tracking-wider mb-1">
+            <Sparkles size={13} />
+            <span>IBM SkillsBuild Project Submission</span>
           </div>
-          <h3 className="text-lg md:text-xl font-heading font-bold text-secondary">
-            4-Role Cross-Functional Team Architecture
+          <h3 className="text-base sm:text-lg font-heading font-bold text-secondary">
+            5-Member Cross-Functional Engineering Team
           </h3>
-          <p className="text-xs md:text-sm text-muted font-mono mt-1">
-            Built with strict separation of concerns, frozen API contracts, and independent parallel development.
+          <p className="text-xs text-muted font-mono mt-0.5">
+            Decoupled micro-roles with frozen API contracts and parallel modular delivery.
           </p>
         </div>
 
@@ -111,93 +105,83 @@ export function CampusPulseContributors() {
           href="https://github.com/Vaibhav-1819/CampusPulseAI"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary font-mono text-xs font-bold transition-all shrink-0 w-fit"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary font-mono text-xs font-bold transition-all shrink-0 w-fit"
         >
-          <GithubIcon size={15} />
-          <span>View on GitHub</span>
+          <GithubIcon size={14} />
+          <span>Repository</span>
         </a>
       </div>
 
-      {/* 2x2 Clean Aligned Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Compact 5-Card Balanced Responsive Flex Grid */}
+      <div className="flex flex-wrap justify-center gap-3">
         {contributors.map((c) => (
           <div
-            key={c.roleId}
-            className={`relative flex flex-col rounded-3xl bg-surface/30 backdrop-blur-md border ${c.accentColor} p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+            key={c.id}
+            className={`w-full sm:w-[calc(50%-0.4rem)] lg:w-[calc(33.333%-0.55rem)] flex flex-col justify-between rounded-2xl bg-surface/30 backdrop-blur-md border ${c.accentBorder} p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-surface/50`}
           >
-            {/* Top Bar: Role badge & Optional Special Badge */}
-            <div className="flex items-center justify-between gap-2 mb-4">
-              <span className="px-3 py-1 rounded-full bg-background border border-border/60 font-mono text-xs font-bold text-secondary flex items-center gap-1.5">
-                {c.icon}
-                <span>{c.roleId}</span>
-              </span>
-
-              {c.isSpecialHighlight && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[10px] font-mono font-bold text-amber-400">
-                  <Star size={10} className="fill-amber-400" />
-                  <span>{c.highlightNote}</span>
+            <div>
+              {/* Top Row: Role Pill & Highlight Badge */}
+              <div className="flex items-center justify-between gap-2 mb-2.5">
+                <span className="px-2 py-0.5 rounded-full bg-background border border-border/60 font-mono text-[10px] font-bold text-secondary flex items-center gap-1">
+                  {c.icon}
+                  <span>{c.roleId}</span>
                 </span>
-              )}
-            </div>
 
-            {/* Role Title */}
-            <h4 className="text-base md:text-lg font-heading font-bold text-secondary mb-1">
-              {c.roleTitle}
-            </h4>
-
-            {/* Names & Contact */}
-            <div className="mb-4 space-y-1">
-              <div className="text-sm font-bold text-primary font-mono">
-                {c.names.join(' • ')}
-              </div>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted font-mono">
-                {c.emails.map((email) => (
-                  <span key={email} className="inline-flex items-center gap-1">
-                    <Mail size={11} />
-                    <span>{email}</span>
+                {c.isSpecialHighlight && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[9px] font-mono font-bold text-amber-400">
+                    <Star size={9} className="fill-amber-400" />
+                    <span>{c.highlightNote}</span>
                   </span>
-                ))}
+                )}
+              </div>
+
+              {/* Contributor Name & Role Title */}
+              <div className="mb-2">
+                <h4 className="text-sm font-heading font-bold text-secondary leading-snug">
+                  {c.name}
+                </h4>
+                <div className="text-xs text-primary font-mono font-medium mt-0.5">
+                  {c.roleTitle}
+                </div>
+              </div>
+
+              {/* Scope Tag */}
+              <div className="mb-2.5">
+                <span className="text-[10px] font-mono text-muted bg-background/60 px-2 py-0.5 rounded border border-border/40 inline-block">
+                  Scope: <span className="text-secondary/90 font-bold">{c.focusArea}</span>
+                </span>
+              </div>
+
+              {/* Key Deliverable */}
+              <div className="pt-2 border-t border-border/30 flex items-start gap-1.5 text-[11px] text-muted font-mono leading-relaxed">
+                <CheckCircle2 size={12} className="text-primary mt-0.5 shrink-0" />
+                <span>{c.keyDeliverable}</span>
               </div>
             </div>
 
-            {/* Focus Scope Pill */}
-            <div className="mb-5 pb-4 border-b border-border/40">
-              <span className="text-[11px] font-mono text-muted/90 bg-background/80 px-2.5 py-1 rounded-lg border border-border/50 block w-fit">
-                Scope: <strong className="text-secondary">{c.focusArea}</strong>
-              </span>
-            </div>
-
-            {/* Deliverables List */}
-            <div className="mt-auto space-y-2.5">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">
-                Key Engineering Deliverables:
-              </div>
-              <ul className="space-y-2">
-                {c.deliverables.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs text-muted font-mono leading-relaxed">
-                    <CheckCircle2 size={13} className="text-primary mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+            {/* Email Contact Footer */}
+            <div className="mt-3 pt-2 border-t border-border/20 flex items-center justify-between">
+              <a
+                href={`mailto:${c.email}`}
+                className="text-[10px] font-mono text-muted hover:text-secondary inline-flex items-center gap-1 transition-colors truncate"
+              >
+                <Mail size={10} className="shrink-0" />
+                <span className="truncate">{c.email}</span>
+              </a>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Bottom Architectural Callout */}
-      <div className="p-5 rounded-2xl bg-primary/5 border border-primary/20 flex items-start gap-3.5">
-        <div className="p-2 rounded-xl bg-primary/10 text-primary shrink-0 mt-0.5">
-          <Star size={18} />
+      {/* Compact Bottom Architectural Callout */}
+      <div className="p-3.5 rounded-2xl bg-primary/5 border border-primary/20 flex items-center gap-3">
+        <div className="p-1.5 rounded-lg bg-primary/10 text-primary shrink-0">
+          <Star size={14} />
         </div>
-        <div className="space-y-1">
-          <h5 className="text-xs md:text-sm font-heading font-bold text-secondary">
-            Cross-Functional Ownership: Vaibhav Bharathula
-          </h5>
-          <p className="text-xs text-muted font-mono leading-relaxed">
-            In addition to architecting the backend API, SQLite schema, and deterministic correlation engine (<strong>Role 1</strong>), Vaibhav Bharathula also co-owned <strong>Role 4 (Integration, QA &amp; Demo)</strong> alongside Sumanth Teju—ensuring frozen contract compliance between the student and admin portals, implementing the 19-test automated suite, and crafting the canonical live demonstration pipeline.
-          </p>
-        </div>
+        <p className="text-xs text-muted font-mono leading-relaxed">
+          <span className="text-secondary font-bold">Cross-Functional Engineering (Vaibhav Bharathula): </span>
+          <span>Spearheaded backend architecture and correlation math (Role 01), while co-leading full-stack integration, 19/19 automated test suite, and merge resolution (Role 04).</span>
+        </p>
       </div>
     </div>
   );

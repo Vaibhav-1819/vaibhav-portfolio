@@ -10,9 +10,9 @@ export const metadata = getBlogMetadata('campuspulse-part1-foundation-admin-inte
 
 > **Hook**: What happens when an electrical short knocks out the Wi-Fi in an engineering building right before assignment deadlines? The campus administration doesn't receive one comprehensive incident report. They receive 60 frantic emails, fragmented WhatsApp messages, and verbal complaints sent to three different department heads.
 
-When our team kicked off the **48-Hour IBM SkillsBuild Hackathon**, we committed to solving this challenge from first principles. We set out to build **CampusPulse AI**—an incident intelligence engine that ingests unstructured student complaints and transforms them into correlated, prioritized, and explainable infrastructure incidents in real time.
+When our team kicked off the **IBM SkillsBuild Learning Plan Project Submission**, we committed to solving this challenge from first principles. We set out to build **CampusPulse AI**—an incident intelligence engine that ingests unstructured student complaints and transforms them into correlated, prioritized, and explainable infrastructure incidents in real time.
 
-In **Part 1** of this two-part series, we dive into the architectural foundation built during the first 24 hours of the hackathon: establishing frozen API contracts, designing our Express + SQLite 3 backend, creating our dual-tier resilient AI service, implementing the 4-factor correlation mathematics, and merging **Pull Request #1** (`feature/admin-dashboard`) on **September 8, 2026**.
+In **Part 1** of this two-part series, we dive into the architectural foundation: establishing frozen API contracts, designing our Express + SQLite 3 backend, creating our dual-tier resilient AI service, implementing the 4-factor correlation mathematics, and merging **Pull Request #1** (`feature/admin-dashboard`) on **September 8, 2026**.
 
 ---
 
@@ -71,7 +71,7 @@ graph TD
 
 ## 3. The Backend Foundation: Lean Persistence & REST Architecture
 
-Rather than burdening a 48-hour sprint with heavyweight database containers (Postgres, Redis, Pinecone), we opted for **SQLite 3 (`better-sqlite3`)** running in **Write-Ahead Logging (`WAL`)** mode:
+Rather than burdening the project submission with heavyweight database containers (Postgres, Redis, Pinecone), we opted for **SQLite 3 (`better-sqlite3`)** running in **Write-Ahead Logging (`WAL`)** mode:
 - **Zero Overhead**: The entire database lives in a local file with sub-millisecond query latency.
 - **Foreign Key Integrity**: Enforced foreign key cascades between `incidents`, `reports`, and `incident_events`.
 - **In-Memory Embedding Lookups**: Vectors are stored as serialized BLOBs and compared in-memory via high-speed dot products.
@@ -80,7 +80,7 @@ Rather than burdening a 48-hour sprint with heavyweight database containers (Pos
 
 ## 4. Dual-Tier Resilient AI Service Layer
 
-External LLM APIs can be unpredictable during hackathons due to network drops, rate limits, or expired keys. A live presentation crash is unacceptable.
+External LLM APIs can be unpredictable during live demonstrations due to network drops, rate limits, or expired keys. A presentation crash is unacceptable.
 
 We designed a unified `AIService` interface with two swappable implementations:
 

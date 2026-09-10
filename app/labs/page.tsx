@@ -7,6 +7,7 @@ import {
   MatchPredictionWidget, 
   MLPipelineWidget 
 } from "@/components/sections/Experiments";
+import { CampusPulseSimulator } from "@/components/ui/CampusPulseSimulator";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 export default function LabsPage() {
@@ -46,13 +47,25 @@ export default function LabsPage() {
           {/* Match Prediction */}
           <FadeIn
             delay={0.1}
-            className="flex flex-col p-6 md:p-8 rounded-3xl bg-surface/30 border border-border/50 h-[500px]"
+            className="flex flex-col p-6 md:p-8 rounded-3xl bg-surface/30 border border-border/50 h-[520px]"
           >
-            <div className="mb-6">
+            <div className="mb-4">
               <span className="text-[11px] font-mono text-muted uppercase tracking-[0.2em]">Live Sandbox</span>
-              <h3 className="font-heading font-bold text-2xl mt-2 text-secondary tracking-[-0.02em]">Match Prediction</h3>
+              <h3 className="font-heading font-bold text-2xl mt-1 text-secondary tracking-[-0.02em]">Match Prediction</h3>
             </div>
             <MatchPredictionWidget />
+          </FadeIn>
+
+          {/* CampusPulse AI 4-Factor Simulator */}
+          <FadeIn
+            delay={0.2}
+            className="flex flex-col p-6 md:p-8 rounded-3xl bg-surface/30 border border-border/50 min-h-[520px]"
+          >
+            <div className="mb-4">
+              <span className="text-[11px] font-mono text-primary uppercase tracking-[0.2em]">Live Sandbox • IBM SkillsBuild</span>
+              <h3 className="font-heading font-bold text-2xl mt-1 text-secondary tracking-[-0.02em]">Incident Intelligence Sandbox</h3>
+            </div>
+            <CampusPulseSimulator />
           </FadeIn>
 
 

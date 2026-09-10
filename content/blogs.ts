@@ -14,20 +14,20 @@ export const blogs: BlogPost[] = [
     id: "campuspulse-part2-student-portal-unification",
     slug: "campuspulse-part2-student-portal-unification",
     title: "Building CampusPulse AI (Part 2): Student Portal, Dual-Persona Unification & End-to-End Verification",
-    description: "How we merged PR #2 into CampusPulse AI: resolving 10-file merge conflicts, student reporting UX, 19/19 automated test suite, universal command palette, and our 4-contributor hackathon team.",
+    description: "How we merged PR #2 into CampusPulse AI: resolving 10-file merge conflicts, student reporting UX, 19/19 automated test suite, universal command palette, and our 5-member engineering team.",
     date: "September 9, 2026",
     readTime: "12 min read",
-    tags: ["React 19", "TypeScript", "Google Gemini", "Testing", "Hackathon", "Open Source"],
+    tags: ["React 19", "TypeScript", "Google Gemini", "Testing", "Full Stack", "Open Source"],
     category: "Machine Learning"
   },
   {
     id: "campuspulse-part1-foundation-admin-intelligence",
     slug: "campuspulse-part1-foundation-admin-intelligence",
     title: "Building CampusPulse AI (Part 1): Foundation, Multi-Factor Correlation & Admin Command Center",
-    description: "The architectural foundation of CampusPulse AI for the IBM SkillsBuild Hackathon: designing frozen contracts, Express + SQLite 3 backend, dual-tier Gemini AI, the 4-factor correlation engine, and merging PR #1.",
+    description: "The architectural foundation of CampusPulse AI for the IBM SkillsBuild project submission: designing frozen contracts, Express + SQLite 3 backend, dual-tier Gemini AI, the 4-factor correlation engine, and merging PR #1.",
     date: "September 8, 2026",
     readTime: "10 min read",
-    tags: ["Google Gemini", "Machine Learning", "Express", "SQLite", "Hackathon", "Architecture"],
+    tags: ["Google Gemini", "Machine Learning", "Express", "SQLite", "Systems Design", "Architecture"],
     category: "Machine Learning"
   },
   {

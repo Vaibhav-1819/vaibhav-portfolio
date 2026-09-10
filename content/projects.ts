@@ -48,6 +48,23 @@ export const projects: Project[] = [
     status: 'Offline'
   },
   {
+    title: 'CampusPulse AI',
+    slug: 'campuspulse-ai',
+    description: 'An explainable real-time incident intelligence platform built for the IBM SkillsBuild learning plan project submission. Correlates unstructured student complaints across space, time, semantics, and category into actionable infrastructure incidents using Gemini 1.5 Flash and a multi-factor deterministic engine.',
+    github: 'https://github.com/Vaibhav-1819/CampusPulseAI',
+    technologies: ['React 19', 'TypeScript', 'Node.js', 'Express', 'SQLite 3', 'Google Gemini'],
+    image: '/images/campuspulse_landing.png',
+    metrics: [
+      { label: 'Correlation', value: '4-Factor' },
+      { label: 'Validation', value: '19/19 Pass' },
+      { label: 'Clustering', value: '≥0.68' },
+      { label: 'Latency', value: '<350ms' }
+    ],
+    featured: true,
+    year: 2024,
+    status: 'Offline'
+  },
+  {
     title: 'BrandRecognizer',
     slug: 'brandrecognizer',
     description: 'Trained an EfficientNetB0 model via transfer learning to classify 50 car brands from 11,000+ images, reaching ~80% accuracy with dynamic data augmentation.',
