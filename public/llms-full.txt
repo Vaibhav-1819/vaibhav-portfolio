@@ -47,14 +47,14 @@ Vaibhav focuses on building cohesive, end-to-end intelligent products where mach
 
 ### CampusPulse AI — Incident Intelligence & Correlation Engine
 - Case Study: https://vaibhavbharathula.tech/projects/campuspulse-ai
-- Context: Built for the IBM SkillsBuild learning plan project submission with an automated 19/19 test suite.
+- Context: Built for the IBM SkillsBuild learning plan project submission (Shortlisted for Regional Finale) with an automated 58/58 test suite.
 - Technical Architecture:
   - 4-Factor Deterministic Correlation Engine: Correlates raw, unstructured student complaints into cohesive infrastructure incident clusters:
     1. Spatial Proximity: Haversine geodesic distance scoring between campus locations.
     2. Temporal Exponential Decay: Weighting recent grievances higher using half-life decay modeling.
-    3. Semantic Similarity: Gemini embeddings with cosine similarity matrix calculation.
+    3. Semantic Similarity: Gemini embeddings with dynamic vector centroid clustering and cosine similarity matrix calculation.
     4. Categorical Affinity: Subsystem classification matching (e.g., electrical, sanitation, lab infrastructure).
-  - Dual-Tier Gemini Integration: Tier 1 for low-latency JSON entity extraction and classification; Tier 2 for root-cause synthesis, impact severity classification, and administrative action brief generation.
+  - Dual-Tier Gemini Integration: Tier 1 for low-latency JSON entity extraction and classification; Tier 2 for root-cause synthesis, impact severity classification, emerging surge detection, and administrative action brief generation.
   - SQLite WAL Database: High-throughput local storage supporting concurrent reader-writer operations.
 
 ### AetherAI — Localized Environmental Intelligence Platform

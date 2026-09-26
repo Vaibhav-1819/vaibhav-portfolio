@@ -11,6 +11,16 @@ export type BlogPost = {
 
 export const blogs: BlogPost[] = [
   {
+    id: "campuspulse-skillup-hackathon-regional-finale",
+    slug: "campuspulse-skillup-hackathon-regional-finale",
+    title: "Beyond the Pitch: Our SkillUp Hackathon 2026 Regional Finale Journey with CampusPulse AI",
+    description: "Reflections on pitching CampusPulse AI as Regional Finalists at SkillUp Hackathon 2026 (in collaboration with IBM SkillsBuild): our presentation day, missing the National Finale cut, invaluable engineering lessons, and heartfelt gratitude to our 4-member team (Team Point Break).",
+    date: "September 24, 2026",
+    readTime: "9 min read",
+    tags: ["SkillUp Hackathon", "IBM SkillsBuild", "Machine Learning", "CampusPulse AI", "Engineering Culture", "Post-Mortem"],
+    category: "Machine Learning"
+  },
+  {
     id: "campuspulse-part2-student-portal-unification",
     slug: "campuspulse-part2-student-portal-unification",
     title: "Building CampusPulse AI (Part 2): Student Portal, Dual-Persona Unification & End-to-End Verification",

@@ -38,9 +38,9 @@ Vaibhav Bharathula is a software developer and machine learning engineer who des
 - Case Study: https://vaibhavbharathula.tech/projects/nexus
 
 ### CampusPulse AI
-- Description: Explainable real-time incident intelligence platform for IBM SkillsBuild project submission.
-- Technologies: React 19, TypeScript, Node.js, Express, SQLite 3, Google Gemini 1.5 Flash
-- Architecture: 4-factor deterministic correlation engine (spatial, temporal decay, semantic embeddings, categorical affinity) correlating student complaints into verified incidents.
+- Description: Explainable real-time incident intelligence platform for IBM SkillsBuild project submission (Shortlisted for Regional Finale) with automated 58/58 test suite.
+- Technologies: React 19, TypeScript, Node.js, Express, SQLite 3 (WAL), Google Gemini 2.5 Flash
+- Architecture: 4-factor deterministic correlation engine with dynamic vector centroid clustering and emerging surge velocity detection.
 - Case Study: https://vaibhavbharathula.tech/projects/campuspulse-ai
 
 ### AetherAI
@@ -72,6 +72,7 @@ Vaibhav Bharathula is a software developer and machine learning engineer who des
 
 ## Key Technical Articles
 
+- Beyond the Pitch: Our SkillUp Hackathon 2026 Regional Finale Journey with CampusPulse AI: https://vaibhavbharathula.tech/blog/campuspulse-skillup-hackathon-regional-finale
 - Building CampusPulse AI (Part 1): Foundation, Multi-Factor Correlation & Admin Command Center: https://vaibhavbharathula.tech/blog/campuspulse-part1-foundation-admin-intelligence
 - Building CampusPulse AI (Part 2): Student Portal, Dual-Persona Unification & End-to-End Verification: https://vaibhavbharathula.tech/blog/campuspulse-part2-student-portal-unification
 - Architecting Nexus: Building an AI-Native Real-Time Collaboration OS: https://vaibhavbharathula.tech/blog/nexus-collaborative-workspace
