@@ -6,6 +6,7 @@ import Image from 'next/image';
 const Mermaid = dynamic(() => import('@/components/ui/Mermaid'));
 const AetherAIDemo = dynamic(() => import('@/components/ui/AetherAIDemo').then(m => m.AetherAIDemo));
 const CampusPulseContributors = dynamic(() => import('@/components/ui/CampusPulseContributors').then(m => m.CampusPulseContributors));
+const CertificateCard = dynamic(() => import('@/components/ui/CertificateCard').then(m => m.CertificateCard));
 
 const extractText = (children: any): string => {
   if (typeof children === 'string') return children;
@@ -20,6 +21,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     AetherAIDemo,
     CampusPulseContributors,
+    CertificateCard,
     table: ({ children }) => (
       <div className="w-full my-8 overflow-x-auto rounded-2xl border border-border/60 bg-surface/30 backdrop-blur-md shadow-lg">
         <table className="w-full text-left border-collapse text-xs md:text-sm">{children}</table>
