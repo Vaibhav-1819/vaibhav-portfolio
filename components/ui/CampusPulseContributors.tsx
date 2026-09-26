@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Server, Layout, ShieldCheck, GitMerge, CheckCircle2, Star, Mail, Sparkles, BrainCircuit } from 'lucide-react';
+import { Server, Layout, ShieldCheck, GitMerge, CheckCircle2, Star, Mail, Sparkles, BrainCircuit, Trophy } from 'lucide-react';
 
 const GithubIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -35,7 +35,7 @@ export const contributors: Contributor[] = [
     highlightNote: "Architecture Lead",
     icon: <Server className="text-indigo-400" size={15} />,
     accentBorder: "border-indigo-500/30 hover:border-indigo-500/60",
-    keyDeliverable: "Designed Express REST API, SQLite 3 (WAL mode), Gemini AI service, and 4-factor deterministic correlation math."
+    keyDeliverable: "Designed Express REST API, SQLite 3 (WAL mode), Gemini AI service, vector centroid clustering math, and 58/58 automated test suite."
   },
   {
     id: "role-2",
@@ -69,17 +69,6 @@ export const contributors: Contributor[] = [
     icon: <GitMerge className="text-emerald-400" size={15} />,
     accentBorder: "border-emerald-500/30 hover:border-emerald-500/60",
     keyDeliverable: "Wired live API fetch clients, authored canonical 6-report demo dataset, and automated database seeder pipeline."
-  },
-  {
-    id: "role-5",
-    roleId: "Role 05",
-    roleTitle: "Research & Domain Intelligence Lead",
-    name: "Venkata Rohit",
-    email: "venkatrohit8317@gmail.com",
-    focusArea: "Taxonomy, User Needs & Problem Framing",
-    icon: <BrainCircuit className="text-purple-400" size={15} />,
-    accentBorder: "border-purple-500/30 hover:border-purple-500/60",
-    keyDeliverable: "Researched campus infrastructure failure patterns, formalized the 8-domain incident taxonomy, and structured diagnostic prompt schemas."
   }
 ];
 
@@ -89,35 +78,52 @@ export function CampusPulseContributors() {
       {/* Compact Header Bar */}
       <div className="p-4 sm:p-5 rounded-2xl bg-surface/40 backdrop-blur-md border border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <div className="flex items-center gap-1.5 text-primary font-mono text-[11px] font-bold uppercase tracking-wider mb-1">
-            <Sparkles size={13} />
-            <span>IBM SkillsBuild Project Submission</span>
+          <div className="flex flex-wrap items-center gap-2 mb-1.5">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-[11px] font-mono font-bold text-amber-400 shadow-sm shadow-amber-500/10">
+              <Trophy size={12} className="text-amber-400" />
+              <span>Shortlisted for Regional Finale</span>
+            </span>
+            <span className="text-primary font-mono text-[11px] font-bold uppercase tracking-wider flex items-center gap-1">
+              <Sparkles size={13} />
+              <span>IBM SkillsBuild</span>
+            </span>
           </div>
           <h3 className="text-base sm:text-lg font-heading font-bold text-secondary">
-            5-Member Cross-Functional Engineering Team
+            4-Member Engineering Team • Team Point Break
           </h3>
           <p className="text-xs text-muted font-mono mt-0.5">
-            Decoupled micro-roles with frozen API contracts and parallel modular delivery.
+            SkillUp Hackathon 2026 Regional Finalists (in collaboration with IBM SkillsBuild).
           </p>
         </div>
 
-        <a
-          href="https://github.com/Vaibhav-1819/CampusPulseAI"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary font-mono text-xs font-bold transition-all shrink-0 w-fit"
-        >
-          <GithubIcon size={14} />
-          <span>Repository</span>
-        </a>
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <a
+            href="/images/team_point_break_certificate.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold transition-all w-fit"
+          >
+            <Trophy size={13} />
+            <span>Certificate</span>
+          </a>
+          <a
+            href="https://github.com/Vaibhav-1819/CampusPulseAI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary font-mono text-xs font-bold transition-all w-fit"
+          >
+            <GithubIcon size={14} />
+            <span>Repository</span>
+          </a>
+        </div>
       </div>
 
-      {/* Compact 5-Card Balanced Responsive Flex Grid */}
+      {/* Compact 4-Card Balanced Responsive 2x2 Grid */}
       <div className="flex flex-wrap justify-center gap-3">
         {contributors.map((c) => (
           <div
             key={c.id}
-            className={`w-full sm:w-[calc(50%-0.4rem)] lg:w-[calc(33.333%-0.55rem)] flex flex-col justify-between rounded-2xl bg-surface/30 backdrop-blur-md border ${c.accentBorder} p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-surface/50`}
+            className={`w-full sm:w-[calc(50%-0.4rem)] flex flex-col justify-between rounded-2xl bg-surface/30 backdrop-blur-md border ${c.accentBorder} p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-surface/50`}
           >
             <div>
               {/* Top Row: Role Pill & Highlight Badge */}
@@ -180,7 +186,7 @@ export function CampusPulseContributors() {
         </div>
         <p className="text-xs text-muted font-mono leading-relaxed">
           <span className="text-secondary font-bold">Cross-Functional Engineering (Vaibhav Bharathula): </span>
-          <span>Spearheaded backend architecture and correlation math (Role 01), while co-leading full-stack integration, 19/19 automated test suite, and merge resolution (Role 04).</span>
+          <span>Spearheaded backend architecture and correlation math (Role 01), while co-leading full-stack integration, 58/58 automated test suite, and merge resolution (Role 04).</span>
         </p>
       </div>
     </div>

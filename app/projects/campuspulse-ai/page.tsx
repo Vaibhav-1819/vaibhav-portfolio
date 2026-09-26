@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles, BrainCircuit, Activity, Database, ArrowRight, Zap, ShieldCheck, BookOpen, ExternalLink, Award } from "lucide-react";
+import { ArrowLeft, Sparkles, BrainCircuit, Activity, Database, ArrowRight, Zap, ShieldCheck, BookOpen, ExternalLink, Award, Trophy } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { projects } from "@/content/projects";
@@ -12,6 +12,7 @@ const project = projects.find(p => p.slug === 'campuspulse-ai');
 
 const campusPulseImages = [
   "/images/campuspulse_landing.png",
+  "/images/team_point_break_certificate.jpg",
   "/images/campuspulse_student.png",
   "/images/campuspulse_admin.png"
 ];
@@ -47,9 +48,15 @@ export default function CampusPulsePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 text-xs font-mono mb-8 uppercase tracking-widest font-bold">
-            <Award size={14} />
-            <span>IBM SkillsBuild Project Submission</span>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/40 text-xs font-mono uppercase tracking-widest font-bold shadow-md shadow-amber-500/10">
+              <Trophy size={14} className="text-amber-400" />
+              <span>Shortlisted for Regional Finale</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 text-xs font-mono uppercase tracking-widest font-bold">
+              <Award size={14} />
+              <span>IBM SkillsBuild Project Submission</span>
+            </div>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight mb-8">
@@ -87,7 +94,7 @@ export default function CampusPulsePage() {
               When campus infrastructure breaks down—whether it is a severed fiber link in a computer science lab or an AC compressor failure in the library—administrators rarely get an actionable diagnostic alert. Instead, they get dozens of fragmented complaints across WhatsApp, student union emails, and verbal grievances.
             </p>
             <p>
-              CampusPulse AI was engineered for our <strong>IBM SkillsBuild learning plan project submission</strong> to resolve this breakdown. Rather than treating symptoms with duplicate tickets, our platform correlates reports across space, time, semantics, and category to surface root incidents, detect emerging surges, and prescribe immediate facilities remediation.
+              CampusPulse AI was engineered for our <strong>IBM SkillsBuild learning plan project submission</strong> (shortlisted for the <strong>Regional Finale</strong>) to resolve this breakdown. Rather than treating symptoms with duplicate tickets, our platform correlates reports across space, time, semantics, and category to surface root incidents, detect emerging surges, and prescribe immediate facilities remediation.
             </p>
           </div>
         </div>
@@ -106,15 +113,15 @@ export default function CampusPulsePage() {
               <BrainCircuit className="text-primary" size={32} />
               <h4 className="font-bold text-xl font-heading">Dual-Tier Resilient AI</h4>
               <p className="text-muted leading-relaxed text-sm font-mono">
-                Leverages Google Gemini 1.5 Flash for strict JSON schema entity extraction and 768-dimensional vector embeddings, backed by a deterministic, zero-dependency offline mock service that ensures 100% resilience during live operations.
+                Leverages Google Gemini 2.5 Flash for strict JSON schema entity extraction and 3,072-dimensional vector embeddings, backed by a deterministic, zero-dependency offline mock service that ensures 100% resilience during live operations.
               </p>
             </div>
 
             <div className="p-8 rounded-3xl bg-surface/30 border border-border/50 space-y-4">
               <Zap className="text-emerald-400" size={32} />
-              <h4 className="font-bold text-xl font-heading">4-Factor Correlation Math</h4>
+              <h4 className="font-bold text-xl font-heading">4-Factor Correlation & Dynamic Centroids</h4>
               <p className="text-muted leading-relaxed text-sm font-mono">
-                Evaluates incoming complaints against active incidents using a transparent formula combining semantic cosine similarity (55%), building location matching (20%), cross-domain category links (15%), and temporal decay (10%).
+                Evaluates incoming complaints against active incidents using a transparent formula combining semantic cosine similarity (55%), building location matching (20%), cross-domain category links (15%), and temporal decay (10%), updating multi-report vector centroids in real time.
               </p>
             </div>
 
@@ -148,7 +155,7 @@ export default function CampusPulsePage() {
 
             <div className="grid sm:grid-cols-4 gap-6 font-mono">
               <div className="p-4 rounded-2xl bg-background/50 border border-border/40">
-                <div className="text-3xl font-bold text-primary mb-1">19 / 19</div>
+                <div className="text-3xl font-bold text-primary mb-1">58 / 58</div>
                 <div className="text-xs text-muted">Automated test suites passing across unit math and REST integration.</div>
               </div>
               <div className="p-4 rounded-2xl bg-background/50 border border-border/40">
@@ -177,28 +184,34 @@ export default function CampusPulsePage() {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 text-primary font-mono text-xs font-bold uppercase tracking-wider">
               <BookOpen size={14} />
-              <span>Technical Writing Series</span>
+              <span>Technical Writing & Hackathon Series</span>
             </div>
             <h4 className="text-xl font-heading font-bold text-secondary">
-              Read the 2-Part Engineering Deep Dive
+              Read the 3-Part Engineering & Hackathon Series
             </h4>
             <p className="text-xs md:text-sm text-muted font-mono">
-              Dive into the code, formulas, git merge conflict resolution, and architectural decisions behind CampusPulse AI.
+              Dive into the code, correlation formulas, merge resolution, and our presentation journey at the SkillUp Hackathon Regional Finale.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 shrink-0">
             <Link
               href="/blog/campuspulse-part1-foundation-admin-intelligence"
-              className="px-4 py-2.5 rounded-xl bg-primary text-background font-mono text-xs font-bold hover:bg-primary/90 transition-all text-center"
+              className="px-3.5 py-2 rounded-xl bg-surface border border-border/60 hover:bg-surface/80 text-secondary font-mono text-xs font-bold transition-all text-center"
             >
               Part 1: Foundation
             </Link>
             <Link
               href="/blog/campuspulse-part2-student-portal-unification"
-              className="px-4 py-2.5 rounded-xl bg-surface border border-border/60 hover:bg-surface/80 text-secondary font-mono text-xs font-bold transition-all text-center"
+              className="px-3.5 py-2 rounded-xl bg-surface border border-border/60 hover:bg-surface/80 text-secondary font-mono text-xs font-bold transition-all text-center"
             >
-              Part 2: Portal Unification
+              Part 2: Portal
+            </Link>
+            <Link
+              href="/blog/campuspulse-skillup-hackathon-regional-finale"
+              className="px-3.5 py-2 rounded-xl bg-primary text-background font-mono text-xs font-bold hover:bg-primary/90 transition-all text-center shadow-sm shadow-primary/20"
+            >
+              Part 3: Finale
             </Link>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { projects } from "@/content/projects";
-import { ArrowRight, BookOpen, ExternalLink, Sparkles, CheckCircle2, Award } from "lucide-react";
+import { ArrowRight, BookOpen, ExternalLink, Sparkles, CheckCircle2, Award, Trophy } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -260,7 +260,14 @@ export function ProjectsGrid() {
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-40 group-hover/preview:opacity-20 transition-opacity" />
                     
-                    {/* Floating Category Pill */}
+                    {/* Floating Status Badges on Image */}
+                    <div className="absolute top-3 right-3">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-background/90 backdrop-blur-md border border-amber-500/40 text-[10px] font-mono font-bold text-amber-400 shadow-sm">
+                        <Trophy size={11} className="text-amber-400" />
+                        <span>Regional Finalist</span>
+                      </span>
+                    </div>
+
                     <div className="absolute bottom-3 left-3">
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-background/90 backdrop-blur-md border border-border/60 text-[10px] font-mono font-bold text-secondary">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -271,20 +278,21 @@ export function ProjectsGrid() {
                 </Link>
               </div>
 
-              {/* Right Column: Streamlined Info & Actions (NO live demo button, only project case study & blog) */}
+              {/* Right Column: Streamlined Info & Actions */}
               <div className="lg:col-span-7 flex flex-col justify-between space-y-3">
                 {/* Badges Row */}
                 <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-[10px] font-mono font-bold text-amber-400 shadow-sm shadow-amber-500/10">
+                    <Trophy size={11} className="text-amber-400" />
+                    <span>Team Point Break</span>
+                  </span>
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-[10px] font-mono font-bold text-indigo-400">
                     <Award size={11} />
-                    <span>IBM SkillsBuild Project Submission</span>
-                  </span>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface border border-border/60 text-[10px] font-mono text-muted">
-                    Learning Plan
+                    <span>IBM SkillsBuild</span>
                   </span>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-mono text-emerald-400">
                     <CheckCircle2 size={10} />
-                    <span>19/19 Verified</span>
+                    <span>58/58 Verified</span>
                   </span>
                 </div>
 
@@ -300,6 +308,18 @@ export function ProjectsGrid() {
                     {campusPulse.description}
                   </p>
                 </div>
+
+                {/* Telemetry Metrics Grid */}
+                {campusPulse.metrics && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-mono">
+                    {campusPulse.metrics.map((m) => (
+                      <div key={m.label} className="p-2 rounded-xl bg-background/60 border border-border/40">
+                        <div className="text-xs font-bold text-primary">{m.value}</div>
+                        <div className="text-[10px] text-muted truncate">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* Tech Stack Pills */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
@@ -324,12 +344,23 @@ export function ProjectsGrid() {
                   </Link>
 
                   <Link
-                    href="/blog/campuspulse-part1-foundation-admin-intelligence"
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface hover:bg-surface/80 border border-border/60 text-secondary hover:text-primary font-mono text-xs font-bold transition-all"
+                    href="/blog/campuspulse-skillup-hackathon-regional-finale"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-surface hover:bg-surface/80 border border-border/60 text-secondary hover:text-primary font-mono text-xs font-bold transition-all"
                   >
                     <BookOpen size={13} className="text-primary" />
-                    <span>2-Part Deep Dive</span>
+                    <span>3-Part Series</span>
                   </Link>
+
+                  <a
+                    href="/images/team_point_break_certificate.jpg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold transition-all"
+                  >
+                    <Trophy size={12} />
+                    <span>Certificate</span>
+                    <ExternalLink size={11} />
+                  </a>
 
                   {campusPulse.github && (
                     <a

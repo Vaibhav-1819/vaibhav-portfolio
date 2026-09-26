@@ -50,13 +50,13 @@ export const projects: Project[] = [
   {
     title: 'CampusPulse AI',
     slug: 'campuspulse-ai',
-    description: 'An explainable real-time incident intelligence platform built for the IBM SkillsBuild learning plan project submission. Correlates unstructured student complaints across space, time, semantics, and category into actionable infrastructure incidents using Gemini 1.5 Flash and a multi-factor deterministic engine.',
+    description: 'An explainable real-time incident intelligence platform built for SkillUp Hackathon 2026 (in collaboration with IBM SkillsBuild) and shortlisted as a Regional Finalist. Correlates unstructured student complaints across space, time, semantics, and category into actionable infrastructure incidents using Gemini AI, dynamic vector centroid clustering, and a 4-factor deterministic engine.',
     github: 'https://github.com/Vaibhav-1819/CampusPulseAI',
-    technologies: ['React 19', 'TypeScript', 'Node.js', 'Express', 'SQLite 3', 'Google Gemini'],
+    technologies: ['React 19', 'TypeScript', 'Node.js', 'Express', 'SQLite 3 (WAL)', 'Google Gemini', 'Centroid Clustering'],
     image: '/images/campuspulse_landing.png',
     metrics: [
       { label: 'Correlation', value: '4-Factor' },
-      { label: 'Validation', value: '19/19 Pass' },
+      { label: 'Validation', value: '58/58 Pass' },
       { label: 'Clustering', value: '≥0.68' },
       { label: 'Latency', value: '<350ms' }
     ],
